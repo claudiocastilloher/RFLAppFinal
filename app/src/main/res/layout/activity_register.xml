@@ -39,6 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
+        android:autofillHints="emailAddress"
         android:background="@drawable/edittext_background"
         android:drawableStart="@drawable/user"
         android:drawablePadding="10dp"
@@ -53,6 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="40dp"
+        android:autofillHints="password"
         android:background="@drawable/edittext_background"
         android:drawableStart="@drawable/lock"
         android:drawablePadding="10dp"
@@ -66,6 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
+        android:checked="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etPassword" />
 
@@ -86,6 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="10dp"
+        android:autofillHints="password"
         android:background="@drawable/edittext_background"
         android:drawableStart="@drawable/lock"
         android:drawablePadding="10dp"
@@ -99,6 +103,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
+        android:checked="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etConfirmPassword" />
 
@@ -146,6 +151,7 @@
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/roboto"
         android:paddingStart="3dp"
+        android:paddingEnd="3dp"
         android:text="@string/register_here"
         android:textSize="15sp"
         android:textStyle="bold"
