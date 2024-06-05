@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">RefactoringLifeAcademy</string>
+    <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="register">Register</string>
+    <string name="logotipo_de_la_academia">Logotipo de la academia</string>
+    <string name="refactoring_life_academy">Refactoring Life Academy</string>
+    <string name="en_caso_de_tener_problemas_comunicarse_con_soporte">En caso de tener problemas comunicarse con soporte</string>
 </resources>
