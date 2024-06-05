@@ -1,4 +1,4 @@
-package com.example.refactoringlifeacademy
+package utils
 
 object StringUtils {
 
