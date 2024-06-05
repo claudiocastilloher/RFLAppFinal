@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">RefactoringLifeAcademy</string>
-    <string name="iniciar_sesion">Iniciar sesión</string>
-    <string name="register">Register</string>
-    <string name="logotipo_de_la_academia">Logotipo de la academia</string>
-    <string name="refactoring_life_academy">Refactoring Life Academy</string>
-    <string name="en_caso_de_tener_problemas_comunicarse_con_soporte">En caso de tener problemas comunicarse con soporte</string>
+    <string name="register">Registrarse</string>
+    <string name="email">Email</string>
+    <string name="password">Contraseña</string>
+    <string name="confirm_password">Confirmar contraseña</string>
+    <string name="show_password">Mostrar contraseña</string>
+    <string name="enter">Entrar</string>
+    <string name="register_here">registrate aqui</string>
+    <string name="no_account">Si no tienes una cuenta,</string>
 </resources>
