@@ -8,4 +8,6 @@
     <string name="enter">Entrar</string>
     <string name="register_here">registrate aqui</string>
     <string name="no_account">Si no tienes una cuenta,</string>
+    <string name="sign_in">Iniciar sesión</string>
+    <string name="error_user_password">Error en el usuario o contraseña!</string>
 </resources>
