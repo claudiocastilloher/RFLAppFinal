@@ -8,4 +8,11 @@
     <string name="enter">Entrar</string>
     <string name="register_here">registrate aqui</string>
     <string name="no_account">Si no tienes una cuenta,</string>
+    <!--PreLogin-->
+    <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="logotipo_de_la_academia">Logotipo de la academia</string>
+    <string name="refactoring_life_academy">Refactoring Life Academy</string>
+    <string name="en_caso_de_tener_problemas_comunicarse_con_soporte">En caso de tener problemas comunicarse con soporte</string>
+    <!--finPreLogin-->
+
 </resources>
