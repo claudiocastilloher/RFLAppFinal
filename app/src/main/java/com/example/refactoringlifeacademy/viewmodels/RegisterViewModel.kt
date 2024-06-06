@@ -13,7 +13,7 @@ class RegisterViewModel : ViewModel() {
     private val _isFormValid = MutableLiveData<Boolean>()
     val isFormValid: LiveData<Boolean> = _isFormValid
 
-    // Funcion que valida email
+    // Funcion en hilo secundario para validar email
     fun validateEmail(email: String) {
         CoroutineScope(Dispatchers.IO).launch {
             val isEmailValid = email.isValidEmail()
@@ -21,7 +21,7 @@ class RegisterViewModel : ViewModel() {
         }
     }
 
-    // Funcion que valida contraseña
+    // Funcion en hilo secundario para validar contraseña
     fun validatePassword(password: String, option: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             val isPasswordValid = password.isValidPassword()
