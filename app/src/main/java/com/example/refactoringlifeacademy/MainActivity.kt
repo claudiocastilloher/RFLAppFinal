@@ -1,5 +1,6 @@
 package com.example.refactoringlifeacademy
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -17,7 +18,9 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-
+        val intent = Intent(this, PreLogin::class.java)
+        startActivity(intent)
+        finish()
     }
 
 }

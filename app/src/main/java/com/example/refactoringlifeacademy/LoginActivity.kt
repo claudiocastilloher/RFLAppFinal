@@ -1,5 +1,6 @@
 package com.example.refactoringlifeacademy
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
@@ -32,6 +33,12 @@ class LoginActivity : AppCompatActivity() {
                 binding.etPassword.transformationMethod = PasswordTransformationMethod.getInstance()
             }
             binding.etPassword.setSelection(binding.etPassword.text.length)
+        }
+
+        binding.tvRegisterHere.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }
