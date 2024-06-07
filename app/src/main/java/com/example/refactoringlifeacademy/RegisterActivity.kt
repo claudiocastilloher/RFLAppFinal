@@ -27,16 +27,28 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    // Funcion que a traves de un textwatch para activar o desactivar boton de registro dependiendo de la validacion de campos
+    // Funcion que a traves de textwatch para activar o desactivar boton de registro dependiendo de la validacion de campos
     private fun activateButton() {
         binding.etEmail.addTextChangedListener { text ->
-            viewModel.validateEmail(text.toString())
+            viewModel.validateEmailPassword(
+                text.toString(),
+                binding.etPassword.text.toString(),
+                binding.etConfirmPassword.text.toString()
+            )
         }
         binding.etPassword.addTextChangedListener { text ->
-            viewModel.validatePassword(text.toString(), 0)
+            viewModel.validateEmailPassword(
+                binding.etEmail.text.toString(),
+                text.toString(),
+                binding.etConfirmPassword.text.toString()
+            )
         }
         binding.etConfirmPassword.addTextChangedListener { text ->
-            viewModel.validatePassword(text.toString(), 1)
+            viewModel.validateEmailPassword(
+                binding.etEmail.text.toString(),
+                binding.etPassword.text.toString(),
+                text.toString()
+            )
         }
     }
 }
