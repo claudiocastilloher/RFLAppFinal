@@ -1,6 +1,8 @@
 package com.example.refactoringlifeacademy
 
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
@@ -17,6 +19,7 @@ class RegisterActivity : AppCompatActivity() {
 
         observer()
         activateButton()
+        initListeners()
     }
 
     // Obserever del cambio de valor cuando son validos o no los campos de email y contraseña
@@ -49,6 +52,29 @@ class RegisterActivity : AppCompatActivity() {
                 binding.etPassword.text.toString(),
                 text.toString()
             )
+        }
+    }
+
+    private fun initListeners() {
+        binding.cbShowPassword.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                binding.etPassword.transformationMethod =
+                    HideReturnsTransformationMethod.getInstance()
+            } else {
+                binding.etPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+            }
+            binding.etPassword.setSelection(binding.etPassword.text.length)
+        }
+
+        binding.cbShowPasswordComfirm.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                binding.etConfirmPassword.transformationMethod =
+                    HideReturnsTransformationMethod.getInstance()
+            } else {
+                binding.etConfirmPassword.transformationMethod =
+                    PasswordTransformationMethod.getInstance()
+            }
+            binding.etConfirmPassword.setSelection(binding.etConfirmPassword.text.length)
         }
     }
 }
