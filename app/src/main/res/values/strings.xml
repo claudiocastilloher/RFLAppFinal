@@ -14,5 +14,6 @@
     <string name="refactoring_life_academy">Refactoring Life\n Academy</string>
     <string name="en_caso_de_tener_problemas_comunicarse_con_soporte">En caso de tener problemas comunicarse con soporte</string>
     <!--finPreLogin-->
-
+    <string name="sign_in">Iniciar sesión</string>
+    <string name="error_user_password">Error en el usuario o contraseña!</string>
 </resources>

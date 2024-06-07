@@ -2,36 +2,40 @@ package com.example.refactoringlifeacademy
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.refactoringlifeacademy.databinding.ActivityPreLoginBinding
+import com.example.refactoringlifeacademy.databinding.ActivityLoginBinding
 
-class PreLogin : AppCompatActivity() {
-    private lateinit var binding: ActivityPreLoginBinding
+class LoginActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityPreLoginBinding.inflate(layoutInflater)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        initButtons()
+        initListeners()
     }
 
-    private fun initButtons() {
-        binding.btnLogin.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
+    private fun initListeners() {
+        binding.cbShowPassword.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked){
+                binding.etPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
+            }else{
+                binding.etPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+            }
+            binding.etPassword.setSelection(binding.etPassword.text.length)
         }
 
-        binding.btnRegister.setOnClickListener {
+        binding.tvRegisterHere.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
             finish()
