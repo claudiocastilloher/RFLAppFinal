@@ -1,5 +1,7 @@
 package com.example.refactoringlifeacademy.utils
 
+import android.util.Patterns
+
 object StringUtils {
 
     // Función de extension para validar el correo electrónico
@@ -21,4 +23,14 @@ object StringUtils {
             Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*+#=.?&]{8,}\$")
         return passwordRegex.matches(this)
     }
+
+    //esto ya tiene configurado como seria el email. modelo. entonces no necesita las validaciones del regex
+    fun String.validationEmail(): Boolean {
+        return this.isNotEmpty() && this.length <= 30 && Patterns.EMAIL_ADDRESS.matcher(this)
+            .matches() && !this.contains(" ")
+    }
+    fun String.validationPassword(): Boolean {
+            return this.length in 8..30 && this.all { it.isLetterOrDigit() } && !this.contains(" ")
+    }
+
 }
