@@ -3,8 +3,8 @@ package com.example.refactoringlifeacademy
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.refactoringlifeacademy.utils.StringUtils.isValidPassword
 import com.example.refactoringlifeacademy.utils.StringUtils.validationEmail
-import com.example.refactoringlifeacademy.utils.StringUtils.validationPassword
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,7 +21,7 @@ class ViewModelLogin : ViewModel() {
     private val _validateData = MutableLiveData<Boolean>()
     val validateData: LiveData<Boolean> = _validateData
     fun checkUserLogin(email: String, pass: String): Boolean {
-        return email.validationEmail() && pass.validationPassword()
+        return email.validationEmail() && pass.isValidPassword()
     }
     fun checkAllFields(email: String, pass: String) {
         validationFields.postValue(checkUserLogin(email, pass))

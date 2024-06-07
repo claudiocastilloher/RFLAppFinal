@@ -2,6 +2,7 @@ package com.example.refactoringlifeacademy.utils
 
 import android.util.Patterns
 
+
 object StringUtils {
 
     // Función de extension para validar el correo electrónico
@@ -12,25 +13,22 @@ object StringUtils {
 
     // Función de extension para validar la contraseña
     fun String.isValidPassword(): Boolean {
-        // Reglas de validación de contraseña
-        // (Faltarian o se modificarian segun lo que responda Backend respecto a la consulta de caracteristicas de las contraseñas):
-        // - Mínimo 8 caracteres
-        // - Al menos una letra mayúscula
-        // - Al menos una letra minúscula
-        // - Al menos un número
-        // - Al menos un carácter especial (@$!%*+#=.?&)
-        val passwordRegex =
-            Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*+#=.?&]{8,}\$")
-        return passwordRegex.matches(this)
+        if (this.length !in 8..20) return false
+
+        val specialCharacters = "@$!%*?&"
+        val hasUpperCase = any { it.isUpperCase() }
+        val hasLowerCase = any { it.isLowerCase() }
+        val hasDigit = any { it.isDigit() }
+        val hasSpecialChar = any { it in specialCharacters }
+        val hasInvalidChar = any { !it.isLetterOrDigit() && it !in specialCharacters }
+
+        return hasUpperCase && hasLowerCase && hasDigit && hasSpecialChar && !hasInvalidChar
     }
 
     //esto ya tiene configurado como seria el email. modelo. entonces no necesita las validaciones del regex
     fun String.validationEmail(): Boolean {
         return this.isNotEmpty() && this.length <= 30 && Patterns.EMAIL_ADDRESS.matcher(this)
             .matches() && !this.contains(" ")
-    }
-    fun String.validationPassword(): Boolean {
-            return this.length in 8..30 && this.all { it.isLetterOrDigit() } && !this.contains(" ")
     }
 
 }
