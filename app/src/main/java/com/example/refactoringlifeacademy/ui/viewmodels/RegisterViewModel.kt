@@ -1,4 +1,4 @@
-package com.example.refactoringlifeacademy.viewmodels
+package com.example.refactoringlifeacademy.ui.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +13,7 @@ class RegisterViewModel : ViewModel() {
     private val _isFormValid = MutableLiveData<Boolean>()
     val isFormValid: LiveData<Boolean> = _isFormValid
 
-    // Funcion en hilo secundario para validar email y password
+
     fun validateEmailPassword(email: String, password: String, confirmPassword: String) {
         CoroutineScope(Dispatchers.IO).launch {
             val isEmailValid = email.isValidEmail()
@@ -23,7 +23,6 @@ class RegisterViewModel : ViewModel() {
         }
     }
 
-    // Funcion que actualiza el valor del LiveData
     private fun updateFormValidity(
         isEmailValid: Boolean,
         isPasswordValid: Boolean,

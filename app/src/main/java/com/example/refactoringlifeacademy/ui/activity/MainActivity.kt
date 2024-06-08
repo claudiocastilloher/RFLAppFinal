@@ -1,4 +1,4 @@
-package com.example.refactoringlifeacademy
+package com.example.refactoringlifeacademy.ui.activity
 
 import android.content.Intent
 import android.os.Bundle

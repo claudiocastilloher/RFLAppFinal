@@ -1,4 +1,4 @@
-package com.example.refactoringlifeacademy
+package com.example.refactoringlifeacademy.ui.activity
 
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.example.refactoringlifeacademy.databinding.ActivityRegisterBinding
-import com.example.refactoringlifeacademy.viewmodels.RegisterViewModel
+import com.example.refactoringlifeacademy.ui.viewmodels.RegisterViewModel
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
@@ -22,15 +22,12 @@ class RegisterActivity : AppCompatActivity() {
         initListeners()
     }
 
-    // Obserever del cambio de valor cuando son validos o no los campos de email y contraseña
     private fun observer() {
         viewModel.isFormValid.observe(this) { isValid ->
-            binding.butttonRegister.isEnabled = isValid
-            activateButton()
+            binding.buttonRegister.isEnabled = isValid
         }
     }
 
-    // Funcion que a traves de un textwatch para activar o desactivar boton de registro dependiendo de la validacion de campos
     private fun activateButton() {
         binding.etEmail.addTextChangedListener { text ->
             viewModel.validateEmailPassword(
