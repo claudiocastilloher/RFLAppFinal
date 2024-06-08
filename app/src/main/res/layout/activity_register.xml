@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    tools:context=".ui.activity.RegisterActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -138,12 +138,12 @@
         android:textSize="15sp"
         android:textStyle="bold"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/butttonRegister"
+        app:layout_constraintBottom_toTopOf="@id/button_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/butttonRegister"
+        android:id="@+id/button_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
