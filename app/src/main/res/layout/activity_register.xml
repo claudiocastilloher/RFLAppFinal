@@ -136,7 +136,7 @@
         android:textSize="15sp"
         android:textStyle="bold"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/buttton_Register"
+        app:layout_constraintBottom_toTopOf="@id/button_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
