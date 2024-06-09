@@ -1,5 +1,4 @@
 package com.example.refactoringlifeacademy.utils
-
 import android.util.Patterns
 
 

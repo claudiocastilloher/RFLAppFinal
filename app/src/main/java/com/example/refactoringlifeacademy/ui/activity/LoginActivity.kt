@@ -1,4 +1,4 @@
-package com.example.refactoringlifeacademy
+package com.example.refactoringlifeacademy.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.refactoringlifeacademy.ViewModelLogin
 import androidx.lifecycle.Observer
+import com.example.refactoringlifeacademy.R
 import com.example.refactoringlifeacademy.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
