@@ -57,7 +57,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    // no me esta haciendo el checkeo
     private fun setupObservers() {
         viewModel.validationFields.observe(this, Observer { isValid ->
             if (isValid) {
