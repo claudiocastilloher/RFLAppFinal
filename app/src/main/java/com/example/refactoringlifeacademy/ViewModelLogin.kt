@@ -3,15 +3,11 @@ package com.example.refactoringlifeacademy
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.refactoringlifeacademy.utils.StringUtils.isValidPassword
-import com.example.refactoringlifeacademy.utils.StringUtils.validationEmail
+import com.example.refactoringlifeacademy.utils.isValidPassword
+import com.example.refactoringlifeacademy.utils.validationEmail
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
-
-import kotlinx.coroutines.launch
-
 
 
 

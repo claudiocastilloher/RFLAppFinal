@@ -3,8 +3,8 @@ package com.example.refactoringlifeacademy.ui.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.refactoringlifeacademy.utils.StringUtils.isValidEmail
-import com.example.refactoringlifeacademy.utils.StringUtils.isValidPassword
+import com.example.refactoringlifeacademy.utils.isValidEmail
+import com.example.refactoringlifeacademy.utils.isValidPassword
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.widget.addTextChangedListener
 import com.example.refactoringlifeacademy.ViewModelLogin
 import androidx.lifecycle.Observer
 import com.example.refactoringlifeacademy.R
@@ -22,17 +23,13 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        observer()
+        activateButton()
         initListeners()
-        setupObservers()
+
     }
 
     private fun initListeners() {
@@ -55,31 +52,40 @@ class LoginActivity : AppCompatActivity() {
         binding.btnEnter.setOnClickListener {
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
-            viewModel.checkAllFields(email, password)
+            viewModel.loginUser(email, password)
         }
     }
 
-    private fun setupObservers() {
-        viewModel.validationFields.observe(this, Observer { isValid ->
-            if (isValid) {
-                viewModel.loginUser(
-                    binding.etEmail.text.toString(),
-                    binding.etPassword.text.toString()
-                )
-            } else {
-                Toast.makeText(this, "Invalid Email or Password format", Toast.LENGTH_SHORT).show()
-            }
-        })
 
-        viewModel.validateData.observe(this, Observer { isValid ->
+    private fun observer() {
+        viewModel.validationFields.observe(this) { isValid ->
+            binding.btnEnter.isEnabled = isValid
+        }
+
+        viewModel.validateData.observe(this) { isValid ->
             if (isValid) {
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {
-                Toast.makeText(this, "Invalid Email or Password", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error en el llenado de campos", Toast.LENGTH_SHORT).show()
             }
-        })
+        }
+    }
+
+    private fun activateButton() {
+        binding.etEmail.addTextChangedListener {
+            validateFields()
+        }
+        binding.etPassword.addTextChangedListener {
+            validateFields()
+        }
+    }
+
+    private fun validateFields() {
+        val email = binding.etEmail.text.toString()
+        val password = binding.etPassword.text.toString()
+        viewModel.checkAllFields(email, password)
     }
 }
