@@ -3,8 +3,8 @@ import android.util.Patterns
 
 
     fun String.isValidEmail(): Boolean {
-        val emailRegex = Regex("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")
-        return emailRegex.matches(this)
+        return this.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(this)
+            .matches() && !this.contains(" ")
     }
 
     fun String.isValidPassword(): Boolean {
@@ -20,8 +20,4 @@ import android.util.Patterns
         return hasUpperCase && hasLowerCase && hasDigit && hasSpecialChar && !hasInvalidChar
     }
 
-    fun String.validationEmail(): Boolean {
-        return this.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(this)
-            .matches() && !this.contains(" ")
-    }
 
