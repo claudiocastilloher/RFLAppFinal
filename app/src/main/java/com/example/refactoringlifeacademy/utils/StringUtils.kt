@@ -21,7 +21,7 @@ import android.util.Patterns
     }
 
     fun String.validationEmail(): Boolean {
-        return this.isNotEmpty() && this.length <= 30 && Patterns.EMAIL_ADDRESS.matcher(this)
+        return this.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(this)
             .matches() && !this.contains(" ")
     }
 
