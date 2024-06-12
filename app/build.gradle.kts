@@ -73,7 +73,8 @@ dependencies {
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
 
     // corrutinas
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
     //Lifecycle components
     implementation ("androidx.lifecycle:lifecycle-extensions:2.2.0")
 

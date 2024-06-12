@@ -3,11 +3,11 @@ package com.example.refactoringlifeacademy.ui.register.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.refactoringlifeacademy.utils.isValidEmail
+import com.example.refactoringlifeacademy.utils.isValidPassword
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import com.example.refactoringlifeacademy.utils.isValidEmail
-import com.example.refactoringlifeacademy.utils.isValidPassword
 
 class RegisterViewModel : ViewModel() {
     private val _isFormValid = MutableLiveData<Boolean>()
