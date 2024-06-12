@@ -1,4 +1,4 @@
-package com.example.refactoringlifeacademy.ui.activity
+package com.example.refactoringlifeacademy.ui.register.presenter
 
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.example.refactoringlifeacademy.databinding.ActivityRegisterBinding
-import com.example.refactoringlifeacademy.ui.viewmodels.RegisterViewModel
+import com.example.refactoringlifeacademy.ui.register.viewmodel.RegisterViewModel
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding

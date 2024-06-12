@@ -13,16 +13,16 @@
         android:theme="@style/Theme.RefactoringLifeAcademy"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activity.LoginActivity"
+            android:name=".ui.login.presenter.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.RegisterActivity"
+            android:name=".ui.register.presenter.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.PreLogin"
+            android:name=".ui.prelogin.presenter.PreLogin"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.MainActivity"
+            android:name=".ui.main.presenter.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

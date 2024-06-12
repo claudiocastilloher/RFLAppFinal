@@ -1,4 +1,4 @@
-package com.example.refactoringlifeacademy.ui.activity
+package com.example.refactoringlifeacademy.ui.login.presenter
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.refactoringlifeacademy.R
 import com.example.refactoringlifeacademy.databinding.ActivityLoginBinding
+import com.example.refactoringlifeacademy.ui.register.presenter.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding

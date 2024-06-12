@@ -1,4 +1,4 @@
-package com.example.refactoringlifeacademy.ui.viewmodels
+package com.example.refactoringlifeacademy.ui.register.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
