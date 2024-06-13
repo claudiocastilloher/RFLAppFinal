@@ -7,7 +7,7 @@ import retrofit2.Response
 
 class LoginRepository(private val service: LoginServiceImp = LoginServiceImp()) {
 
-    fun loginUser(request: LoginRequest) :Response<LoginResponse>{
+    suspend fun loginUser(request: LoginRequest) :Response<LoginResponse>{
         return service.loginUser(request)
     }
 
