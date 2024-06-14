@@ -1,8 +1,10 @@
 package com.example.refactoringlifeacademy.utils
 import android.util.Patterns
+import androidx.annotation.StringRes
+import android.content.Context
 
 
-    fun String.isValidEmail(): Boolean {
+fun String.isValidEmail(): Boolean {
         return this.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(this)
             .matches() && !this.contains(" ")
     }
@@ -19,5 +21,8 @@ import android.util.Patterns
 
         return hasUpperCase && hasLowerCase && hasDigit && hasSpecialChar && !hasInvalidChar
     }
+
+
+
 
 

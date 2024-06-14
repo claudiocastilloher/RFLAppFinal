@@ -1,9 +1,10 @@
-package com.example.refactoringlifeacademy.ui.activity
+package com.example.refactoringlifeacademy.ui.main.presenter
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.refactoringlifeacademy.databinding.ActivityMainBinding
+import com.example.refactoringlifeacademy.ui.prelogin.presenter.PreLogin
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

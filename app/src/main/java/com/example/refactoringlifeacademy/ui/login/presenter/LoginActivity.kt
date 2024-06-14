@@ -1,20 +1,17 @@
-package com.example.refactoringlifeacademy.ui.activity
+package com.example.refactoringlifeacademy.ui.login.presenter
 
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
-import com.example.refactoringlifeacademy.ViewModelLogin
-import androidx.lifecycle.Observer
-import com.example.refactoringlifeacademy.R
+import com.example.refactoringlifeacademy.ui.login.viewmodel.ViewModelLogin
 import com.example.refactoringlifeacademy.databinding.ActivityLoginBinding
+import com.example.refactoringlifeacademy.ui.main.presenter.MainActivity
+import com.example.refactoringlifeacademy.ui.register.presenter.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding

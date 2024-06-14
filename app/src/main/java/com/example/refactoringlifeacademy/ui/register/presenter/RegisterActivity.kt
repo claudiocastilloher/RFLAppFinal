@@ -1,4 +1,4 @@
-package com.example.refactoringlifeacademy.ui.activity
+package com.example.refactoringlifeacademy.ui.register.presenter
 
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
@@ -6,8 +6,9 @@ import android.text.method.PasswordTransformationMethod
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import com.example.refactoringlifeacademy.data.dto.request.RegisterRequest
 import com.example.refactoringlifeacademy.databinding.ActivityRegisterBinding
-import com.example.refactoringlifeacademy.ui.viewmodels.RegisterViewModel
+import com.example.refactoringlifeacademy.ui.register.viewmodel.RegisterViewModel
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
@@ -20,6 +21,7 @@ class RegisterActivity : AppCompatActivity() {
         observer()
         activateButton()
         initListeners()
+        registerButton()
     }
 
     private fun observer() {
@@ -49,6 +51,19 @@ class RegisterActivity : AppCompatActivity() {
                 binding.etPassword.text.toString(),
                 text.toString()
             )
+        }
+    }
+
+    private fun registerButton() {
+        val email = binding.etEmail.text.toString()
+        val password = binding.etPassword.text.toString()
+        val confirmPassword = binding.etConfirmPassword.text.toString()
+        viewModel.validateEmailPassword(email, password, confirmPassword)
+        binding.buttonRegister.setOnClickListener {
+            if (password == confirmPassword) {
+                val requestRegister = RegisterRequest(email, password)
+                viewModel.registerUser(requestRegister)
+            }
         }
     }
 
