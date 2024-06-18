@@ -4,18 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import com.example.refactoringlifeacademy.ViewModelLogin
-import androidx.lifecycle.Observer
-import com.example.refactoringlifeacademy.R
 import com.example.refactoringlifeacademy.databinding.ActivityLoginBinding
-import com.example.refactoringlifeacademy.utils.StateLogin
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -50,39 +43,40 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.btnEnter.setOnClickListener {
-            val email = binding.etEmail.text.toString()
-            val password = binding.etPassword.text.toString()
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                viewModel.loginUser(email, password)
-            } else {
-                Toast.makeText(this, "Por favor ingrese su correo y contraseña", Toast.LENGTH_SHORT).show()
-            }
-        }
     }
+
+//    binding.btnEnter.setOnClickListener {
+//        val email = binding.etEmail.text.toString()
+//        val password = binding.etPassword.text.toString()
+//        if (email.isNotEmpty() && password.isNotEmpty()) {
+//            viewModel.loginUser(email, password)
+//        } else {
+//            Toast.makeText(this, "Por favor ingrese su correo y contraseña", Toast.LENGTH_SHORT).show()
+//        }
+//    }
 
 
     private fun observer() {
-        viewModel.validationFields.observe(this) {
-            binding.btnEnter.isEnabled = it
+        viewModel.validationFields.observe(this) { isValid ->
+            binding.btnEnter.isEnabled = isValid
         }
 
-        viewModel.dataState.observe(this) { state ->
-            when (state) {
-                is StateLogin.Loading -> {
-                    Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show()
-                }
-                is StateLogin.Succes -> {
-                    Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
-                is StateLogin.Error -> {
-                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
+//        viewModel.dataState.observe(this) { state ->
+//            when (state) {
+//                is StateLogin.Loading -> {
+//                    Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show()
+//                }
+//                is StateLogin.Succes -> {
+//                    Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
+//                    val intent = Intent(this, MainActivity::class.java)
+//                    startActivity(intent)
+//                    finish()
+//                }
+//                is StateLogin.Error -> {
+//                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//        }
     }
 
     private fun activateButton() {

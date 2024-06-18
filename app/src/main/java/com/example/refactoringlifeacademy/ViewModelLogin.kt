@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.refactoringlifeacademy.data.dto.request.LoginRequest
 import com.example.refactoringlifeacademy.data.repository.LoginRepository
-import com.example.refactoringlifeacademy.utils.StateLogin
 import com.example.refactoringlifeacademy.utils.isValidEmail
 import com.example.refactoringlifeacademy.utils.isValidPassword
 import kotlinx.coroutines.CoroutineScope
@@ -19,8 +18,6 @@ class ViewModelLogin(private val repository: LoginRepository = LoginRepository()
     private val _validateData = MutableLiveData<Boolean>()
     val validateData: LiveData<Boolean> = _validateData
 
-    private val _dataState = MutableLiveData<StateLogin>()
-    var dataState :LiveData<StateLogin> = _dataState
     private fun checkUserLogin(email: String, pass: String): Boolean {
         return email.isNotEmpty() && pass.isNotEmpty() && email.isValidEmail() && pass.isValidPassword()
     }
@@ -31,18 +28,10 @@ class ViewModelLogin(private val repository: LoginRepository = LoginRepository()
 
     fun loginUser(email: String, password: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            _dataState.postValue(StateLogin.Loading)
             val isValid = checkUserLogin(email, password)
             _validateData.postValue(isValid)
 
             val response = repository.loginUser(LoginRequest(email, password))
-            if(response.isSuccessful){
-                response.body()?.let {
-                    _dataState.postValue(StateLogin.Succes(it))
-                } ?: _dataState.postValue(StateLogin.Error("No Data"))
-            }else{
-                _dataState.postValue(StateLogin.Error("Error Service"))
-            }
         }
     }
 
