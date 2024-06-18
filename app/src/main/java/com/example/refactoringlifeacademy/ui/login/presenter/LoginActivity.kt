@@ -1,4 +1,4 @@
-package com.example.refactoringlifeacademy.ui.activity
+package com.example.refactoringlifeacademy.ui.login.presenter
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,8 +7,9 @@ import android.text.method.PasswordTransformationMethod
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
-import com.example.refactoringlifeacademy.ViewModelLogin
+import com.example.refactoringlifeacademy.ui.login.viewmodel.ViewModelLogin
 import com.example.refactoringlifeacademy.databinding.ActivityLoginBinding
+import com.example.refactoringlifeacademy.ui.register.presenter.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding

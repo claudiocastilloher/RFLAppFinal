@@ -45,6 +45,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.ui.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -68,6 +69,7 @@ dependencies {
 
     //picasso
     implementation ("com.squareup.picasso:picasso:2.71828")
+
     //navigation
     implementation ("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
@@ -77,6 +79,4 @@ dependencies {
 
     //Lifecycle components
     implementation ("androidx.lifecycle:lifecycle-extensions:2.2.0")
-
-
 }

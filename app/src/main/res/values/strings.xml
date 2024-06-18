@@ -16,4 +16,6 @@
     <!--finPreLogin-->
     <string name="sign_in">Iniciar sesión</string>
     <string name="error_user_password">Error en el usuario o contraseña!</string>
+    <!--API-->
+    <string name="base_url">https://api-users-c9xg.onrender.com/</string>
 </resources>

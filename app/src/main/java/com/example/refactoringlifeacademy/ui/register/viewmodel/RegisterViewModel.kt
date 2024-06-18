@@ -1,15 +1,17 @@
-package com.example.refactoringlifeacademy.ui.viewmodels
+package com.example.refactoringlifeacademy.ui.register.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.refactoringlifeacademy.data.dto.request.RegisterRequest
+import com.example.refactoringlifeacademy.data.repository.RegisterRepository
 import com.example.refactoringlifeacademy.utils.isValidEmail
 import com.example.refactoringlifeacademy.utils.isValidPassword
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class RegisterViewModel : ViewModel() {
+class RegisterViewModel(private val regRepository: RegisterRepository = RegisterRepository()) : ViewModel() {
     private val _isFormValid = MutableLiveData<Boolean>()
     val isFormValid: LiveData<Boolean> = _isFormValid
 
@@ -29,5 +31,11 @@ class RegisterViewModel : ViewModel() {
         isPasswordConfValid: Boolean
     ) {
         _isFormValid.postValue(isEmailValid && isPasswordValid && isPasswordConfValid)
+    }
+
+    fun registerUser(requestRegister: RegisterRequest) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val regResponse = regRepository.registerUser(requestRegister)
+        }
     }
 }
