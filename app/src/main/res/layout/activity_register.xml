@@ -148,7 +148,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/button_background"
+        android:background="@drawable/button_validate"
         android:elevation="42dp"
         android:text="@string/enter"
         android:textAllCaps="false"
