@@ -27,9 +27,6 @@ class ViewModelLogin(private val repository: LoginRepository = LoginRepository()
 
     fun loginUser(email: String, password: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val isValid = checkUserLogin(email, password)
-            _validateData.postValue(isValid)
-
             val response = repository.loginUser(LoginRequest(email, password))
         }
     }

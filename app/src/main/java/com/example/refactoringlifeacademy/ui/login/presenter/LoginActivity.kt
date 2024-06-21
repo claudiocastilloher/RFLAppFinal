@@ -26,7 +26,6 @@ class LoginActivity : AppCompatActivity() {
         observer()
         activateButton()
         initListeners()
-
     }
 
     private fun initListeners() {
@@ -46,13 +45,14 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
+        binding.btnEnter.isEnabled = false
+
         binding.btnEnter.setOnClickListener {
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
             viewModel.loginUser(email, password)
         }
     }
-
 
     private fun observer() {
         viewModel.validationFields.observe(this) { isValid ->
