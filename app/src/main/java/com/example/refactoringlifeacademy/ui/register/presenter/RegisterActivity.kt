@@ -55,11 +55,11 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun registerButton() {
-        val email = binding.etEmail.text.toString()
-        val password = binding.etPassword.text.toString()
-        val confirmPassword = binding.etConfirmPassword.text.toString()
-        viewModel.validateEmailPassword(email, password, confirmPassword)
+        binding.buttonRegister.isEnabled = false
         binding.buttonRegister.setOnClickListener {
+            val email = binding.etEmail.text.toString()
+            val password = binding.etPassword.text.toString()
+            val confirmPassword = binding.etConfirmPassword.text.toString()
             if (password == confirmPassword) {
                 val requestRegister = RegisterRequest(email, password)
                 viewModel.registerUser(requestRegister)

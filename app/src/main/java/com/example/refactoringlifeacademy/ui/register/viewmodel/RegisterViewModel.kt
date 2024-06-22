@@ -11,10 +11,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class RegisterViewModel(private val regRepository: RegisterRepository = RegisterRepository()) : ViewModel() {
+class RegisterViewModel(private val regRepository: RegisterRepository = RegisterRepository()) :
+    ViewModel() {
     private val _isFormValid = MutableLiveData<Boolean>()
     val isFormValid: LiveData<Boolean> = _isFormValid
-
 
     fun validateEmailPassword(email: String, password: String, confirmPassword: String) {
         CoroutineScope(Dispatchers.IO).launch {
