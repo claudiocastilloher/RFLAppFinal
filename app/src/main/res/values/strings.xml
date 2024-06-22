@@ -18,4 +18,15 @@
     <string name="error_user_password">Error en el usuario o contraseña!</string>
     <!--API-->
     <string name="base_url">https://api-users-c9xg.onrender.com/</string>
+    <!--home-->
+    <string name="content_description">Imagen de descripcion</string>
+    <string name="search">Busca en Refactoring Life Shop</string>
+    <string name="product">Short Verano</string>
+    <string name="price">$ 12.000</string>
+    <string name="problems">En caso de problemas comunicate con </string>
+    <string name="support">soporte</string>
+    <string name="offer">Oferta del día</string>
+    <string name="rusty">Rusty</string>
+    <string name="rusty_description">Buzo canguro capucha con cordon</string>
+
 </resources>
