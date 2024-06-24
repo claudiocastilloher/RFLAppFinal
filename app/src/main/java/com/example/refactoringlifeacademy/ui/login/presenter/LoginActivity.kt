@@ -24,7 +24,6 @@ class LoginActivity : AppCompatActivity() {
         observer()
         activateButton()
         initListeners()
-
     }
 
     private fun initListeners() {
@@ -37,25 +36,20 @@ class LoginActivity : AppCompatActivity() {
             }
             binding.etPassword.setSelection(binding.etPassword.text.length)
         }
-
         binding.tvRegisterHere.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
             finish()
         }
 
+        binding.btnEnter.isEnabled = false
+
+        binding.btnEnter.setOnClickListener {
+            val email = binding.etEmail.text.toString()
+            val password = binding.etPassword.text.toString()
+            viewModel.loginUser(email, password)
+        }
     }
-
-//    binding.btnEnter.setOnClickListener {
-//        val email = binding.etEmail.text.toString()
-//        val password = binding.etPassword.text.toString()
-//        if (email.isNotEmpty() && password.isNotEmpty()) {
-//            viewModel.loginUser(email, password)
-//        } else {
-//            Toast.makeText(this, "Por favor ingrese su correo y contraseña", Toast.LENGTH_SHORT).show()
-//        }
-//    }
-
 
     private fun observer() {
         viewModel.validationFields.observe(this) { isValid ->

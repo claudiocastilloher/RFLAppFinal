@@ -7,7 +7,7 @@ import retrofit2.Response
 
 class RegisterRepository(private val service: RegisterServiceImplement = RegisterServiceImplement()) {
 
-    fun registerUser(request: RegisterRequest) : Response<RegisterResponse>{
+    suspend fun registerUser(request: RegisterRequest) : Response<RegisterResponse>{
         return service.registerUser(request)
     }
 }

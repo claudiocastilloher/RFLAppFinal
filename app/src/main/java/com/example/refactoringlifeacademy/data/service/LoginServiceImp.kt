@@ -15,7 +15,8 @@ class LoginServiceImp {
 
     private val service = retrofit.create<LoginService>()
 
-   suspend fun loginUser(request: LoginRequest): Response<LoginResponse>{
+
+    suspend fun loginUser(request: LoginRequest): Response<LoginResponse>{
         return service.loginUser(request)
     }
 }
