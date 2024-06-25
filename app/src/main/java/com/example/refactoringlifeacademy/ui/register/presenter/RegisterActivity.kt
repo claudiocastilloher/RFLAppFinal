@@ -9,6 +9,8 @@ import androidx.core.widget.addTextChangedListener
 import com.example.refactoringlifeacademy.data.dto.request.RegisterRequest
 import com.example.refactoringlifeacademy.databinding.ActivityRegisterBinding
 import com.example.refactoringlifeacademy.ui.register.viewmodel.RegisterViewModel
+import com.example.refactoringlifeacademy.utils.StateRegister
+import java.lang.Thread.State
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
@@ -25,8 +27,22 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun observer() {
-        viewModel.isFormValid.observe(this) { isValid ->
-            binding.buttonRegister.isEnabled = isValid
+        viewModel.data.observe(this) { state ->
+            when(state){
+                is StateRegister.FormValid ->{
+                    binding.buttonRegister.isEnabled = state.state
+                }
+                is StateRegister.Loading ->{
+
+                }
+                is StateRegister.Success ->{
+
+                }
+                is StateRegister.Error ->{
+
+                }
+            }
+
         }
     }
 

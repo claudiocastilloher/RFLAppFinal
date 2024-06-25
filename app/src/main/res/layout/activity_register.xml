@@ -128,19 +128,8 @@
         app:layout_constraintStart_toEndOf="@id/cbShowPasswordComfirm"
         app:layout_constraintTop_toBottomOf="@id/etConfirmPassword" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:fontFamily="@font/roboto"
-        android:text="@string/error_user_password"
-        android:textColor="@color/red"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/button_register"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_register"
@@ -188,18 +177,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tvnoAccount" />
 
-    <RelativeLayout
-        android:id="@+id/rlProgressBar"
+
+    <include
+        android:id="@+id/progressBar"
+        layout="@layout/progresbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black_light"
-        android:visibility="gone">
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        />
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="160dp" />
-    </RelativeLayout>
+    <include
+        layout="@layout/msj_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/etConfirmPassword"
+        app:layout_constraintBottom_toTopOf="@+id/button_register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
 
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
