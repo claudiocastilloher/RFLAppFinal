@@ -55,23 +55,6 @@ class LoginActivity : AppCompatActivity() {
         viewModel.validationFields.observe(this) { isValid ->
             binding.btnEnter.isEnabled = isValid
         }
-
-//        viewModel.dataState.observe(this) { state ->
-//            when (state) {
-//                is StateLogin.Loading -> {
-//                    Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show()
-//                }
-//                is StateLogin.Succes -> {
-//                    Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
-//                    val intent = Intent(this, MainActivity::class.java)
-//                    startActivity(intent)
-//                    finish()
-//                }
-//                is StateLogin.Error -> {
-//                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        }
     }
 
     private fun activateButton() {
