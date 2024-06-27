@@ -4,13 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.example.refactoringlifeacademy.ui.login.viewmodel.ViewModelLogin
 import com.example.refactoringlifeacademy.databinding.ActivityLoginBinding
-import com.example.refactoringlifeacademy.ui.main.presenter.MainActivity
 import com.example.refactoringlifeacademy.ui.register.presenter.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
@@ -38,7 +36,6 @@ class LoginActivity : AppCompatActivity() {
             }
             binding.etPassword.setSelection(binding.etPassword.text.length)
         }
-
         binding.tvRegisterHere.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
@@ -57,17 +54,6 @@ class LoginActivity : AppCompatActivity() {
     private fun observer() {
         viewModel.validationFields.observe(this) { isValid ->
             binding.btnEnter.isEnabled = isValid
-        }
-
-        viewModel.validateData.observe(this) { isValid ->
-            if (isValid) {
-                Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-            } else {
-                Toast.makeText(this, "Error en el llenado de campos", Toast.LENGTH_SHORT).show()
-            }
         }
     }
 

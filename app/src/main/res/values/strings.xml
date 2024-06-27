@@ -28,5 +28,7 @@
     <string name="offer">Oferta del día</string>
     <string name="rusty">Rusty</string>
     <string name="rusty_description">Buzo canguro capucha con cordon</string>
+    <!-- Register-->
+    <string name="msj_error">Error en el mail o la contraseña</string>
 
 </resources>

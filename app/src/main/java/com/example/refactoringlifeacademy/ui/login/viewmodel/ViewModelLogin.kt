@@ -17,8 +17,9 @@ class ViewModelLogin(private val repository: LoginRepository = LoginRepository()
 
     private val _validateData = MutableLiveData<Boolean>()
     val validateData: LiveData<Boolean> = _validateData
+
     private fun checkUserLogin(email: String, pass: String): Boolean {
-        return email.isValidEmail() && pass.isValidPassword()
+        return email.isNotEmpty() && pass.isNotEmpty() && email.isValidEmail() && pass.isValidPassword()
     }
     fun checkAllFields(email: String, pass: String) {
         validationFields.postValue(checkUserLogin(email, pass))
