@@ -1,6 +1,7 @@
 package com.example.refactoringlifeacademy.ui.home.presenter
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -38,12 +39,11 @@ class HomeActivity : AppCompatActivity() {
                     // Muestra una barra de progreso
                 }
                 is ProductState.Success -> {
-                    // Maneja la respuesta exitosa
                     val products = state.data.products
                     // agregar al adapter
                 }
                 is ProductState.Error -> {
-                    // Muestra un mensaje de error
+                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
                 }
             }
         })
@@ -54,12 +54,11 @@ class HomeActivity : AppCompatActivity() {
                     // Muestra una barra de progreso
                 }
                 is ProductState.Success -> {
-                    // Maneja la respuesta exitosa
                     val products = state.data.product
                     // agregar al adapter
                 }
                 is ProductState.Error -> {
-                    // Muestra un mensaje de error
+                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
                 }
             }
         })
@@ -70,12 +69,11 @@ class HomeActivity : AppCompatActivity() {
                     // Muestra una barra de progreso
                 }
                 is ProductState.Success -> {
-                    // Maneja la respuesta exitosa
                     val products = state.data.productTypes
                     // agregar al adapter
                 }
                 is ProductState.Error -> {
-                    // Muestra un mensaje de error
+                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
                 }
             }
         })
@@ -86,12 +84,11 @@ class HomeActivity : AppCompatActivity() {
                     // Muestra una barra de progreso
                 }
                 is ProductState.Success -> {
-                    // Maneja la respuesta exitosa
                     val products = state.data.product
                     // agregar al adapter
                 }
                 is ProductState.Error -> {
-                    // Muestra un mensaje de error
+                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
                 }
             }
         })
