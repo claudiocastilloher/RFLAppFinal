@@ -1,16 +1,19 @@
 package com.example.refactoringlifeacademy.ui.register.presenter
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.example.refactoringlifeacademy.data.dto.request.RegisterRequest
 import com.example.refactoringlifeacademy.databinding.ActivityRegisterBinding
+import com.example.refactoringlifeacademy.ui.home.presenter.HomeActivity
 import com.example.refactoringlifeacademy.ui.register.viewmodel.RegisterViewModel
 import com.example.refactoringlifeacademy.utils.StateRegister
-import java.lang.Thread.State
+
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
@@ -31,19 +34,31 @@ class RegisterActivity : AppCompatActivity() {
             when(state){
                 is StateRegister.FormValid ->{
                     binding.buttonRegister.isEnabled = state.state
+
                 }
                 is StateRegister.Loading ->{
+                    binding.progressBar.rlProgressBar.visibility = View.VISIBLE
+                    binding.incMsjError.tvEmailError.visibility = View.GONE
 
                 }
                 is StateRegister.Success ->{
+                    binding.progressBar.rlProgressBar.visibility = View.GONE
+                    goToHome()
 
                 }
                 is StateRegister.Error ->{
+                    binding.progressBar.rlProgressBar.visibility = View.GONE
+                    binding.incMsjError.tvEmailError.visibility = View.VISIBLE
 
                 }
             }
 
         }
+    }
+    fun goToHome(){
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun activateButton() {

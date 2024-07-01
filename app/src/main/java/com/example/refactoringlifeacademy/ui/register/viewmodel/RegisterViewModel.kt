@@ -40,7 +40,13 @@ class RegisterViewModel(private val regRepository: RegisterRepository = Register
         CoroutineScope(Dispatchers.IO).launch {
             _data.postValue(StateRegister.Loading)
             val regResponse = regRepository.registerUser(requestRegister)
-
+            if(regResponse.isSuccessful){
+                regResponse.body()?.let {
+                    _data.postValue(StateRegister.Success(it))
+                } ?: _data.postValue(StateRegister.Error("No Data"))
+            }else{
+                _data.postValue(StateRegister.Error("Error Service"))
+            }
         }
     }
 }
