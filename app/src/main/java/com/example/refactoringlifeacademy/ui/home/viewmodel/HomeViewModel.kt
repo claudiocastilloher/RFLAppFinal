@@ -25,10 +25,21 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
     private val _dailyOfferState = MutableLiveData<ProductState<SingleProductResponse>>()
     val dailyOfferState: LiveData<ProductState<SingleProductResponse>> = _dailyOfferState
 
-    fun getProducts() {
+    fun getProducts(
+        idProductType: Int? = null,
+        productName: String? = null,
+        onlyFavorite: Boolean = false,
+        page: Int = 1,
+        size: Int = 10
+    ) {
+        if (page < 1 || size !in 1..50) {
+            _productsState.postValue(ProductState.Error("Invalid pagination parameters"))
+            return
+        }
+
         CoroutineScope(Dispatchers.IO).launch {
             _productsState.postValue(ProductState.Loading)
-            val response = repository.getProducts()
+            val response = repository.getProducts(idProductType, productName, onlyFavorite, page, size)
             if (response.isSuccessful) {
                 response.body()?.let {
                     _productsState.postValue(ProductState.Success(it))
