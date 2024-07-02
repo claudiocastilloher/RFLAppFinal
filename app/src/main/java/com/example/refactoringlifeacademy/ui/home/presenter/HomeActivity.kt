@@ -28,7 +28,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun observer() {
-        homeViewModel.productsState.observe(this, Observer { state ->
+        homeViewModel.productsState.observe(this) { state ->
             when (state) {
                 is ProductState.Loading -> {
                     // Muestra una barra de progreso
@@ -41,9 +41,9 @@ class HomeActivity : AppCompatActivity() {
                     Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
                 }
             }
-        })
+        }
 
-        homeViewModel.lastUserProductState.observe(this, Observer { state ->
+        homeViewModel.lastUserProductState.observe(this) { state ->
             when (state) {
                 is ProductState.Loading -> {
                     // Muestra una barra de progreso
@@ -56,9 +56,9 @@ class HomeActivity : AppCompatActivity() {
                     Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
                 }
             }
-        })
+        }
 
-        homeViewModel.productTypesState.observe(this, Observer { state ->
+        homeViewModel.productTypesState.observe(this) { state ->
             when (state) {
                 is ProductState.Loading -> {
                     // Muestra una barra de progreso
@@ -71,9 +71,9 @@ class HomeActivity : AppCompatActivity() {
                     Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
                 }
             }
-        })
+        }
 
-        homeViewModel.dailyOfferState.observe(this, Observer { state ->
+        homeViewModel.dailyOfferState.observe(this) { state ->
             when (state) {
                 is ProductState.Loading -> {
                     // Muestra una barra de progreso
@@ -86,7 +86,7 @@ class HomeActivity : AppCompatActivity() {
                     Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
                 }
             }
-        })
+        }
     }
 
     private fun initRecyclerViewCategory(value: List<ProductType>) {
