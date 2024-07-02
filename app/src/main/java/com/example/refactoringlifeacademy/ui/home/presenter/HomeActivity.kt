@@ -1,14 +1,9 @@
 package com.example.refactoringlifeacademy.ui.home.presenter
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.refactoringlifeacademy.R
 import com.example.refactoringlifeacademy.databinding.ActivityHomeBinding
-import com.example.refactoringlifeacademy.databinding.ActivityRegisterBinding
 import com.example.refactoringlifeacademy.ui.home.viewmodel.adapter.AdapterCategory
 import com.example.refactoringlifeacademy.ui.home.viewmodel.adapter.AdapterProduct
 

@@ -30,7 +30,7 @@ class ProductHolder(view: View) : RecyclerView.ViewHolder(view) {
         val image = value.split(",")[0]
         val name = value.split(",")[1]
         val price = value.split(",")[2]
-        Picasso.get().load(value).into(binding.ivProduct)
+        Picasso.get().load(image).into(binding.ivProduct)
         binding.producName.text = name
         binding.producPrice.text = price
     }
