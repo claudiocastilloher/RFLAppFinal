@@ -3,6 +3,7 @@ package com.example.refactoringlifeacademy.ui.home.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.refactoringlifeacademy.data.dto.response.FavoriteResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductTypesResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductsResponse
 import com.example.refactoringlifeacademy.data.dto.response.SingleProductResponse
@@ -25,10 +26,24 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
     private val _dailyOfferState = MutableLiveData<ProductState<SingleProductResponse>>()
     val dailyOfferState: LiveData<ProductState<SingleProductResponse>> = _dailyOfferState
 
-    fun getProducts() {
+    private val _favoriteState = MutableLiveData<ProductState<FavoriteResponse>>()
+    val favoriteState: LiveData<ProductState<FavoriteResponse>> = _favoriteState
+
+    fun getProducts(
+        idProductType: Int? = null,
+        productName: String? = null,
+        onlyFavorite: Boolean = false,
+        page: Int = 1,
+        size: Int = 10
+    ) {
+        if (page < 1 || size !in 1..50) {
+            _productsState.postValue(ProductState.Error("Invalid pagination parameters"))
+            return
+        }
+
         CoroutineScope(Dispatchers.IO).launch {
             _productsState.postValue(ProductState.Loading)
-            val response = repository.getProducts()
+            val response = repository.getProducts(idProductType, productName, onlyFavorite, page, size)
             if (response.isSuccessful) {
                 response.body()?.let {
                     _productsState.postValue(ProductState.Success(it))
@@ -80,4 +95,19 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
             }
         }
     }
+
+    fun markProductAsFavorite(idProduct: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            _favoriteState.postValue(ProductState.Loading)
+            val response = repository.markProductAsFavorite(idProduct)
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    _favoriteState.postValue(ProductState.Success(it))
+                } ?:  _dailyOfferState.postValue(ProductState.Error("Empty response body"))
+            } else {
+                _dailyOfferState.postValue(ProductState.Error("Failed: ${response.message()}"))
+            }
+        }
+    }
+
 }
