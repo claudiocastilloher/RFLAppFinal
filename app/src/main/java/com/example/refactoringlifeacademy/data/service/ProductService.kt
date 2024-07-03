@@ -1,10 +1,13 @@
 package com.example.refactoringlifeacademy.data.service
 
+import com.example.refactoringlifeacademy.data.dto.response.FavoriteResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductTypesResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductsResponse
 import com.example.refactoringlifeacademy.data.dto.response.SingleProductResponse
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.PUT
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ProductService {
@@ -25,4 +28,7 @@ interface ProductService {
 
     @GET("api/v1/products/daily-offer")
     suspend fun getDailyOffer(): Response<SingleProductResponse>
+
+    @PUT("api/v1/products/{idProduct}/favorite")
+    suspend fun markProductAsFavorite(@Path("idProduct") idProduct: Int): Response<FavoriteResponse>
 }

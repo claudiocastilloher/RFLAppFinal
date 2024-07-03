@@ -92,5 +92,21 @@ class HomeActivity : AppCompatActivity() {
                 }
             }
         })
+
+        homeViewModel.favoriteState.observe(this, Observer { state ->
+            when (state) {
+                is ProductState.Loading -> {
+                    // Muestra una barra de progreso
+                }
+                is ProductState.Success -> {
+                    Toast.makeText(this, "${state.data?.token ?: "Product marked as favorite"} ", Toast.LENGTH_SHORT).show()
+                }
+                is ProductState.Error -> {
+                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
     }
+
+
 }

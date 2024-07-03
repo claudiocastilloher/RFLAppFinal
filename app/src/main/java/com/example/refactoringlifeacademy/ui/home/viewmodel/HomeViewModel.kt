@@ -3,6 +3,7 @@ package com.example.refactoringlifeacademy.ui.home.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.refactoringlifeacademy.data.dto.response.FavoriteResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductTypesResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductsResponse
 import com.example.refactoringlifeacademy.data.dto.response.SingleProductResponse
@@ -24,6 +25,9 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
 
     private val _dailyOfferState = MutableLiveData<ProductState<SingleProductResponse>>()
     val dailyOfferState: LiveData<ProductState<SingleProductResponse>> = _dailyOfferState
+
+    private val _favoriteState = MutableLiveData<ProductState<FavoriteResponse>>()
+    val favoriteState: LiveData<ProductState<FavoriteResponse>> = _favoriteState
 
     fun getProducts(
         idProductType: Int? = null,
@@ -91,4 +95,19 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
             }
         }
     }
+
+    fun markProductAsFavorite(idProduct: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            _favoriteState.postValue(ProductState.Loading)
+            val response = repository.markProductAsFavorite(idProduct)
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    _favoriteState.postValue(ProductState.Success(it))
+                } ?:  _dailyOfferState.postValue(ProductState.Error("Empty response body"))
+            } else {
+                _dailyOfferState.postValue(ProductState.Error("Failed: ${response.message()}"))
+            }
+        }
+    }
+
 }
