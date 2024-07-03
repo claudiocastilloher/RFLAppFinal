@@ -108,15 +108,11 @@ class HomeActivity : AppCompatActivity() {
         binding.rvCategory.adapter = adapter
 
     }
+
     private fun initRecyclerViewProduct(value: List<Product>) {
         binding.rvProduct.layoutManager = LinearLayoutManager(this)
         val adapter = AdapterProduct(value)
         binding.rvProduct.adapter = adapter
 
-        })
-
-
+        }
     }
-
-
-}
