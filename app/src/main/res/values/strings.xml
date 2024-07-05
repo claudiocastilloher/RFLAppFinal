@@ -37,5 +37,7 @@
     <string name="but_coment">Comentarios</string>
     <string name="desc_arrowleft">Flecha Regreso Home</string>
     <string name="desc_semicircle">Semicirculo Leftbar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
