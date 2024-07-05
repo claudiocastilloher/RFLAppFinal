@@ -1,10 +1,12 @@
 package com.example.refactoringlifeacademy.ui.home.presenter
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.refactoringlifeacademy.R
 import com.example.refactoringlifeacademy.data.dto.model.Product
 import com.example.refactoringlifeacademy.data.dto.model.ProductType
 import com.example.refactoringlifeacademy.databinding.ActivityHomeBinding
@@ -12,6 +14,7 @@ import com.example.refactoringlifeacademy.ui.home.viewmodel.HomeViewModel
 import com.example.refactoringlifeacademy.ui.home.viewmodel.ProductState
 import com.example.refactoringlifeacademy.ui.home.viewmodel.adapter.AdapterCategory
 import com.example.refactoringlifeacademy.ui.home.viewmodel.adapter.AdapterProduct
+import com.squareup.picasso.Picasso
 
 class HomeActivity : AppCompatActivity() {
 
@@ -23,21 +26,33 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        calls()
         observer()
     }
 
+    private fun calls(){
+        homeViewModel.getProducts()
+        homeViewModel.getProductTypes()
+        homeViewModel.getDailyOffer()
+        homeViewModel.getLastUserProduct()
+    }
     private fun observer() {
         homeViewModel.productsState.observe(this) { state ->
             when (state) {
                 is ProductState.Loading -> {
-                    // Muestra una barra de progreso
+                    binding.progressBar.rlProgressBar.visibility= View.VISIBLE
                 }
                 is ProductState.Success -> {
-                    val products = state.data.products
-                    // actualizar el recycler de productos
+                    binding.progressBar.rlProgressBar.visibility= View.GONE
+                    state.data.products?.let { products ->
+                        initRecyclerViewProduct(products)
+                    } ?: run {
+                        Toast.makeText(this, "Product list is null", Toast.LENGTH_SHORT).show()
+                    }
                 }
                 is ProductState.Error -> {
-                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+                    binding.progressBar.rlProgressBar.visibility= View.GONE
+                    showMessageError(state.message)
                 }
             }
         }
@@ -45,14 +60,21 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.lastUserProductState.observe(this) { state ->
             when (state) {
                 is ProductState.Loading -> {
-                    // Muestra una barra de progreso
+                    binding.progressBar.rlProgressBar.visibility= View.VISIBLE
                 }
                 is ProductState.Success -> {
-                    val products = state.data.product
-                    // actualizar informacion del ultimo producto visitado
+                    binding.progressBar.rlProgressBar.visibility = View.GONE
+                    val product = state.data.product
+                    if (product != null) {
+                        updateLastUserProductUI(product)
+                        showMessageSuccess("Last viewed product loaded successfully")
+                    } else {
+                        showMessageError("Last viewed product is null")
+                    }
                 }
                 is ProductState.Error -> {
-                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+                    binding.progressBar.rlProgressBar.visibility = View.GONE
+                    showMessageError(state.message)
                 }
             }
         }
@@ -60,14 +82,19 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.productTypesState.observe(this) { state ->
             when (state) {
                 is ProductState.Loading -> {
-                    // Muestra una barra de progreso
+                    binding.progressBar.rlProgressBar.visibility = View.VISIBLE
                 }
                 is ProductState.Success -> {
-                    val products = state.data.productTypes
-                    // recycler categoria de productos
+                    binding.progressBar.rlProgressBar.visibility = View.GONE
+                    state.data.productTypes?.let { productTypes ->
+                       initRecyclerViewCategory(productTypes)
+                    } ?: run {
+                        Toast.makeText(this, "Product types list is null", Toast.LENGTH_SHORT).show()
+                    }
                 }
                 is ProductState.Error -> {
-                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+                    binding.progressBar.rlProgressBar.visibility = View.GONE
+                    showMessageError(state.message)
                 }
             }
         }
@@ -75,14 +102,18 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.dailyOfferState.observe(this) { state ->
             when (state) {
                 is ProductState.Loading -> {
-                    // Muestra una barra de progreso
+                    binding.progressTv.rlProgressBar.visibility = View.VISIBLE
                 }
                 is ProductState.Success -> {
-                    val products = state.data.product
-                    // actualizar la oferta del dia
+                    binding.progressTv.rlProgressBar.visibility = View.GONE
+                    val dailyOffer = state.data.product
+                    if (dailyOffer != null) {
+                        updateDailyOffer(dailyOffer)
+                    }
                 }
                 is ProductState.Error -> {
-                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+                    binding.progressTv.rlProgressBar.visibility = View.GONE
+                    showMessageError(state.message)
                 }
             }
         }
@@ -90,18 +121,42 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.favoriteState.observe(this){ state ->
             when (state) {
                 is ProductState.Loading -> {
-                    // Muestra una barra de progreso
+                    binding.progressTv.rlProgressBar.visibility = View.VISIBLE
                 }
                 is ProductState.Success -> {
-                    Toast.makeText(this, "${state.data.token ?: "Product marked as favorite"} ", Toast.LENGTH_SHORT).show()
+                    binding.progressTv.rlProgressBar.visibility = View.GONE
+                    showMessageSuccess("Daily offer loaded successfully")
                 }
                 is ProductState.Error -> {
-                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+                    binding.progressTv.rlProgressBar.visibility = View.GONE
+                    showMessageError(state.message)
                 }
             }
         }
     }
 
+    private fun showMessageSuccess(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+    private fun showMessageError(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun updateDailyOffer(dailyOffer: Product) {
+        Picasso.get()
+            .load(dailyOffer.image)
+            .into(binding.ivOfferDaily)
+        binding.tvProductName.text = dailyOffer.name ?: ""
+        binding.tvDescription.text = dailyOffer.description ?: ""
+        binding.tvPrice.text = dailyOffer.price ?: ""
+    }
+
+    private fun updateLastUserProductUI(product: Product) {
+        Picasso.get().load(product.image).into(binding.ivOfferDaily)
+        binding.tvProductName.text = product.name ?: ""
+        binding.tvDescription.text  = product.description ?: ""
+        binding.tvPrice.text = product.price ?: ""
+    }
     private fun initRecyclerViewCategory(value: List<ProductType>) {
         binding.rvCategory.layoutManager = LinearLayoutManager(this)
         val adapter = AdapterCategory(value)
