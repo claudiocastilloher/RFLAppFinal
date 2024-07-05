@@ -105,7 +105,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/sc_1"
+        android:id="@+id/ellipse_image"
         android:layout_width="30dp"
         android:layout_height="20dp"
         android:layout_marginTop="160dp"
@@ -118,40 +118,40 @@
         android:visibility="invisible"/>
 
     <ImageView
-        android:id="@+id/sc_2"
+        android:id="@+id/ellipse_descrip"
         android:layout_width="30dp"
         android:layout_height="20dp"
         android:layout_marginTop="130dp"
         android:layout_marginBottom="110dp"
         android:contentDescription="@string/desc_semicircle"
         android:src="@drawable/ellipse"
-        app:layout_constraintTop_toTopOf="@+id/sc_1"
+        app:layout_constraintTop_toTopOf="@+id/ellipse_image"
         app:layout_constraintEnd_toStartOf="@+id/guideline1"
         app:layout_constraintStart_toEndOf="@+id/guideline"
         android:visibility="invisible"/>
 
     <ImageView
-        android:id="@+id/sc_3"
+        android:id="@+id/ellipse_fiance"
         android:layout_width="30dp"
         android:layout_height="20dp"
         android:layout_marginTop="120dp"
         android:layout_marginBottom="110dp"
         android:contentDescription="@string/desc_semicircle"
         android:src="@drawable/ellipse"
-        app:layout_constraintTop_toTopOf="@+id/sc_2"
+        app:layout_constraintTop_toTopOf="@+id/ellipse_descrip"
         app:layout_constraintEnd_toStartOf="@+id/guideline1"
         app:layout_constraintStart_toEndOf="@+id/guideline"
         android:visibility="invisible"/>
 
     <ImageView
-        android:id="@+id/sc_4"
+        android:id="@+id/ellipse_comment"
         android:layout_width="30dp"
         android:layout_height="20dp"
         android:layout_marginTop="130dp"
         android:layout_marginBottom="110dp"
         android:contentDescription="@string/desc_semicircle"
         android:src="@drawable/ellipse"
-        app:layout_constraintTop_toTopOf="@+id/sc_3"
+        app:layout_constraintTop_toTopOf="@+id/ellipse_fiance"
         app:layout_constraintEnd_toStartOf="@+id/guideline1"
         app:layout_constraintStart_toEndOf="@+id/guideline"
         android:visibility="invisible"/>
