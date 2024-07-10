@@ -31,5 +31,17 @@
     <string name="rusty_description">Buzo canguro capucha con cordon</string>
     <!-- Register-->
     <string name="msj_error">Error en el mail o la contraseña</string>
+    <!-- Detail-->
+    <string name="but_images">Imagenes</string>
+    <string name="but_descrip">Descripcion</string>
+    <string name="but_financ">Financiacion</string>
+    <string name="but_coment">Comentarios</string>
+    <string name="desc_arrowleft">Flecha Regreso Home</string>
+    <string name="desc_semicircle">Semicirculo Leftbar</string>
+    <!-- Texto Prueba Fragments -->
+    <string name="image_fragment">Hello image fragment</string>
+    <string name="descr_fragment">Hello description fragment</string>
+    <string name="commment_fragment">Hello comment fragment</string>
+    <string name="fiance_fragment">Hello finence fragment</string>
 
 </resources>
