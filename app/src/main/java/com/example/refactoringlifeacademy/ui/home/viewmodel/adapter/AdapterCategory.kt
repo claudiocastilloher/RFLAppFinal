@@ -27,6 +27,6 @@ class CategoryHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val binding = ItemCategoryBinding.bind(view)
 
     fun render(value: ProductType){
-        binding.tvCategory.text = value.description
+        binding.tvCategory.text = value.descripcion
     }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.refactoringlifeacademy.databinding.ActivityPreLoginBinding
+import com.example.refactoringlifeacademy.ui.detail.presenter.DetailActivity
 import com.example.refactoringlifeacademy.ui.register.presenter.RegisterActivity
 import com.example.refactoringlifeacademy.ui.login.presenter.LoginActivity
 
