@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".45" />
+        app:layout_constraintGuide_end="402dp" />
 
 
     <EditText
@@ -151,18 +151,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tvnoAccount" />
 
-    <RelativeLayout
-        android:id="@+id/rlProgressBar"
+    <include
+        android:id="@+id/progressBar"
+        layout="@layout/progressbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black_light"
-        android:visibility="gone">
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        />
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="160dp" />
-    </RelativeLayout>
+    <include
+        android:id="@+id/inc_msj_error"
+        layout="@layout/msj_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_marginStart="42dp"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline"
+        app:layout_constraintBottom_toTopOf="@+id/etEmail"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

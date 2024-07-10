@@ -192,6 +192,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
+        android:layout_marginStart="42dp"
         app:layout_constraintBottom_toBottomOf="@+id/etConfirmPassword"
         app:layout_constraintBottom_toTopOf="@+id/button_register"
         app:layout_constraintEnd_toEndOf="parent"
