@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.detail.presenter.DetailActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.09" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.19" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <LinearLayout
+        android:id="@+id/linear_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/guideline0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/violet">
+
+        <ImageButton
+            android:id="@+id/tv_imag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="110dp"
+            android:layout_marginBottom="70dp"
+            android:contentDescription="@string/but_images"
+            android:src="@drawable/imagenes"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:background="@color/violet"/>
+
+        <ImageButton
+            android:id="@+id/tv_descript"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="70dp"
+            android:contentDescription="@string/but_descrip"
+            android:src="@drawable/descripcion"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:background="@color/violet"/>
+
+        <ImageButton
+            android:id="@+id/tv_financ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="70dp"
+            android:contentDescription="@string/but_financ"
+            android:src="@drawable/financiacion"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:background="@color/violet"/>
+
+        <ImageButton
+            android:id="@+id/tv_coment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/but_coment"
+            android:src="@drawable/comentarios"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:background="@color/violet" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ellipse_image"
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="135dp"
+        android:contentDescription="@string/desc_semicircle"
+        android:src="@drawable/ellipse"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline1"
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/ellipse_descrip"
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="150dp"
+        android:contentDescription="@string/desc_semicircle"
+        android:src="@drawable/ellipse"
+        app:layout_constraintTop_toTopOf="@+id/ellipse_image"
+        app:layout_constraintEnd_toStartOf="@+id/guideline1"
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/ellipse_finance"
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="155dp"
+        android:contentDescription="@string/desc_semicircle"
+        android:src="@drawable/ellipse"
+        app:layout_constraintTop_toTopOf="@+id/ellipse_descrip"
+        app:layout_constraintEnd_toStartOf="@+id/guideline1"
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/ellipse_comment"
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="160dp"
+        android:contentDescription="@string/desc_semicircle"
+        android:src="@drawable/ellipse"
+        app:layout_constraintTop_toTopOf="@+id/ellipse_finance"
+        app:layout_constraintEnd_toStartOf="@+id/guideline1"
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/arrow_left1"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="20dp"
+        android:contentDescription="@string/desc_arrowleft"
+        android:src="@drawable/arrow_left1"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guideline1"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
