@@ -101,6 +101,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/iv_offer_daily"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:contentDescription="@string/content_description"
@@ -145,6 +146,14 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:text="@string/rusty" />
 
+        <include
+            android:id="@+id/progress_tv"
+            layout="@layout/progressbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -176,5 +185,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tvProblem" />
 
+
+    <include
+        android:id="@+id/progressBar"
+        layout="@layout/progressbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/svSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
