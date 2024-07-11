@@ -4,11 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.example.refactoringlifeacademy.ui.login.viewmodel.ViewModelLogin
 import com.example.refactoringlifeacademy.databinding.ActivityLoginBinding
+import com.example.refactoringlifeacademy.ui.home.presenter.HomeActivity
 import com.example.refactoringlifeacademy.ui.register.presenter.RegisterActivity
 import com.example.refactoringlifeacademy.utils.LoginState
 
@@ -59,17 +61,26 @@ class LoginActivity : AppCompatActivity() {
                     binding.btnEnter.isEnabled = state.state
                 }
                 is LoginState.Succes -> {
-
+                    binding.progressBar.rlProgressBar.visibility = View.GONE
+                    goToHome()
                 }
                 is LoginState.Error -> {
-
+                    binding.progressBar.rlProgressBar.visibility = View.GONE
+                    binding.incMsjError.tvEmailError.visibility = View.VISIBLE
                 }
                 is LoginState.Loading -> {
-
+                    binding.progressBar.rlProgressBar.visibility = View.VISIBLE
+                    binding.incMsjError.tvEmailError.visibility = View.GONE
                 }
             }
 
         }
+    }
+
+    fun goToHome(){
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun activateButton() {
