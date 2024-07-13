@@ -88,6 +88,7 @@ class HomeActivity : AppCompatActivity() {
                         else -> {
                             updateLastUserProductUI(product)
                             UserProduct.userProductId = product.idProduct
+                            UserProduct.isfavorite = product.isFavorite
                             showMessageSuccess("Last viewed product loaded successfully")
                         }
                     }
@@ -139,6 +140,7 @@ class HomeActivity : AppCompatActivity() {
                         else -> {
                             updateDailyOffer(dailyOffer)
                             UserProduct.userProductId = dailyOffer.idProduct
+                            UserProduct.isfavorite = dailyOffer.isFavorite
                             showMessageSuccess("Daily offer product loaded successfully")
                         }
                     }
@@ -159,8 +161,16 @@ class HomeActivity : AppCompatActivity() {
 
                 is ProductState.Success -> {
                     binding.progressTv.rlProgressBar.visibility = View.GONE
-                    binding.ivHeartBlue.setImageResource(R.drawable.heart_blue_fill)
-                    showMessageSuccess("Mark favorite product successfully")
+                    if (UserProduct.isfavorite == true || UserProduct.isfavorite == null) {
+                        binding.ivHeartBlue.setImageResource(R.drawable.heart_blue)
+                        UserProduct.isfavorite = false
+                        showMessageSuccess("Mark not favorite product successfully")
+                    } else {
+                        binding.ivHeartBlue.setImageResource(R.drawable.heart_blue_fill)
+                        UserProduct.isfavorite = true
+                        showMessageSuccess("Mark favorite product successfully")
+                    }
+
                 }
 
                 is ProductState.Error -> {
