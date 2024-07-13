@@ -44,7 +44,6 @@
         app:layout_constraintTop_toBottomOf="@id/guideline1"
         app:layout_constraintBottom_toTopOf="@id/guideline2" />
 
-
     <LinearLayout
         android:id="@+id/linear_layout"
         android:layout_width="wrap_content"
@@ -79,7 +78,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_buy"
-        android:layout_width="80dp"
+        android:layout_width="100dp"
         android:layout_height="30dp"
         android:background="@drawable/button_background"
         android:elevation="42dp"
