@@ -1,6 +1,5 @@
 package com.example.refactoringlifeacademy.ui.home.presenter
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -12,7 +11,6 @@ import com.example.refactoringlifeacademy.data.dto.model.Product
 import com.example.refactoringlifeacademy.data.dto.model.ProductType
 import com.example.refactoringlifeacademy.data.dto.model.UserProduct
 import com.example.refactoringlifeacademy.databinding.ActivityHomeBinding
-import com.example.refactoringlifeacademy.ui.detail.presenter.DetailActivity
 import com.example.refactoringlifeacademy.ui.home.viewmodel.HomeViewModel
 import com.example.refactoringlifeacademy.ui.home.viewmodel.ProductState
 import com.example.refactoringlifeacademy.ui.home.viewmodel.adapter.AdapterCategory
