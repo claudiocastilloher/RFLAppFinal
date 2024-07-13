@@ -1,6 +1,6 @@
 package com.example.refactoringlifeacademy.data.service
 
-import com.example.refactoringlifeacademy.data.dto.response.FavoriteResponse
+import com.example.refactoringlifeacademy.data.dto.response.DailyOfferResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductTypesResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductsResponse
 import com.example.refactoringlifeacademy.data.dto.response.SingleProductResponse
@@ -23,12 +23,12 @@ interface ProductService {
     @GET("api/v1/products/lastUserProduct")
     suspend fun getLastUserProduct(): Response<SingleProductResponse>
 
-    @GET("api/v1/products-type")
+    @GET("api/v1/product-types")
     suspend fun getProductTypes(): Response<ProductTypesResponse>
 
     @GET("api/v1/products/daily-offer")
-    suspend fun getDailyOffer(): Response<SingleProductResponse>
+    suspend fun getDailyOffer(): Response<DailyOfferResponse>
 
     @PUT("api/v1/products/{idProduct}/favorite")
-    suspend fun markProductAsFavorite(@Path("idProduct") idProduct: Int): Response<FavoriteResponse>
+    suspend fun markProductAsFavorite(@Path("idProduct") idProduct: Int): Response<Void>
 }

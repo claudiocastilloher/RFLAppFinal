@@ -48,7 +48,8 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
-        android:scrollbars="horizontal"
+        android:layout_marginHorizontal="20dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/svSearch"
@@ -60,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_marginTop="20dp"
-        android:scrollbars="horizontal"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rvCategory"
@@ -151,7 +152,7 @@
             layout="@layout/progressbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible"
+            android:visibility="gone"
             />
 
 
@@ -187,11 +188,11 @@
 
 
     <include
-        android:id="@+id/progressBar"
+        android:id="@+id/progress_barr"
         layout="@layout/progressbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/svSearch"
         app:layout_constraintEnd_toEndOf="parent"
         />

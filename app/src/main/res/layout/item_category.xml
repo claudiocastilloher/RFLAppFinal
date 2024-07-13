@@ -4,7 +4,7 @@
     android:layout_height="35dp"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/rounded_stroke"
-    android:layout_marginHorizontal="20dp">
+    android:layout_marginEnd="10dp">
 
     <TextView
         android:gravity="center"
