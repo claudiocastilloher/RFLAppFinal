@@ -6,5 +6,5 @@ import com.google.gson.annotations.SerializedName
 
 data class ProductTypesResponse(
     @SerializedName("productTypes")
-    val productTypes: List<ProductType>?
+    val productTypes: List<ProductTypeAlt>?
 )

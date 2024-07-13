@@ -1,6 +1,5 @@
 package com.example.refactoringlifeacademy.ui.register.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -45,7 +44,6 @@ class RegisterViewModel(private val regRepository: RegisterRepository = Register
             if(regResponse.isSuccessful){
                 regResponse.body()?.let {
                     UserProduct.userToken = it.token
-                    Log.d("TokenTagPrueba","${it.token}")
                     _data.postValue(StateRegister.Success(it))
                 } ?: _data.postValue(StateRegister.Error("No Data"))
             }else{

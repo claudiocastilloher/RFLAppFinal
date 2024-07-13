@@ -12,7 +12,7 @@ data class Product(
     @SerializedName("currency")
     val currency: String?,
     @SerializedName("price")
-    val price: Int?,
+    val price: Double?,
     @SerializedName("image")
     val image: String?,
     @SerializedName("description")

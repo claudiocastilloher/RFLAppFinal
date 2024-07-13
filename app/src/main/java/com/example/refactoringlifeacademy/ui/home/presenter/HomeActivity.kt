@@ -8,10 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.refactoringlifeacademy.R
 import com.example.refactoringlifeacademy.data.dto.model.Product
-import com.example.refactoringlifeacademy.data.dto.model.ProductType
 import com.example.refactoringlifeacademy.data.dto.model.ProductTypeAlt
 import com.example.refactoringlifeacademy.data.dto.response.DailyOfferResponse
-import com.example.refactoringlifeacademy.data.dto.response.ProductTypesResponse
 import com.example.refactoringlifeacademy.databinding.ActivityHomeBinding
 import com.example.refactoringlifeacademy.ui.home.viewmodel.HomeViewModel
 import com.example.refactoringlifeacademy.ui.home.viewmodel.ProductState
@@ -31,6 +29,12 @@ class HomeActivity : AppCompatActivity() {
 
         calls()
         observer()
+        initSearch()
+    }
+
+    private fun initSearch() {
+        binding.svSearch.isIconifiedByDefault = false
+
     }
 
     private fun calls() {
@@ -179,7 +183,7 @@ class HomeActivity : AppCompatActivity() {
         binding.tvPrice.text = (product.price ?: 0).toString()
     }
 
-    private fun initRecyclerViewCategory(value: List<ProductType>) {
+    private fun initRecyclerViewCategory(value: List<ProductTypeAlt>) {
         val adapter = AdapterCategory(value) {
             onCategorySelected(it)
         }
@@ -195,7 +199,7 @@ class HomeActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     }
 
-    private fun onCategorySelected(category: ProductType) {
+    private fun onCategorySelected(category: ProductTypeAlt) {
         homeViewModel.getProducts(idProductType = category.idProductType)
     }
 }

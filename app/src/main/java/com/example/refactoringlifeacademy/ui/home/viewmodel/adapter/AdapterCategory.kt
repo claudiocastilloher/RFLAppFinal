@@ -5,11 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.refactoringlifeacademy.R
-import com.example.refactoringlifeacademy.data.dto.model.ProductType
 import com.example.refactoringlifeacademy.data.dto.model.ProductTypeAlt
 import com.example.refactoringlifeacademy.databinding.ItemCategoryBinding
 
-class AdapterCategory(private val categoryList: List<ProductType>, private val onCategorySelected: (ProductType) -> Unit) : RecyclerView.Adapter<CategoryHolder>() {
+class AdapterCategory(private val categoryList: List<ProductTypeAlt>, private val onCategorySelected: (ProductTypeAlt) -> Unit) : RecyclerView.Adapter<CategoryHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_category,parent,false)
         return CategoryHolder(view)
@@ -27,8 +26,8 @@ class AdapterCategory(private val categoryList: List<ProductType>, private val o
 class CategoryHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val binding = ItemCategoryBinding.bind(view)
 
-    fun render(value: ProductType, onCategorySelected: (ProductType) -> Unit){
-        binding.tvCategory.text = value.descripcion
+    fun render(value: ProductTypeAlt, onCategorySelected: (ProductTypeAlt) -> Unit){
+        binding.tvCategory.text = value.description
         itemView.setOnClickListener {
             onCategorySelected(value)
         }

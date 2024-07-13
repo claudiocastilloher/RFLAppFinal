@@ -9,9 +9,8 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
-import retrofit2.http.Path
 
-class ProductServiceImp() {
+class ProductServiceImp {
 
     private val client = OkHttpClient.Builder()
         .addInterceptor(AuthInterceptor())
