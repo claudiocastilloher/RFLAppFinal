@@ -37,6 +37,7 @@
     <string name="but_coment">Comentarios</string>
     <string name="desc_arrowleft">Flecha Regreso Home</string>
     <string name="desc_semicircle">Semicirculo Leftbar</string>
+    <string name="comprar">Comprar</string>
     <!-- Texto Prueba Fragments -->
     <string name="image_fragment">Hello image fragment</string>
     <string name="descr_fragment">Hello description fragment</string>
