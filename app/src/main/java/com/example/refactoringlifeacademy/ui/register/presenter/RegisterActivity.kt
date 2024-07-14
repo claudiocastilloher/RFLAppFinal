@@ -8,6 +8,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import com.example.refactoringlifeacademy.data.dto.model.UserProduct
 import com.example.refactoringlifeacademy.data.dto.request.RegisterRequest
 import com.example.refactoringlifeacademy.databinding.ActivityRegisterBinding
 import com.example.refactoringlifeacademy.ui.home.presenter.HomeActivity
@@ -37,17 +38,18 @@ class RegisterActivity : AppCompatActivity() {
 
                 }
                 is StateRegister.Loading ->{
-                    binding.progressBar.rlProgressBar.visibility = View.VISIBLE
+                    binding.progressBarr.rlProgressBar.visibility = View.VISIBLE
                     binding.incMsjError.tvEmailError.visibility = View.GONE
 
                 }
                 is StateRegister.Success ->{
-                    binding.progressBar.rlProgressBar.visibility = View.GONE
+                    binding.progressBarr.rlProgressBar.visibility = View.GONE
+                    UserProduct.userToken = state.info.token
                     goToHome()
 
                 }
                 is StateRegister.Error ->{
-                    binding.progressBar.rlProgressBar.visibility = View.GONE
+                    binding.progressBarr.rlProgressBar.visibility = View.GONE
                     binding.incMsjError.tvEmailError.visibility = View.VISIBLE
 
                 }
@@ -55,7 +57,7 @@ class RegisterActivity : AppCompatActivity() {
 
         }
     }
-    fun goToHome(){
+    private fun goToHome(){
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
         finish()

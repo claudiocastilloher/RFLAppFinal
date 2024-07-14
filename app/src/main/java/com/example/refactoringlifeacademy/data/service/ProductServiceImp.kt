@@ -1,17 +1,24 @@
 package com.example.refactoringlifeacademy.data.service
 
-import com.example.refactoringlifeacademy.data.dto.response.FavoriteResponse
+import com.example.refactoringlifeacademy.data.dto.response.DailyOfferResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductTypesResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductsResponse
 import com.example.refactoringlifeacademy.data.dto.response.SingleProductResponse
+import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 
 class ProductServiceImp {
+
+    private val client = OkHttpClient.Builder()
+        .addInterceptor(AuthInterceptor())
+        .build()
+
     private val retrofit = Retrofit.Builder()
-        .baseUrl("https://stoplight.io/mocks/reinierdearmas/api-app-final-rfa/428619854/")
+        .baseUrl("https://api-products-fe4p.onrender.com/")
+        .client(client)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
@@ -35,11 +42,11 @@ class ProductServiceImp {
         return service.getProductTypes()
     }
 
-    suspend fun getDailyOffer(): Response<SingleProductResponse> {
+    suspend fun getDailyOffer(): Response<DailyOfferResponse> {
         return service.getDailyOffer()
     }
 
-    suspend fun markProductAsFavorite(idProduct: Int): Response<FavoriteResponse> {
+    suspend fun markProductAsFavorite(idProduct: Int): Response<Void> {
         return service.markProductAsFavorite(idProduct)
     }
 
