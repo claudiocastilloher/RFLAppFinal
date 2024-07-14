@@ -95,6 +95,7 @@ class HomeActivity : AppCompatActivity() {
                             updateLastUserProductUI(product)
                             UserProduct.userProductId = product.idProduct
                             UserProduct.isfavorite = product.isFavorite
+                            loadHeart()
                             showMessageSuccess("Last viewed product loaded successfully")
                         }
                     }
@@ -147,6 +148,7 @@ class HomeActivity : AppCompatActivity() {
                             updateDailyOffer(dailyOffer)
                             UserProduct.userProductId = dailyOffer.idProduct
                             UserProduct.isfavorite = dailyOffer.isFavorite
+                            loadHeart()
                             showMessageSuccess("Daily offer product loaded successfully")
                         }
                     }
@@ -167,16 +169,11 @@ class HomeActivity : AppCompatActivity() {
 
                 is ProductState.Success -> {
                     binding.progressTv.rlProgressBar.visibility = View.GONE
-                    if (UserProduct.isfavorite == true || UserProduct.isfavorite == null) {
-                        binding.ivHeartBlue.setImageResource(R.drawable.heart_blue)
-                        UserProduct.isfavorite = false
+                    if ( loadHeart() ) {
                         showMessageSuccess("Mark not favorite product successfully")
                     } else {
-                        binding.ivHeartBlue.setImageResource(R.drawable.heart_blue_fill)
-                        UserProduct.isfavorite = true
                         showMessageSuccess("Mark favorite product successfully")
                     }
-
                 }
 
                 is ProductState.Error -> {
@@ -247,5 +244,21 @@ class HomeActivity : AppCompatActivity() {
 
     private fun onCategorySelected(category: ProductTypeAlt) {
         homeViewModel.getProducts(idProductType = category.idProductType)
+    }
+
+    private fun loadHeart(): Boolean {
+        val messageFav: Boolean
+        if (UserProduct.isfavorite == true || UserProduct.isfavorite == null) {
+            binding.ivHeartBlue.setImageResource(R.drawable.heart_blue)
+            UserProduct.isfavorite = false
+            messageFav = true
+            showMessageSuccess("Mark not favorite product successfully")
+        } else {
+            binding.ivHeartBlue.setImageResource(R.drawable.heart_blue_fill)
+            UserProduct.isfavorite = true
+            messageFav = false
+            showMessageSuccess("Mark favorite product successfully")
+        }
+        return messageFav
     }
 }
