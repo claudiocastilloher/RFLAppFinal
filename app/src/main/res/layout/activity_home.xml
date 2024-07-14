@@ -44,6 +44,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+
         android:id="@+id/rvCategory"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -187,7 +188,7 @@
 
 
     <include
-        android:id="@+id/progressBar"
+        android:id="@+id/progress_barr"
         layout="@layout/progressbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
