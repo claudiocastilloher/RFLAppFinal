@@ -10,7 +10,6 @@ import com.example.refactoringlifeacademy.R
 import com.example.refactoringlifeacademy.data.dto.model.Product
 import com.example.refactoringlifeacademy.data.dto.model.ProductTypeAlt
 import com.example.refactoringlifeacademy.data.dto.response.DailyOfferResponse
-import com.example.refactoringlifeacademy.data.dto.model.ProductType
 import com.example.refactoringlifeacademy.data.dto.model.UserProduct
 import com.example.refactoringlifeacademy.databinding.ActivityHomeBinding
 import com.example.refactoringlifeacademy.ui.home.viewmodel.HomeViewModel
@@ -234,7 +233,6 @@ class HomeActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     }
 
-    }
 
     private fun putFavoriteProduct() {
         binding.ivHeartBlue.setOnClickListener {
@@ -244,7 +242,7 @@ class HomeActivity : AppCompatActivity() {
             }
         }
     }
-}
+
     private fun onCategorySelected(category: ProductTypeAlt) {
         homeViewModel.getProducts(idProductType = category.idProductType)
     }
