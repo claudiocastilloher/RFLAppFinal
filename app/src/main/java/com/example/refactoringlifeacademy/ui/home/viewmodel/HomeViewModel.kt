@@ -3,7 +3,7 @@ package com.example.refactoringlifeacademy.ui.home.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.refactoringlifeacademy.data.dto.response.FavoriteResponse
+import com.example.refactoringlifeacademy.data.dto.response.DailyOfferResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductTypesResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductsResponse
 import com.example.refactoringlifeacademy.data.dto.response.SingleProductResponse
@@ -23,11 +23,11 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
     private val _productTypesState = MutableLiveData<ProductState<ProductTypesResponse>>()
     val productTypesState: LiveData<ProductState<ProductTypesResponse>> = _productTypesState
 
-    private val _dailyOfferState = MutableLiveData<ProductState<SingleProductResponse>>()
-    val dailyOfferState: LiveData<ProductState<SingleProductResponse>> = _dailyOfferState
+    private val _dailyOfferState = MutableLiveData<ProductState<DailyOfferResponse>>()
+    val dailyOfferState: LiveData<ProductState<DailyOfferResponse>> = _dailyOfferState
 
-    private val _favoriteState = MutableLiveData<ProductState<FavoriteResponse>>()
-    val favoriteState: LiveData<ProductState<FavoriteResponse>> = _favoriteState
+    private val _favoriteState = MutableLiveData<ProductState<Void>>()
+    val favoriteState: LiveData<ProductState<Void>> = _favoriteState
 
     fun getProducts(
         idProductType: Int? = null,
@@ -101,9 +101,7 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
             _favoriteState.postValue(ProductState.Loading)
             val response = repository.markProductAsFavorite(idProduct)
             if (response.isSuccessful) {
-                response.body()?.let {
-                    _favoriteState.postValue(ProductState.Success(it))
-                } ?:  _dailyOfferState.postValue(ProductState.Error("Empty response body"))
+                    _favoriteState.postValue(ProductState.Success(null))
             } else {
                 _dailyOfferState.postValue(ProductState.Error("Failed: ${response.message()}"))
             }
