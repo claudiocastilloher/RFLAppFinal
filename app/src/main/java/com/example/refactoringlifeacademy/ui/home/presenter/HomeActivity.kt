@@ -98,7 +98,7 @@ class HomeActivity : AppCompatActivity() {
                             UserProduct.userProductId = product.idProduct
                             UserProduct.isfavorite = product.isFavorite
                             showMessageSuccess("Last viewed product loaded successfully")
-                            onConstarintLayoutClic()
+                            product.idProduct?.let { onConstarintLayoutClic(it) }
                         }
                     }
                 }
@@ -151,7 +151,7 @@ class HomeActivity : AppCompatActivity() {
                             UserProduct.userProductId = dailyOffer.idProduct
                             UserProduct.isfavorite = dailyOffer.isFavorite
                             showMessageSuccess("Daily offer product loaded successfully")
-                            onConstarintLayoutClic()
+                            dailyOffer.idProduct?.let { onConstarintLayoutClic(it) }
                         }
                     }
                 }
@@ -253,14 +253,15 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.getProducts(idProductType = category.idProductType)
     }
 
-    private fun onConstarintLayoutClic(){
+    private fun onConstarintLayoutClic(idProduct: Int){
         binding.clProductDetail.setOnClickListener {
-            goToDetails()
+            goToDetails(idProduct)
         }
     }
 
-    private fun goToDetails(){
+    private fun goToDetails(idProduct: Int){
         val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra("idProduct", idProduct)
         startActivity(intent)
     }
 }
