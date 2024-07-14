@@ -8,7 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.refactoringlifeacademy.R
 import com.example.refactoringlifeacademy.data.dto.model.Product
-import com.example.refactoringlifeacademy.data.dto.model.ProductType
+import com.example.refactoringlifeacademy.data.dto.model.ProductTypeAlt
+import com.example.refactoringlifeacademy.data.dto.response.DailyOfferResponse
 import com.example.refactoringlifeacademy.data.dto.model.UserProduct
 import com.example.refactoringlifeacademy.databinding.ActivityHomeBinding
 import com.example.refactoringlifeacademy.ui.home.viewmodel.HomeViewModel
@@ -29,7 +30,14 @@ class HomeActivity : AppCompatActivity() {
 
         calls()
         observer()
+        initSearch()
         putFavoriteProduct()
+    }
+
+    private fun initSearch() {
+        binding.svSearch.isIconifiedByDefault = false
+
+
     }
 
     private fun calls() {
@@ -56,7 +64,7 @@ class HomeActivity : AppCompatActivity() {
 
                 is ProductState.Success -> {
                     binding.progressBarr.rlProgressBar.visibility = View.GONE
-                    state.data.products?.let { products ->
+                    state.data?.products?.let { products ->
                         initRecyclerViewProduct(products)
                     } ?: run {
                         Toast.makeText(this, "Product list is null", Toast.LENGTH_SHORT).show()
@@ -78,7 +86,7 @@ class HomeActivity : AppCompatActivity() {
 
                 is ProductState.Success -> {
                     binding.progressTv.rlProgressBar.visibility = View.GONE
-                    when (val product = state.data.product) {
+                    when (val product = state.data?.product) {
                         null -> {
                             showMessageError("Last viewed product is null")
                         }
@@ -107,7 +115,7 @@ class HomeActivity : AppCompatActivity() {
 
                 is ProductState.Success -> {
                     binding.progressBarr.rlProgressBar.visibility = View.GONE
-                    state.data.productTypes?.let { productTypes ->
+                    state.data?.productTypes?.let { productTypes ->
                         initRecyclerViewCategory(productTypes)
                     } ?: run {
                         Toast.makeText(this, "Product types list is null", Toast.LENGTH_SHORT)
@@ -130,7 +138,7 @@ class HomeActivity : AppCompatActivity() {
 
                 is ProductState.Success -> {
                     binding.progressTv.rlProgressBar.visibility = View.GONE
-                    when (val dailyOffer = state.data.product) {
+                    when (val dailyOffer = state.data) {
                         null -> {
                             showMessageError("Daily offer product is null")
                         }
@@ -187,37 +195,44 @@ class HomeActivity : AppCompatActivity() {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun updateDailyOffer(dailyOffer: Product) {
-        Picasso.get()
-            .load(dailyOffer.image)
-            .into(binding.ivOfferDaily)
-        binding.tvProductName.text = dailyOffer.name ?: ""
-        binding.tvDescription.text = dailyOffer.description ?: ""
-        binding.tvPrice.text = dailyOffer.price ?: ""
+    private fun updateDailyOffer(dailyOffer: DailyOfferResponse?) {
+        dailyOffer?.let {
+            if (!it.images.isNullOrEmpty()) {
+                Picasso.get()
+                    .load(it.images[0].link)
+                    .into(binding.ivOfferDaily)
+            } else {
+                binding.ivOfferDaily.setImageResource(R.drawable.trademark)
+            }
+            binding.tvProductName.text = it.name ?: ""
+            binding.tvDescription.text = it.description ?: ""
+            binding.tvPrice.text = (dailyOffer.price ?: 0).toString()
+        }
     }
 
     private fun updateLastUserProductUI(product: Product) {
         Picasso.get().load(product.image).into(binding.ivOfferDaily)
         binding.tvProductName.text = product.name ?: ""
         binding.tvDescription.text = product.description ?: ""
-        binding.tvPrice.text = product.price ?: ""
+        binding.tvPrice.text = (product.price ?: 0).toString()
     }
 
-    private fun initRecyclerViewCategory(value: List<ProductType>) {
+    private fun initRecyclerViewCategory(value: List<ProductTypeAlt>) {
+        val adapter = AdapterCategory(value) {
+            onCategorySelected(it)
+        }
+        binding.rvCategory.adapter = adapter
         binding.rvCategory.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        val adapter = AdapterCategory(value)
-        binding.rvCategory.adapter = adapter
-
     }
 
     private fun initRecyclerViewProduct(value: List<Product>) {
-        binding.rvProduct.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val adapter = AdapterProduct(value)
         binding.rvProduct.adapter = adapter
-
+        binding.rvProduct.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     }
+
 
     private fun putFavoriteProduct() {
         binding.ivHeartBlue.setOnClickListener {
@@ -226,5 +241,9 @@ class HomeActivity : AppCompatActivity() {
                 homeViewModel.markProductAsFavorite(idProduct)
             }
         }
+    }
+
+    private fun onCategorySelected(category: ProductTypeAlt) {
+        homeViewModel.getProducts(idProductType = category.idProductType)
     }
 }

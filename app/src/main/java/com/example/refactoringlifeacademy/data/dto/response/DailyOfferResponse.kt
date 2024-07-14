@@ -1,8 +1,10 @@
-package com.example.refactoringlifeacademy.data.dto.model
+package com.example.refactoringlifeacademy.data.dto.response
 
+import com.example.refactoringlifeacademy.data.dto.model.Image
+import com.example.refactoringlifeacademy.data.dto.model.ProductType
 import com.google.gson.annotations.SerializedName
 
-data class Product(
+data class DailyOfferResponse(
     @SerializedName("idProduct")
     val idProduct: Int?,
     @SerializedName("name")
@@ -12,11 +14,13 @@ data class Product(
     @SerializedName("currency")
     val currency: String?,
     @SerializedName("price")
-    val price: Double?,
-    @SerializedName("image")
-    val image: String?,
+    val price: Int?,
+    @SerializedName("images")
+    val images: List<Image>?,
     @SerializedName("description")
     val description: String?,
+    @SerializedName("dailyOffer")
+    val dailyOffer: Boolean?,
     @SerializedName("isFavorite")
     val isFavorite: Boolean?
 )

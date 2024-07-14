@@ -57,7 +57,7 @@ class RegisterActivity : AppCompatActivity() {
 
         }
     }
-    fun goToHome(){
+    private fun goToHome(){
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
         finish()
