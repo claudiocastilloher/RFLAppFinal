@@ -15,6 +15,7 @@
     <string name="en_caso_de_tener_problemas_comunicarse_con_soporte">En caso de tener problemas comunicarse con soporte</string>
     <!--finPreLogin-->
     <string name="sign_in">Iniciar sesión</string>
+    <string name="user_or_password_error">Error en el usuario o contraseña!</string>
     <string name="error_user_password">Error en el usuario o contraseña!</string>
     <!--API-->
     <string name="base_url">https://api-users-c9xg.onrender.com/</string>
@@ -26,6 +27,7 @@
     <string name="problems">En caso de problemas comunicate con </string>
     <string name="support">soporte</string>
     <string name="offer">Oferta del día</string>
+    <string name="last_visited">Ultimo visitado</string>
     <string name="rusty">Rusty</string>
     <string name="rusty_description">Buzo canguro capucha con cordon</string>
     <!-- Register-->
