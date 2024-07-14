@@ -14,7 +14,7 @@ data class DailyOfferResponse(
     @SerializedName("currency")
     val currency: String?,
     @SerializedName("price")
-    val price: Int?,
+    val price: Double?,
     @SerializedName("images")
     val images: List<Image>?,
     @SerializedName("description")
