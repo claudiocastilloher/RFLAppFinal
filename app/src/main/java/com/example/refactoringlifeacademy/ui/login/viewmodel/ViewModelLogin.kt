@@ -7,7 +7,6 @@ import com.example.refactoringlifeacademy.data.dto.model.UserProduct
 import com.example.refactoringlifeacademy.data.dto.request.LoginRequest
 import com.example.refactoringlifeacademy.data.repository.LoginRepository
 import com.example.refactoringlifeacademy.utils.LoginState
-import com.example.refactoringlifeacademy.utils.StateRegister
 import com.example.refactoringlifeacademy.utils.isValidEmail
 import com.example.refactoringlifeacademy.utils.isValidPassword
 import kotlinx.coroutines.CoroutineScope
