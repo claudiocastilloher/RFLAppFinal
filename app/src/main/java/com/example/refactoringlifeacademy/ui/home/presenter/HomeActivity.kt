@@ -10,6 +10,8 @@ import com.example.refactoringlifeacademy.R
 import com.example.refactoringlifeacademy.data.dto.model.Product
 import com.example.refactoringlifeacademy.data.dto.model.ProductTypeAlt
 import com.example.refactoringlifeacademy.data.dto.response.DailyOfferResponse
+import com.example.refactoringlifeacademy.data.dto.model.ProductType
+import com.example.refactoringlifeacademy.data.dto.model.UserProduct
 import com.example.refactoringlifeacademy.databinding.ActivityHomeBinding
 import com.example.refactoringlifeacademy.ui.home.viewmodel.HomeViewModel
 import com.example.refactoringlifeacademy.ui.home.viewmodel.ProductState
@@ -30,19 +32,30 @@ class HomeActivity : AppCompatActivity() {
         calls()
         observer()
         initSearch()
+        putFavoriteProduct()
     }
 
     private fun initSearch() {
         binding.svSearch.isIconifiedByDefault = false
+
 
     }
 
     private fun calls() {
         homeViewModel.getProducts()
         homeViewModel.getProductTypes()
-        homeViewModel.getDailyOffer()
-        homeViewModel.getLastUserProduct()
+        when (UserProduct.isLogging) { //condicion de carga del item principal
+            false -> {
+                homeViewModel.getDailyOffer()
+                UserProduct.isLogging = true
+            }
+
+            true -> {
+                homeViewModel.getLastUserProduct()
+            }
+        }
     }
+
     private fun observer() {
         homeViewModel.productsState.observe(this) { state ->
             when (state) {
@@ -69,22 +82,27 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.lastUserProductState.observe(this) { state ->
             when (state) {
                 is ProductState.Loading -> {
-                    binding.progressBarr.rlProgressBar.visibility = View.VISIBLE
+                    binding.progressTv.rlProgressBar.visibility = View.VISIBLE
                 }
 
                 is ProductState.Success -> {
-                    binding.progressBarr.rlProgressBar.visibility = View.GONE
-                    val product = state.data?.product
-                    if (product != null) {
-                        updateLastUserProductUI(product)
-                        showMessageSuccess("Last viewed product loaded successfully")
-                    } else {
-                        showMessageError("Last viewed product is null")
+                    binding.progressTv.rlProgressBar.visibility = View.GONE
+                    when (val product = state.data?.product) {
+                        null -> {
+                            showMessageError("Last viewed product is null")
+                        }
+
+                        else -> {
+                            updateLastUserProductUI(product)
+                            UserProduct.userProductId = product.idProduct
+                            UserProduct.isfavorite = product.isFavorite
+                            showMessageSuccess("Last viewed product loaded successfully")
+                        }
                     }
                 }
 
                 is ProductState.Error -> {
-                    binding.progressBarr.rlProgressBar.visibility = View.GONE
+                    binding.progressTv.rlProgressBar.visibility = View.GONE
                     showMessageError(state.message)
                 }
             }
@@ -121,9 +139,17 @@ class HomeActivity : AppCompatActivity() {
 
                 is ProductState.Success -> {
                     binding.progressTv.rlProgressBar.visibility = View.GONE
-                    val dailyOffer = state.data
-                    if (dailyOffer != null) {
-                        updateDailyOffer(dailyOffer)
+                    when (val dailyOffer = state.data) {
+                        null -> {
+                            showMessageError("Daily offer product is null")
+                        }
+
+                        else -> {
+                            updateDailyOffer(dailyOffer)
+                            UserProduct.userProductId = dailyOffer.idProduct
+                            UserProduct.isfavorite = dailyOffer.isFavorite
+                            showMessageSuccess("Daily offer product loaded successfully")
+                        }
                     }
                 }
 
@@ -142,7 +168,16 @@ class HomeActivity : AppCompatActivity() {
 
                 is ProductState.Success -> {
                     binding.progressTv.rlProgressBar.visibility = View.GONE
-                    showMessageSuccess("Daily offer loaded successfully")
+                    if (UserProduct.isfavorite == true || UserProduct.isfavorite == null) {
+                        binding.ivHeartBlue.setImageResource(R.drawable.heart_blue)
+                        UserProduct.isfavorite = false
+                        showMessageSuccess("Mark not favorite product successfully")
+                    } else {
+                        binding.ivHeartBlue.setImageResource(R.drawable.heart_blue_fill)
+                        UserProduct.isfavorite = true
+                        showMessageSuccess("Mark favorite product successfully")
+                    }
+
                 }
 
                 is ProductState.Error -> {
@@ -199,6 +234,17 @@ class HomeActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     }
 
+    }
+
+    private fun putFavoriteProduct() {
+        binding.ivHeartBlue.setOnClickListener {
+            val idProduct = UserProduct.userProductId
+            if (idProduct != null) {
+                homeViewModel.markProductAsFavorite(idProduct)
+            }
+        }
+    }
+}
     private fun onCategorySelected(category: ProductTypeAlt) {
         homeViewModel.getProducts(idProductType = category.idProductType)
     }
