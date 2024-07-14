@@ -1,5 +1,6 @@
 package com.example.refactoringlifeacademy.ui.home.presenter
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -12,6 +13,7 @@ import com.example.refactoringlifeacademy.data.dto.model.ProductTypeAlt
 import com.example.refactoringlifeacademy.data.dto.response.DailyOfferResponse
 import com.example.refactoringlifeacademy.data.dto.model.UserProduct
 import com.example.refactoringlifeacademy.databinding.ActivityHomeBinding
+import com.example.refactoringlifeacademy.ui.detail.presenter.DetailActivity
 import com.example.refactoringlifeacademy.ui.home.viewmodel.HomeViewModel
 import com.example.refactoringlifeacademy.ui.home.viewmodel.ProductState
 import com.example.refactoringlifeacademy.ui.home.viewmodel.adapter.AdapterCategory
@@ -96,6 +98,7 @@ class HomeActivity : AppCompatActivity() {
                             UserProduct.userProductId = product.idProduct
                             UserProduct.isfavorite = product.isFavorite
                             showMessageSuccess("Last viewed product loaded successfully")
+                            onConstarintLayoutClic()
                         }
                     }
                 }
@@ -148,6 +151,7 @@ class HomeActivity : AppCompatActivity() {
                             UserProduct.userProductId = dailyOffer.idProduct
                             UserProduct.isfavorite = dailyOffer.isFavorite
                             showMessageSuccess("Daily offer product loaded successfully")
+                            onConstarintLayoutClic()
                         }
                     }
                 }
@@ -207,6 +211,7 @@ class HomeActivity : AppCompatActivity() {
             binding.tvProductName.text = it.name ?: ""
             binding.tvDescription.text = it.description ?: ""
             binding.tvPrice.text = (dailyOffer.price ?: 0).toString()
+            binding.tvHeader.text = getString(R.string.offer)
         }
     }
 
@@ -215,6 +220,7 @@ class HomeActivity : AppCompatActivity() {
         binding.tvProductName.text = product.name ?: ""
         binding.tvDescription.text = product.description ?: ""
         binding.tvPrice.text = (product.price ?: 0).toString()
+        binding.tvHeader.text = getString(R.string.last_visited)
     }
 
     private fun initRecyclerViewCategory(value: List<ProductTypeAlt>) {
@@ -245,5 +251,16 @@ class HomeActivity : AppCompatActivity() {
 
     private fun onCategorySelected(category: ProductTypeAlt) {
         homeViewModel.getProducts(idProductType = category.idProductType)
+    }
+
+    private fun onConstarintLayoutClic(){
+        binding.clProductDetail.setOnClickListener {
+            goToDetails()
+        }
+    }
+
+    private fun goToDetails(){
+        val intent = Intent(this, DetailActivity::class.java)
+        startActivity(intent)
     }
 }
