@@ -61,11 +61,11 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.productsState.observe(this) { state ->
             when (state) {
                 is ProductState.Loading -> {
-                    binding.progressBarr.rlProgressBar.visibility = View.VISIBLE
+                    binding.progressTv.rlProgressBar.visibility = View.VISIBLE
                 }
 
                 is ProductState.Success -> {
-                    binding.progressBarr.rlProgressBar.visibility = View.GONE
+                    binding.progressTv.rlProgressBar.visibility = View.GONE
                     state.data?.products?.let { products ->
                         initRecyclerViewProduct(products)
                     } ?: run {
@@ -74,7 +74,7 @@ class HomeActivity : AppCompatActivity() {
                 }
 
                 is ProductState.Error -> {
-                    binding.progressBarr.rlProgressBar.visibility = View.GONE
+                    binding.progressTv.rlProgressBar.visibility = View.GONE
                     showMessageError(state.message)
                 }
             }
@@ -83,13 +83,14 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.lastUserProductState.observe(this) { state ->
             when (state) {
                 is ProductState.Loading -> {
-                    binding.progressTv.rlProgressBar.visibility = View.VISIBLE
+                    binding.progressBarr.rlProgressBar.visibility = View.VISIBLE
                 }
 
                 is ProductState.Success -> {
-                    binding.progressTv.rlProgressBar.visibility = View.GONE
+                    binding.progressBarr.rlProgressBar.visibility = View.GONE
                     when (val product = state.data?.product) {
                         null -> {
+                            UserProduct.userProductId = null
                             showMessageError("Last viewed product is null")
                         }
 
@@ -105,7 +106,9 @@ class HomeActivity : AppCompatActivity() {
                 }
 
                 is ProductState.Error -> {
-                    binding.progressTv.rlProgressBar.visibility = View.GONE
+                    UserProduct.userProductId = null
+                    loadHeart()
+                    binding.progressBarr.rlProgressBar.visibility = View.GONE
                     showMessageError(state.message)
                 }
             }
@@ -114,11 +117,11 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.productTypesState.observe(this) { state ->
             when (state) {
                 is ProductState.Loading -> {
-                    binding.progressBarr.rlProgressBar.visibility = View.VISIBLE
+                    binding.progressTv.rlProgressBar.visibility = View.VISIBLE
                 }
 
                 is ProductState.Success -> {
-                    binding.progressBarr.rlProgressBar.visibility = View.GONE
+                    binding.progressTv.rlProgressBar.visibility = View.GONE
                     state.data?.productTypes?.let { productTypes ->
                         initRecyclerViewCategory(productTypes)
                     } ?: run {
@@ -128,7 +131,7 @@ class HomeActivity : AppCompatActivity() {
                 }
 
                 is ProductState.Error -> {
-                    binding.progressBarr.rlProgressBar.visibility = View.GONE
+                    binding.progressTv.rlProgressBar.visibility = View.GONE
                     showMessageError(state.message)
                 }
             }
@@ -137,13 +140,14 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.dailyOfferState.observe(this) { state ->
             when (state) {
                 is ProductState.Loading -> {
-                    binding.progressTv.rlProgressBar.visibility = View.VISIBLE
+                    binding.progressBarr.rlProgressBar.visibility = View.VISIBLE
                 }
 
                 is ProductState.Success -> {
-                    binding.progressTv.rlProgressBar.visibility = View.GONE
+                    binding.progressBarr.rlProgressBar.visibility = View.GONE
                     when (val dailyOffer = state.data) {
                         null -> {
+                            UserProduct.userProductId = null
                             showMessageError("Daily offer product is null")
                         }
 
@@ -159,7 +163,9 @@ class HomeActivity : AppCompatActivity() {
                 }
 
                 is ProductState.Error -> {
-                    binding.progressTv.rlProgressBar.visibility = View.GONE
+                    UserProduct.userProductId = null
+                    loadHeart()
+                    binding.progressBarr.rlProgressBar.visibility = View.GONE
                     showMessageError(state.message)
                 }
             }
@@ -237,14 +243,10 @@ class HomeActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     }
 
-
     private fun putFavoriteProduct() {
         binding.ivHeartBlue.setOnClickListener {
-            println("FAVORITO")
             val idProduct = UserProduct.userProductId
             if (idProduct != null) {
-                println("ID PRODUCTO")
-                println(idProduct.toString())
                 homeViewModel.markProductAsFavorite(idProduct)
             }
         }
@@ -272,12 +274,10 @@ class HomeActivity : AppCompatActivity() {
             binding.ivHeartBlue.setImageResource(R.drawable.heart_blue)
             UserProduct.isfavorite = false
             messageFav = true
-            showMessageSuccess("Mark not favorite product successfully")
         } else {
             binding.ivHeartBlue.setImageResource(R.drawable.heart_blue_fill)
             UserProduct.isfavorite = true
             messageFav = false
-            showMessageSuccess("Mark favorite product successfully")
         }
         return messageFav
     }
