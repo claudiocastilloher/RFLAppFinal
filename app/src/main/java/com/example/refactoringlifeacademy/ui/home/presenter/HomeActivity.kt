@@ -12,6 +12,7 @@ import com.example.refactoringlifeacademy.data.dto.model.ProductTypeAlt
 import com.example.refactoringlifeacademy.data.dto.response.DailyOfferResponse
 import com.example.refactoringlifeacademy.data.dto.model.UserProduct
 import com.example.refactoringlifeacademy.databinding.ActivityHomeBinding
+import com.example.refactoringlifeacademy.ui.detail.presenter.DetailActivity
 import com.example.refactoringlifeacademy.ui.home.viewmodel.HomeViewModel
 import com.example.refactoringlifeacademy.ui.home.viewmodel.ProductState
 import com.example.refactoringlifeacademy.ui.home.viewmodel.adapter.AdapterCategory
@@ -97,6 +98,7 @@ class HomeActivity : AppCompatActivity() {
                             UserProduct.isfavorite = product.isFavorite
                             loadHeart()
                             showMessageSuccess("Last viewed product loaded successfully")
+                            product.idProduct?.let { onConstarintLayoutClic(it) }
                         }
                     }
                 }
@@ -150,6 +152,7 @@ class HomeActivity : AppCompatActivity() {
                             UserProduct.isfavorite = dailyOffer.isFavorite
                             loadHeart()
                             showMessageSuccess("Daily offer product loaded successfully")
+                            dailyOffer.idProduct?.let { onConstarintLayoutClic(it) }
                         }
                     }
                 }
@@ -174,6 +177,7 @@ class HomeActivity : AppCompatActivity() {
                     } else {
                         showMessageSuccess("Mark favorite product successfully")
                     }
+
                 }
 
                 is ProductState.Error -> {
@@ -204,6 +208,7 @@ class HomeActivity : AppCompatActivity() {
             binding.tvProductName.text = it.name ?: ""
             binding.tvDescription.text = it.description ?: ""
             binding.tvPrice.text = (dailyOffer.price ?: 0).toString()
+            binding.tvHeader.text = getString(R.string.offer)
         }
     }
 
@@ -212,6 +217,7 @@ class HomeActivity : AppCompatActivity() {
         binding.tvProductName.text = product.name ?: ""
         binding.tvDescription.text = product.description ?: ""
         binding.tvPrice.text = (product.price ?: 0).toString()
+        binding.tvHeader.text = getString(R.string.last_visited)
     }
 
     private fun initRecyclerViewCategory(value: List<ProductTypeAlt>) {
@@ -230,6 +236,7 @@ class HomeActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     }
 
+
     private fun putFavoriteProduct() {
         binding.ivHeartBlue.setOnClickListener {
             println("FAVORITO")
@@ -244,6 +251,18 @@ class HomeActivity : AppCompatActivity() {
 
     private fun onCategorySelected(category: ProductTypeAlt) {
         homeViewModel.getProducts(idProductType = category.idProductType)
+    }
+
+    private fun onConstarintLayoutClic(idProduct: Int){
+        binding.clProductDetail.setOnClickListener {
+            goToDetails(idProduct)
+        }
+    }
+
+    private fun goToDetails(idProduct: Int){
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra("idProduct", idProduct)
+        startActivity(intent)
     }
 
     private fun loadHeart(): Boolean {
