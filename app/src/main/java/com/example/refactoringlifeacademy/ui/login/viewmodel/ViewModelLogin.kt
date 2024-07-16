@@ -31,7 +31,6 @@ class ViewModelLogin(private val repository: LoginRepository = LoginRepository()
         CoroutineScope(Dispatchers.IO).launch {
             _loginState.postValue(LoginState.Loading)
             val response = repository.loginUser(LoginRequest(email, password))
-            println(response)
             if(response.isSuccessful){
                 response.body()?.let {
                     UserProduct.userToken = it.token
