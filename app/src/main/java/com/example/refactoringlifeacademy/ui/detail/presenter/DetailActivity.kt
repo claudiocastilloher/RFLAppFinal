@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.refactoringlifeacademy.databinding.ActivityDetailBinding
+import com.example.refactoringlifeacademy.ui.descriptionFragmen.presenter.DescriptionFragment
 import com.example.refactoringlifeacademy.ui.home.presenter.HomeActivity
 
 class DetailActivity : AppCompatActivity() {
