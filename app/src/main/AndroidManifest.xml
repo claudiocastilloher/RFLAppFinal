@@ -15,6 +15,9 @@
         android:theme="@style/Theme.RefactoringLifeAcademy"
         tools:targetApi="31">
         <activity
+            android:name=".ui.buy.presenter.BuyActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.detail.presenter.DetailActivity"
             android:exported="false" />
         <activity

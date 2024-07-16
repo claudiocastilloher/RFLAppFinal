@@ -33,7 +33,6 @@ class HomeActivity : AppCompatActivity() {
         calls()
         observer()
         initSearch()
-        putFavoriteProduct()
     }
 
     private fun initSearch() {
@@ -61,11 +60,11 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.productsState.observe(this) { state ->
             when (state) {
                 is ProductState.Loading -> {
-                    binding.progressBarr.rlProgressBar.visibility = View.VISIBLE
+                    binding.progressTv.rlProgressBar.visibility = View.VISIBLE
                 }
 
                 is ProductState.Success -> {
-                    binding.progressBarr.rlProgressBar.visibility = View.GONE
+                    binding.progressTv.rlProgressBar.visibility = View.GONE
                     state.data?.products?.let { products ->
                         initRecyclerViewProduct(products)
                     } ?: run {
@@ -74,7 +73,7 @@ class HomeActivity : AppCompatActivity() {
                 }
 
                 is ProductState.Error -> {
-                    binding.progressBarr.rlProgressBar.visibility = View.GONE
+                    binding.progressTv.rlProgressBar.visibility = View.GONE
                     showMessageError(state.message)
                 }
             }
@@ -83,13 +82,16 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.lastUserProductState.observe(this) { state ->
             when (state) {
                 is ProductState.Loading -> {
-                    binding.progressTv.rlProgressBar.visibility = View.VISIBLE
+                    binding.progressBarr.rlProgressBar.visibility = View.VISIBLE
                 }
 
                 is ProductState.Success -> {
-                    binding.progressTv.rlProgressBar.visibility = View.GONE
+                    binding.progressBarr.rlProgressBar.visibility = View.GONE
                     when (val product = state.data?.product) {
                         null -> {
+                            UserProduct.userProductId = null
+                            UserProduct.isfavorite = null
+                            loadHeart()
                             showMessageError("Last viewed product is null")
                         }
 
@@ -97,14 +99,19 @@ class HomeActivity : AppCompatActivity() {
                             updateLastUserProductUI(product)
                             UserProduct.userProductId = product.idProduct
                             UserProduct.isfavorite = product.isFavorite
+                            loadHeart()
                             showMessageSuccess("Last viewed product loaded successfully")
                             product.idProduct?.let { onConstarintLayoutClic(it) }
+                            putFavoriteProduct()
                         }
                     }
                 }
 
                 is ProductState.Error -> {
-                    binding.progressTv.rlProgressBar.visibility = View.GONE
+                    UserProduct.userProductId = null
+                    UserProduct.isfavorite = null
+                    loadHeart()
+                    binding.progressBarr.rlProgressBar.visibility = View.GONE
                     showMessageError(state.message)
                 }
             }
@@ -113,11 +120,11 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.productTypesState.observe(this) { state ->
             when (state) {
                 is ProductState.Loading -> {
-                    binding.progressBarr.rlProgressBar.visibility = View.VISIBLE
+                    binding.progressTv.rlProgressBar.visibility = View.VISIBLE
                 }
 
                 is ProductState.Success -> {
-                    binding.progressBarr.rlProgressBar.visibility = View.GONE
+                    binding.progressTv.rlProgressBar.visibility = View.GONE
                     state.data?.productTypes?.let { productTypes ->
                         initRecyclerViewCategory(productTypes)
                     } ?: run {
@@ -127,7 +134,7 @@ class HomeActivity : AppCompatActivity() {
                 }
 
                 is ProductState.Error -> {
-                    binding.progressBarr.rlProgressBar.visibility = View.GONE
+                    binding.progressTv.rlProgressBar.visibility = View.GONE
                     showMessageError(state.message)
                 }
             }
@@ -136,13 +143,16 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.dailyOfferState.observe(this) { state ->
             when (state) {
                 is ProductState.Loading -> {
-                    binding.progressTv.rlProgressBar.visibility = View.VISIBLE
+                    binding.progressBarr.rlProgressBar.visibility = View.VISIBLE
                 }
 
                 is ProductState.Success -> {
-                    binding.progressTv.rlProgressBar.visibility = View.GONE
+                    binding.progressBarr.rlProgressBar.visibility = View.GONE
                     when (val dailyOffer = state.data) {
                         null -> {
+                            UserProduct.userProductId = null
+                            UserProduct.isfavorite = null
+                            loadHeart()
                             showMessageError("Daily offer product is null")
                         }
 
@@ -150,14 +160,19 @@ class HomeActivity : AppCompatActivity() {
                             updateDailyOffer(dailyOffer)
                             UserProduct.userProductId = dailyOffer.idProduct
                             UserProduct.isfavorite = dailyOffer.isFavorite
+                            loadHeart()
                             showMessageSuccess("Daily offer product loaded successfully")
                             dailyOffer.idProduct?.let { onConstarintLayoutClic(it) }
+                            putFavoriteProduct()
                         }
                     }
                 }
 
                 is ProductState.Error -> {
-                    binding.progressTv.rlProgressBar.visibility = View.GONE
+                    UserProduct.userProductId = null
+                    UserProduct.isfavorite = null
+                    loadHeart()
+                    binding.progressBarr.rlProgressBar.visibility = View.GONE
                     showMessageError(state.message)
                 }
             }
@@ -171,13 +186,9 @@ class HomeActivity : AppCompatActivity() {
 
                 is ProductState.Success -> {
                     binding.progressTv.rlProgressBar.visibility = View.GONE
-                    if (UserProduct.isfavorite == true || UserProduct.isfavorite == null) {
-                        binding.ivHeartBlue.setImageResource(R.drawable.heart_blue)
-                        UserProduct.isfavorite = false
+                    if ( loadHeartFavorite() ) {
                         showMessageSuccess("Mark not favorite product successfully")
                     } else {
-                        binding.ivHeartBlue.setImageResource(R.drawable.heart_blue_fill)
-                        UserProduct.isfavorite = true
                         showMessageSuccess("Mark favorite product successfully")
                     }
 
@@ -239,7 +250,6 @@ class HomeActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     }
 
-
     private fun putFavoriteProduct() {
         binding.ivHeartBlue.setOnClickListener {
             val idProduct = UserProduct.userProductId
@@ -263,5 +273,27 @@ class HomeActivity : AppCompatActivity() {
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra("idProduct", idProduct)
         startActivity(intent)
+    }
+
+    private fun loadHeart() {
+        if (UserProduct.isfavorite == false || UserProduct.isfavorite == null) {
+            binding.ivHeartBlue.setImageResource(R.drawable.heart_blue)
+        } else {
+            binding.ivHeartBlue.setImageResource(R.drawable.heart_blue_fill)
+        }
+    }
+
+    private fun loadHeartFavorite(): Boolean {
+        val messageFav: Boolean
+        if (UserProduct.isfavorite == true || UserProduct.isfavorite == null) {
+            binding.ivHeartBlue.setImageResource(R.drawable.heart_blue)
+            UserProduct.isfavorite = false
+            messageFav = true
+        } else {
+            binding.ivHeartBlue.setImageResource(R.drawable.heart_blue_fill)
+            UserProduct.isfavorite = true
+            messageFav = false
+        }
+        return messageFav
     }
 }
