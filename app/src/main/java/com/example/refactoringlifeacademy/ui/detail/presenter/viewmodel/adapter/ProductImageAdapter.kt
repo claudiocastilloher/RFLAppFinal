@@ -7,17 +7,18 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.refactoringlifeacademy.R
 import com.example.refactoringlifeacademy.data.dto.model.Image
+import com.example.refactoringlifeacademy.data.dto.model.UserProduct
 import com.example.refactoringlifeacademy.databinding.ItemImageBinding
 import com.squareup.picasso.Picasso
 
-class ProductImageAdapter(private var images: List<Image>) : RecyclerView.Adapter<ProductImageAdapter.ViewHolder>() {
+class ProductImageAdapter(private val images: List<Image>) : RecyclerView.Adapter<ImageViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val binding = ItemImageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
+        return ImageViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val image = images[position]
         holder.render(image)
     }
@@ -25,15 +26,11 @@ class ProductImageAdapter(private var images: List<Image>) : RecyclerView.Adapte
     override fun getItemCount(): Int {
         return images.size
     }
+}
 
-    fun updateImages(newImages: List<Image>) {
-        images = newImages
-        notifyDataSetChanged()
-    }
-
-    class ViewHolder(private val binding: ItemImageBinding) : RecyclerView.ViewHolder(binding.root) {
+class ImageViewHolder(private val binding: ItemImageBinding) : RecyclerView.ViewHolder(binding.root) {
         fun render(image: Image) {
             Picasso.get().load(image.link).into(binding.ivImageProduct)
+
         }
     }
-}
