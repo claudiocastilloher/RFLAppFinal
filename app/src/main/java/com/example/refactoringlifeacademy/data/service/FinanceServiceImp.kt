@@ -1,6 +1,5 @@
 package com.example.refactoringlifeacademy.data.service
 
-import com.example.refactoringlifeacademy.data.dto.response.DailyOfferResponse
 import com.example.refactoringlifeacademy.data.dto.response.FinanceMethodsResponse
 import okhttp3.OkHttpClient
 import retrofit2.Response
