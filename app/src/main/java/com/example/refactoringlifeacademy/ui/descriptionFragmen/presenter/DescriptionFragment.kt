@@ -1,6 +1,6 @@
 package com.example.refactoringlifeacademy.ui.descriptionFragmen.presenter
 
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,7 +12,6 @@ import androidx.lifecycle.Observer
 import com.example.refactoringlifeacademy.data.dto.model.UserProduct
 import com.example.refactoringlifeacademy.databinding.FragmentDescriptionBinding
 import com.example.refactoringlifeacademy.ui.descriptionFragmen.viewmodel.DescriptionViewModel
-import com.example.refactoringlifeacademy.ui.home.presenter.HomeActivity
 import com.example.refactoringlifeacademy.ui.home.viewmodel.ProductState
 
 class DescriptionFragment : Fragment() {
@@ -24,7 +23,7 @@ class DescriptionFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentDescriptionBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -34,24 +33,13 @@ class DescriptionFragment : Fragment() {
 
         observer()
         calls()
-        initUI()
-    }
-
-    private fun initUI() {
-        binding.btnBuy.setOnClickListener {
-            goToSale()
-        }
-    }
-
-    private fun goToSale(){
-        val intent = Intent(context, HomeActivity::class.java)//CAMBIAR UNA VEZ QUE SE TENGA LA CLASE
-        startActivity(intent)
     }
 
     private fun calls() {
         UserProduct.userProductId?.let { viewModel.getProductByID(it) }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun observer() {
         viewModel.productByIdState.observe(viewLifecycleOwner, Observer { state ->
             when(state){
@@ -67,7 +55,6 @@ class DescriptionFragment : Fragment() {
                     binding.tvPrice.text = "$ ${state.data?.price}"
                     binding.divider.visibility = View.VISIBLE
                     binding.divierDown.visibility = View.VISIBLE
-                    binding.btnBuy.visibility = View.VISIBLE
                 }
 
                 is ProductState.Error -> {
@@ -81,5 +68,4 @@ class DescriptionFragment : Fragment() {
     private fun showMessageError(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
-
 }
