@@ -3,27 +3,30 @@ package com.example.refactoringlifeacademy.ui.financeFragment.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.refactoringlifeacademy.data.dto.response.FinanceMethodsResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductByIdResponse
+import com.example.refactoringlifeacademy.data.repository.FinanceRepository
 import com.example.refactoringlifeacademy.data.repository.ProductRepository
 import com.example.refactoringlifeacademy.ui.home.viewmodel.ProductState
+import com.example.refactoringlifeacademy.utils.FinanceState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class FinanceViewModel(private val repository: ProductRepository = ProductRepository()) : ViewModel() {
-    private val _productByIdState = MutableLiveData<ProductState<ProductByIdResponse>>()
-    val productByIdState: LiveData<ProductState<ProductByIdResponse>> = _productByIdState
+class FinanceViewModel(private val repository: FinanceRepository = FinanceRepository()) : ViewModel() {
+    private val _financeState = MutableLiveData<FinanceState>()
+    val financeState: LiveData<FinanceState> = _financeState
 
-    fun getProductByID(idProduc: Int){
+    fun getFinanceMethods(){
         CoroutineScope(Dispatchers.IO).launch {
-            _productByIdState.postValue(ProductState.Loading)
-            val response = repository.getProductById(idProduc)
+            _financeState.postValue(FinanceState.Loading)
+            val response = repository.getFinanceMethods()
             if (response.isSuccessful){
                 response.body()?.let {
-                    _productByIdState.postValue(ProductState.Success(it))
-                } ?: _productByIdState.postValue(ProductState.Error("Empty response body"))
+                    _financeState.postValue(FinanceState.Success(it))
+                } ?: _financeState.postValue(FinanceState.Error("Empty response body"))
             }else {
-                _productByIdState.postValue(ProductState.Error("Failed: ${response.message()}"))
+                _financeState.postValue(FinanceState.Error("Failed: ${response.message()}"))
             }
         }
     }
