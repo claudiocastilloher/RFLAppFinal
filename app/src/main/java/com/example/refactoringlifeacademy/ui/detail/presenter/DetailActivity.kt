@@ -7,11 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.refactoringlifeacademy.databinding.ActivityDetailBinding
 import com.example.refactoringlifeacademy.ui.buy.presenter.BuyActivity
+import com.example.refactoringlifeacademy.ui.commentFragment.presenter.CommentFragment
 import com.example.refactoringlifeacademy.ui.descriptionFragmen.presenter.DescriptionFragment
 import com.example.refactoringlifeacademy.ui.home.presenter.HomeActivity
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
+    private var productPrice: Double = 0.0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
@@ -21,8 +23,14 @@ class DetailActivity : AppCompatActivity() {
         initLeftBar()
         goToBuy()
         goToHome()
+        getInformation()
 
     }
+
+    private fun getInformation() {
+        productPrice = intent.getDoubleExtra("productPrice", 0.0)
+    }
+
     private fun firstLoad() {
         binding.ellipseImage.visibility = View.VISIBLE
         loadFragment(ImageFragment())
@@ -57,7 +65,7 @@ class DetailActivity : AppCompatActivity() {
             binding.ellipseDescrip.visibility = View.INVISIBLE
             binding.ellipseFinance.visibility = View.INVISIBLE
             binding.ellipseComment.visibility = View.VISIBLE
-            loadFragment(CommentFragment())
+            loadFragment(CommentFragment.newInstance(productPrice))
         }
     }
     private fun loadFragment(fragment: Fragment) {
