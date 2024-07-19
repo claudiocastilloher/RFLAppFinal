@@ -10,7 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class DescriptionViewModel(private val repository: ProductRepository = ProductRepository()) : ViewModel() {
+class FinanceViewModel(private val repository: ProductRepository = ProductRepository()) : ViewModel() {
     private val _productByIdState = MutableLiveData<ProductState<ProductByIdResponse>>()
     val productByIdState: LiveData<ProductState<ProductByIdResponse>> = _productByIdState
 
