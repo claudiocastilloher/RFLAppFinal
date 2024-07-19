@@ -8,10 +8,12 @@ import androidx.fragment.app.Fragment
 import com.example.refactoringlifeacademy.databinding.ActivityDetailBinding
 import com.example.refactoringlifeacademy.ui.buy.presenter.BuyActivity
 import com.example.refactoringlifeacademy.ui.descriptionFragmen.presenter.DescriptionFragment
+import com.example.refactoringlifeacademy.ui.financeFragment.presenter.FinanceFragment
 import com.example.refactoringlifeacademy.ui.home.presenter.HomeActivity
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
+    private var productPrice: Double = 0.0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
@@ -49,7 +51,7 @@ class DetailActivity : AppCompatActivity() {
             binding.ellipseImage.visibility = View.INVISIBLE
             binding.ellipseDescrip.visibility = View.INVISIBLE
             binding.ellipseFinance.visibility = View.VISIBLE
-            loadFragment(FinanceFragment())
+            loadFragment(FinanceFragment.newInstance(productPrice))
         }
 
         binding.tvComent.setOnClickListener {
