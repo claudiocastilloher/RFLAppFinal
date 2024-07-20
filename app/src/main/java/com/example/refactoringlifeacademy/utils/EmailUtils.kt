@@ -3,7 +3,6 @@ package com.example.refactoringlifeacademy.utils
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 
 object EmailUtils {
     private const val TO_EMAIL = "destinatario@example.com"//CAMBIAR EL DESTINATARIO UNA VEZ DEFINIDO
