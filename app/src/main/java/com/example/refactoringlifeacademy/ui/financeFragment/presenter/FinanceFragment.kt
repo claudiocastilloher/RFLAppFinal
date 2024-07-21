@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.refactoringlifeacademy.data.dto.model.FinanceMethods
 import com.example.refactoringlifeacademy.databinding.FragmentFinanceBinding
@@ -33,7 +32,7 @@ class FinanceFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentFinanceBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -52,7 +51,7 @@ class FinanceFragment : Fragment() {
     }
 
     private fun observer() {
-        viewModel.financeState.observe(viewLifecycleOwner, Observer { state ->
+        viewModel.financeState.observe(viewLifecycleOwner) { state ->
             when(state){
                 is FinanceState.Loading -> {
                     binding.progressBarr.visibility = View.VISIBLE
@@ -62,7 +61,7 @@ class FinanceFragment : Fragment() {
                     binding.progressBarr.visibility = View.GONE
                     state.info.financeMethods?.let { financeMethods ->
                         initRecyclerViewFinance(financeMethods)
-                    } ?: showMessageError("Finece Methods list is null")
+                    } ?: showMessageError("Finance Methods list is null")
                 }
 
                 is FinanceState.Error -> {
@@ -70,7 +69,7 @@ class FinanceFragment : Fragment() {
                     showMessageError(state.message)
                 }
             }
-        })
+        }
     }
 
     private fun initRecyclerViewFinance(value: List<FinanceMethods>) {

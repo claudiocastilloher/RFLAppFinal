@@ -3,11 +3,7 @@ package com.example.refactoringlifeacademy.ui.financeFragment.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.refactoringlifeacademy.data.dto.response.FinanceMethodsResponse
-import com.example.refactoringlifeacademy.data.dto.response.ProductByIdResponse
 import com.example.refactoringlifeacademy.data.repository.FinanceRepository
-import com.example.refactoringlifeacademy.data.repository.ProductRepository
-import com.example.refactoringlifeacademy.ui.home.viewmodel.ProductState
 import com.example.refactoringlifeacademy.utils.FinanceState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -55,29 +55,28 @@
 
         <TextView
             android:id="@+id/tv_finance_methods"
-            android:layout_width="150dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:fontFamily="@font/roboto"
             android:textStyle="bold"
-            tools:text="@string/comment_text"
             android:textSize="14sp"
             android:textAlignment="gravity"
             android:layout_gravity="center_vertical"/>
 
         <TextView
             android:id="@+id/tv_finance_methods2"
-            android:layout_width="150dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:layout_marginStart="1dp"
             android:fontFamily="@font/roboto_regular"
+            android:textStyle="normal"
             android:textSize="12sp"
             android:textAlignment="gravity"
-            android:layout_gravity="center_vertical"
-            tools:text="@string/comment_text" />
+            android:layout_gravity="center_vertical"/>
 
     </LinearLayout>
 
