@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.refactoringlifeacademy.R
 import com.example.refactoringlifeacademy.data.dto.model.Product
-import com.example.refactoringlifeacademy.data.dto.model.ProductTypeAlt
 import com.example.refactoringlifeacademy.databinding.ItemProductBinding
 import com.squareup.picasso.Picasso
 
