@@ -18,6 +18,7 @@ import com.example.refactoringlifeacademy.ui.home.viewmodel.HomeViewModel
 import com.example.refactoringlifeacademy.ui.home.viewmodel.ProductState
 import com.example.refactoringlifeacademy.ui.home.viewmodel.adapter.AdapterCategory
 import com.example.refactoringlifeacademy.ui.home.viewmodel.adapter.AdapterProduct
+import com.example.refactoringlifeacademy.utils.EmailUtils
 import com.squareup.picasso.Picasso
 
 class HomeActivity : AppCompatActivity() {
@@ -33,6 +34,13 @@ class HomeActivity : AppCompatActivity() {
         calls()
         observer()
         initSearch()
+        initGmail()
+    }
+
+    private fun initGmail() {
+        binding.tvSupport.setOnClickListener {
+            EmailUtils.sendEmail(this)
+        }
     }
 
     private fun initSearch() {
@@ -289,6 +297,7 @@ class HomeActivity : AppCompatActivity() {
         intent.putExtra("productPrice", productPrice)
         startActivity(intent)
     }
+
 
     private fun loadHeart() {
         if (UserProduct.isfavorite == false || UserProduct.isfavorite == null) {
