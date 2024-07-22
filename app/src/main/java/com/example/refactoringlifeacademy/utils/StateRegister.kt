@@ -1,6 +1,5 @@
 package com.example.refactoringlifeacademy.utils
 
-import com.example.refactoringlifeacademy.data.dto.response.LoginResponse
 import com.example.refactoringlifeacademy.data.dto.response.RegisterResponse
 
 sealed class StateRegister {

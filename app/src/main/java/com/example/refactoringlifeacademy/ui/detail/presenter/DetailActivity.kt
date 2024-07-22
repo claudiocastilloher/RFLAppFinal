@@ -9,6 +9,7 @@ import com.example.refactoringlifeacademy.databinding.ActivityDetailBinding
 import com.example.refactoringlifeacademy.ui.buy.presenter.BuyActivity
 import com.example.refactoringlifeacademy.ui.commentFragment.presenter.CommentFragment
 import com.example.refactoringlifeacademy.ui.descriptionFragmen.presenter.DescriptionFragment
+import com.example.refactoringlifeacademy.ui.financeFragment.presenter.FinanceFragment
 import com.example.refactoringlifeacademy.ui.home.presenter.HomeActivity
 
 class DetailActivity : AppCompatActivity() {
@@ -57,7 +58,7 @@ class DetailActivity : AppCompatActivity() {
             binding.ellipseImage.visibility = View.INVISIBLE
             binding.ellipseDescrip.visibility = View.INVISIBLE
             binding.ellipseFinance.visibility = View.VISIBLE
-            loadFragment(FinanceFragment())
+            loadFragment(FinanceFragment.newInstance(productPrice))
         }
 
         binding.tvComent.setOnClickListener {

@@ -45,6 +45,8 @@
     <string name="descr_fragment">Hello description fragment</string>
     <string name="commment_fragment">Hello comment fragment</string>
     <string name="fiance_fragment">Hello finence fragment</string>
+    <string name="image_finance_fragment">Image Banco Financiacion</string>
+    <string name="cuotas"> cuotas: </string>
     <!--buy-->
     <string name="image_check">Imagen de Comprar</string>
     <string name="texto_buy1">El vendedor se comunicara</string>
