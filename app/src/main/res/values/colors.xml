@@ -10,5 +10,6 @@
     <color name="red">#C0392B</color>
     <color name="orange">#FF6600</color>
     <color name="grey2">#8F8A89</color>
+    <color name="gray_tittle">#B7B7B7</color>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.example.refactoringlifeacademy.ui.home.presenter
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -44,7 +45,9 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initSearch() {
-        binding.svSearch.isIconifiedByDefault = false
+        binding.lySearch.setOnClickListener {
+
+        }
 
 
     }
@@ -68,11 +71,11 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.productsState.observe(this) { state ->
             when (state) {
                 is ProductState.Loading -> {
-                    binding.progressTv.rlProgressBar.visibility = View.VISIBLE
+                    binding.progressBarrProduct.visibility = View.VISIBLE
                 }
 
                 is ProductState.Success -> {
-                    binding.progressTv.rlProgressBar.visibility = View.GONE
+                    binding.progressBarrProduct.visibility = View.GONE
                     state.data?.products?.let { products ->
                         initRecyclerViewProduct(products)
                     } ?: run {
@@ -81,7 +84,7 @@ class HomeActivity : AppCompatActivity() {
                 }
 
                 is ProductState.Error -> {
-                    binding.progressTv.rlProgressBar.visibility = View.GONE
+                    binding.progressBarrProduct.visibility = View.GONE
                     showMessageError(state.message)
                 }
             }
@@ -190,7 +193,7 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.favoriteState.observe(this) { state ->
             when (state) {
                 is ProductState.Loading -> {
-                    binding.progressTv.rlProgressBar.visibility = View.VISIBLE
+                    binding.progressTv.rlProgressBar.visibility = View.GONE
                 }
 
                 is ProductState.Success -> {
@@ -219,6 +222,7 @@ class HomeActivity : AppCompatActivity() {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun updateDailyOffer(dailyOffer: DailyOfferResponse?) {
         dailyOffer?.let {
             if (!it.images.isNullOrEmpty()) {
@@ -230,16 +234,17 @@ class HomeActivity : AppCompatActivity() {
             }
             binding.tvProductName.text = it.name ?: ""
             binding.tvDescription.text = it.description ?: ""
-            binding.tvPrice.text = (dailyOffer.price ?: 0).toString()
+            binding.tvPrice.text = "${it.currency} ${it.price}"
             binding.tvHeader.text = getString(R.string.offer)
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun updateLastUserProductUI(product: Product) {
         Picasso.get().load(product.image).into(binding.ivOfferDaily)
         binding.tvProductName.text = product.name ?: ""
         binding.tvDescription.text = product.description ?: ""
-        binding.tvPrice.text = (product.price ?: 0).toString()
+        binding.tvPrice.text = "${product.currency} ${product.price}"
         binding.tvHeader.text = getString(R.string.last_visited)
     }
 
