@@ -18,6 +18,7 @@ import com.example.refactoringlifeacademy.ui.home.viewmodel.HomeViewModel
 import com.example.refactoringlifeacademy.ui.home.viewmodel.ProductState
 import com.example.refactoringlifeacademy.ui.home.viewmodel.adapter.AdapterCategory
 import com.example.refactoringlifeacademy.ui.home.viewmodel.adapter.AdapterProduct
+import com.example.refactoringlifeacademy.utils.EmailUtils
 import com.squareup.picasso.Picasso
 
 class HomeActivity : AppCompatActivity() {
@@ -33,6 +34,13 @@ class HomeActivity : AppCompatActivity() {
         calls()
         observer()
         initSearch()
+        initGmail()
+    }
+
+    private fun initGmail() {
+        binding.tvSupport.setOnClickListener {
+            EmailUtils.sendEmail(this)
+        }
     }
 
     private fun initSearch() {
@@ -51,7 +59,8 @@ class HomeActivity : AppCompatActivity() {
             }
 
             true -> {
-                homeViewModel.getLastUserProduct()
+                //homeViewModel.getLastUserProduct() //Servicio retirado, lo incorporaron en ele daily offer
+                homeViewModel.getDailyOffer()
             }
         }
     }
@@ -101,7 +110,7 @@ class HomeActivity : AppCompatActivity() {
                             UserProduct.isfavorite = product.isFavorite
                             loadHeart()
                             showMessageSuccess("Last viewed product loaded successfully")
-                            product.idProduct?.let { onConstarintLayoutClic(it) }
+                            product.price?.let { onConstarintLayoutClic(it) }
                             putFavoriteProduct()
                         }
                     }
@@ -162,7 +171,8 @@ class HomeActivity : AppCompatActivity() {
                             UserProduct.isfavorite = dailyOffer.isFavorite
                             loadHeart()
                             showMessageSuccess("Daily offer product loaded successfully")
-                            dailyOffer.idProduct?.let { onConstarintLayoutClic(it) }
+                            //dailyOffer.idProduct?.let { onConstarintLayoutClic(it) }
+                            dailyOffer.price?.let { onConstarintLayoutClic(it) }
                             putFavoriteProduct()
                         }
                     }
@@ -186,7 +196,7 @@ class HomeActivity : AppCompatActivity() {
 
                 is ProductState.Success -> {
                     binding.progressTv.rlProgressBar.visibility = View.GONE
-                    if ( loadHeartFavorite() ) {
+                    if (loadHeartFavorite()) {
                         showMessageSuccess("Mark not favorite product successfully")
                     } else {
                         showMessageSuccess("Mark favorite product successfully")
@@ -222,7 +232,12 @@ class HomeActivity : AppCompatActivity() {
             binding.tvProductName.text = it.name ?: ""
             binding.tvDescription.text = it.description ?: ""
             binding.tvPrice.text = (dailyOffer.price ?: 0).toString()
-            binding.tvHeader.text = getString(R.string.offer)
+            if (it.dailyOffer == true){
+                binding.tvHeader.text = getString(R.string.offer)
+            }
+            else{
+                binding.tvHeader.text = getString(R.string.last_visited)
+            }
         }
     }
 
@@ -244,7 +259,9 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerViewProduct(value: List<Product>) {
-        val adapter = AdapterProduct(value)
+        val adapter = AdapterProduct(value) {
+            onProductSelected(it)
+        }
         binding.rvProduct.adapter = adapter
         binding.rvProduct.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
@@ -263,17 +280,24 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.getProducts(idProductType = category.idProductType)
     }
 
-    private fun onConstarintLayoutClic(idProduct: Int){
+    private fun onProductSelected(product: Product) {
+        UserProduct.userProductId = product.idProduct //Actualizar Id Producto
+        UserProduct.isfavorite = product.isFavorite  //Actualizar Favorito Producto
+        product.price?.let { goToDetails(it) }
+    }
+
+    private fun onConstarintLayoutClic(productPrice: Double) {
         binding.clProductDetail.setOnClickListener {
-            goToDetails(idProduct)
+            goToDetails(productPrice)
         }
     }
 
-    private fun goToDetails(idProduct: Int){
+    private fun goToDetails(productPrice: Double) {
         val intent = Intent(this, DetailActivity::class.java)
-        intent.putExtra("idProduct", idProduct)
+        intent.putExtra("productPrice", productPrice)
         startActivity(intent)
     }
+
 
     private fun loadHeart() {
         if (UserProduct.isfavorite == false || UserProduct.isfavorite == null) {

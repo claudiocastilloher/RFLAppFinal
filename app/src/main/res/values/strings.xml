@@ -45,6 +45,8 @@
     <string name="descr_fragment">Hello description fragment</string>
     <string name="commment_fragment">Hello comment fragment</string>
     <string name="fiance_fragment">Hello finence fragment</string>
+    <string name="image_finance_fragment">Image Banco Financiacion</string>
+    <string name="cuotas"> cuotas: </string>
     <!--buy-->
     <string name="image_check">Imagen de Comprar</string>
     <string name="texto_buy1">El vendedor se comunicara</string>
@@ -64,5 +66,7 @@ Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el
     <string name="image_error">image_error</string>
     <string name="image_warning_error">image_warning_error</string>
     <string name="description_image_error">Hay un problema con \nla carga de imagenes</string>
+
+    <string name="comment_text">an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially </string>
 
 </resources>
