@@ -9,7 +9,7 @@ import com.example.refactoringlifeacademy.data.dto.model.Product
 import com.example.refactoringlifeacademy.databinding.ItemProductBinding
 import com.squareup.picasso.Picasso
 
-class AdapterProduct(private val productList: List<Product>) : RecyclerView.Adapter<ProductHolder>() {
+class AdapterProduct(private val productList: List<Product>, private val onProductSelected: (Product) -> Unit) : RecyclerView.Adapter<ProductHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_product,parent,false)
         return ProductHolder(view)
@@ -20,19 +20,22 @@ class AdapterProduct(private val productList: List<Product>) : RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: ProductHolder, position: Int) {
-        holder.render(productList[position])
+        holder.render(productList[position], onProductSelected)
     }
 }
 
 class ProductHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val binding = ItemProductBinding.bind(view)
 
-    fun render(value: Product){
+    fun render(value: Product, onProductSelected: (Product) -> Unit){
         val image = value.image
         val name = value.name
         val price = "$ ${value.price}"
         Picasso.get().load(image).into(binding.ivProduct)
         binding.producName.text = name
         binding.producPrice.text = price
+        itemView.setOnClickListener{
+            onProductSelected(value)
+        }
     }
 }
