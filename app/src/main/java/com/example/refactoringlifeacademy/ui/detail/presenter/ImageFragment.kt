@@ -103,7 +103,7 @@ class ImageFragment : Fragment() {
         }
     }
 
-    fun onClick(){
+    private fun onClick(){
         binding.btProduct.setOnClickListener {
 
             binding.btProduct.setBackgroundResource(R.drawable.button_image2)
