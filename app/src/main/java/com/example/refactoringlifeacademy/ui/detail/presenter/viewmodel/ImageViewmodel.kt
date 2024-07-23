@@ -11,14 +11,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ImageViewmodel(private val repository: ProductRepository) : ViewModel() {
+class ImageViewmodel(private val repository: ProductRepository = ProductRepository()) : ViewModel() {
 
     private val _data = MutableLiveData<ProductState<ProductByIdResponse>>()
     val data: LiveData<ProductState<ProductByIdResponse>> = _data
 
     fun getProductById(idProduct: Int){
         CoroutineScope(Dispatchers.IO).launch{
-            _data.value = ProductState.Loading
+            _data.postValue(ProductState.Loading)
             val response = repository.getProductById(idProduct)
             if (response.isSuccessful) {
                 response.body()?.let {

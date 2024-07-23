@@ -30,6 +30,5 @@ class ProductImageAdapter(private val images: List<Image>) : RecyclerView.Adapte
 class ImageViewHolder(private val binding: ItemImageBinding) : RecyclerView.ViewHolder(binding.root) {
         fun render(image: Image) {
             Picasso.get().load(image.link).into(binding.ivImageProduct)
-
-        }
+            }
     }
