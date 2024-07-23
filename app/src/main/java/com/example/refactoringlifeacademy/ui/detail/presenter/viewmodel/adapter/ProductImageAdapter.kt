@@ -19,8 +19,7 @@ class ProductImageAdapter(private val images: List<Image>) : RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        val image = images[position]
-        holder.render(image)
+        holder.render(images[position])
     }
 
     override fun getItemCount(): Int {

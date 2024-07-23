@@ -87,9 +87,15 @@ class ImageFragment : Fragment() {
     }
 
     private fun updateUI(images: List<Image>) {
+        if(images.isNullOrEmpty()){
+            binding.icMsgError.cslImgError.visibility = View.VISIBLE
+        }else{
+            binding.icMsgError.cslImgError.visibility = View.GONE
+            val adapter = ProductImageAdapter(images)
+            binding.rvItemImage.adapter = adapter
+        }
 
-        val adapter = ProductImageAdapter(images)
-        binding.rvItemImage.adapter = adapter
+
 
     }
     private fun calls() {
