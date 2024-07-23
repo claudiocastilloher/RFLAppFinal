@@ -62,7 +62,8 @@ class HomeActivity : AppCompatActivity() {
             }
 
             true -> {
-                homeViewModel.getLastUserProduct()
+                //homeViewModel.getLastUserProduct() //Servicio retirado, lo incorporaron en ele daily offer
+                homeViewModel.getDailyOffer()
             }
         }
     }
@@ -198,7 +199,7 @@ class HomeActivity : AppCompatActivity() {
 
                 is ProductState.Success -> {
                     binding.progressTv.rlProgressBar.visibility = View.GONE
-                    if ( loadHeartFavorite() ) {
+                    if (loadHeartFavorite()) {
                         showMessageSuccess("Mark not favorite product successfully")
                     } else {
                         showMessageSuccess("Mark favorite product successfully")
@@ -235,11 +236,15 @@ class HomeActivity : AppCompatActivity() {
             binding.tvProductName.text = it.name ?: ""
             binding.tvDescription.text = it.description ?: ""
             binding.tvPrice.text = "${it.currency} ${it.price}"
-            binding.tvHeader.text = getString(R.string.offer)
+            if (it.dailyOffer == true){
+                binding.tvHeader.text = getString(R.string.offer)
+            }
+            else{
+                binding.tvHeader.text = getString(R.string.last_visited)
+            }
         }
     }
 
-    @SuppressLint("SetTextI18n")
     private fun updateLastUserProductUI(product: Product) {
         Picasso.get().load(product.image).into(binding.ivOfferDaily)
         binding.tvProductName.text = product.name ?: ""
@@ -258,7 +263,9 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerViewProduct(value: List<Product>) {
-        val adapter = AdapterProduct(value)
+        val adapter = AdapterProduct(value) {
+            onProductSelected(it)
+        }
         binding.rvProduct.adapter = adapter
         binding.rvProduct.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
@@ -277,13 +284,19 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.getProducts(idProductType = category.idProductType)
     }
 
-    private fun onConstarintLayoutClic(productPrice: Double){
+    private fun onProductSelected(product: Product) {
+        UserProduct.userProductId = product.idProduct //Actualizar Id Producto
+        UserProduct.isfavorite = product.isFavorite  //Actualizar Favorito Producto
+        product.price?.let { goToDetails(it) }
+    }
+
+    private fun onConstarintLayoutClic(productPrice: Double) {
         binding.clProductDetail.setOnClickListener {
             goToDetails(productPrice)
         }
     }
 
-    private fun goToDetails(productPrice: Double){
+    private fun goToDetails(productPrice: Double) {
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra("productPrice", productPrice)
         startActivity(intent)
