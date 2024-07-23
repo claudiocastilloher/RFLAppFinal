@@ -5,56 +5,129 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.example.refactoringlifeacademy.R
+import com.example.refactoringlifeacademy.data.dto.model.Image
+import com.example.refactoringlifeacademy.data.dto.model.UserProduct
+import com.example.refactoringlifeacademy.databinding.FragmentImageBinding
+import com.example.refactoringlifeacademy.ui.detail.presenter.viewmodel.ImageViewmodel
+import com.example.refactoringlifeacademy.ui.detail.presenter.viewmodel.adapter.ProductImageAdapter
+import com.example.refactoringlifeacademy.ui.home.viewmodel.ProductState
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ImageFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ImageFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentImageBinding // Debes cambiar FragmentImageBinding por tu variable correspondiente
+    private val viewModel: ImageViewmodel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_image, container, false)
+        // Inflate the layout for this fragment using View Binding
+        binding = FragmentImageBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ImageFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ImageFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        observer()
+
+        calls()
+
+
+        onClick()
+
+
+        viewModel.getProductById(1)
+    }
+
+    private fun observer() {
+        viewModel.data.observe(viewLifecycleOwner, Observer { state ->
+            when(state){
+                is ProductState.Loading -> {
+                    showLoading()
+                }
+
+                is ProductState.Success -> {
+                   hideLoading()
+                    binding.tvProductName.text = state.data?.name
+                    binding.tvPrice.text = "$ ${state.data?.price}"
+                    state.data?.images?.let { images ->
+                        updateUI(images)
+                    }
+
+                }
+
+                is ProductState.Error -> {
+                    hideLoading()
+                    showMessageError(state.message)
                 }
             }
+        })
+    }
+
+
+
+    private fun showLoading() {
+        binding.progressBarrImage.rlProgressBar.visibility = View.VISIBLE
+    }
+
+    private fun hideLoading() {
+        binding.progressBarrImage.rlProgressBar.visibility = View.GONE
+    }
+
+    private fun showMessageError(message: String) {
+
+        Toast.makeText(requireContext(), "Error: $message", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun updateUI(images: List<Image>) {
+        if(images.isNullOrEmpty()){
+            binding.icMsgError.cslImgError.visibility = View.VISIBLE
+        }else{
+            binding.icMsgError.cslImgError.visibility = View.GONE
+            val adapter = ProductImageAdapter(images)
+            binding.rvItemImage.adapter = adapter
+        }
+
+
+
+    }
+    private fun calls() {
+        UserProduct.userProductId?.let { productId ->
+            viewModel.getProductById(productId)
+        }
+    }
+
+    fun onClick(){
+        binding.btProduct.setOnClickListener {
+
+            binding.btProduct.setBackgroundResource(R.drawable.button_image2)
+            binding.btColors.setBackgroundResource(R.drawable.button_image1)
+            binding.btSimilar.setBackgroundResource(R.drawable.button_image1)
+            // Aquí puedes realizar otras acciones según sea necesario
+        }
+
+
+        binding.btColors.setOnClickListener {
+
+            binding.btColors.setBackgroundResource(R.drawable.button_image2)
+            binding.btProduct.setBackgroundResource(R.drawable.button_image1)
+            binding.btSimilar.setBackgroundResource(R.drawable.button_image1)
+
+        }
+
+
+        binding.btSimilar.setOnClickListener {
+            binding.btSimilar.setBackgroundResource(R.drawable.button_image2)
+            binding.btColors.setBackgroundResource(R.drawable.button_image1)
+            binding.btProduct.setBackgroundResource(R.drawable.button_image1)
+
+        }
     }
 }
