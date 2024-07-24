@@ -20,13 +20,15 @@
             android:fontFamily="@font/roboto"
             tools:text="@string/rusty"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginStart="10dp"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
             android:background="@color/violet" />
 
 
@@ -34,6 +36,7 @@
             android:id="@+id/tvComment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:fontFamily="@font/roboto"
             tools:text="@string/comment_text"
             android:textSize="14sp" />
