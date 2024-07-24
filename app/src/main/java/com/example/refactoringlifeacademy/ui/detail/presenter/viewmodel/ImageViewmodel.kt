@@ -17,7 +17,7 @@ class ImageViewmodel(private val repository: ProductRepository = ProductReposito
 
     fun getProductById(idProduct: Int){
         CoroutineScope(Dispatchers.IO).launch{
-            _data.value = ProductState.Loading
+            _data.postValue(ProductState.Loading)
             val response = repository.getProductById(idProduct)
             if (response.isSuccessful) {
                 response.body()?.let {

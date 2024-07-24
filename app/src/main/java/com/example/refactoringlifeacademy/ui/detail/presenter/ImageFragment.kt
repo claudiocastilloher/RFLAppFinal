@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.example.refactoringlifeacademy.R
 import com.example.refactoringlifeacademy.data.dto.model.Image
 import com.example.refactoringlifeacademy.data.dto.model.UserProduct
@@ -26,7 +25,7 @@ class ImageFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment using View Binding
         binding = FragmentImageBinding.inflate(inflater, container, false)
         return binding.root
@@ -43,11 +42,11 @@ class ImageFragment : Fragment() {
         onClick()
 
 
-        viewModel.getProductById(1)
+        UserProduct.userProductId?.let{viewModel.getProductById(it)}
     }
 
     private fun observer() {
-        viewModel.data.observe(viewLifecycleOwner, Observer { state ->
+        viewModel.data.observe(viewLifecycleOwner) { state ->
             when(state){
                 is ProductState.Loading -> {
                     showLoading()
@@ -57,9 +56,9 @@ class ImageFragment : Fragment() {
                    hideLoading()
                     binding.tvProductName.text = state.data?.name
                     binding.tvPrice.text = "$ ${state.data?.price}"
-                    state.data?.images?.let { images ->
-                        updateUI(images)
-                    }
+                    //state.data?.images?.let { images -> Hay que dar la posibilidad de que sea null para poder cargar la pantalla de error
+                        state.data?.let{updateUI(it.images)}
+                    //}
 
                 }
 
@@ -68,7 +67,7 @@ class ImageFragment : Fragment() {
                     showMessageError(state.message)
                 }
             }
-        })
+        }
     }
 
 
@@ -86,7 +85,7 @@ class ImageFragment : Fragment() {
         Toast.makeText(requireContext(), "Error: $message", Toast.LENGTH_SHORT).show()
     }
 
-    private fun updateUI(images: List<Image>) {
+    private fun updateUI(images: List<Image>?) {
         if(images.isNullOrEmpty()){
             binding.icMsgError.cslImgError.visibility = View.VISIBLE
         }else{
@@ -104,7 +103,7 @@ class ImageFragment : Fragment() {
         }
     }
 
-    fun onClick(){
+    private fun onClick(){
         binding.btProduct.setOnClickListener {
 
             binding.btProduct.setBackgroundResource(R.drawable.button_image2)
