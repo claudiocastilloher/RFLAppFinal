@@ -3,7 +3,6 @@ package com.example.refactoringlifeacademy.ui.detail.presenter.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.refactoringlifeacademy.data.dto.model.Product
 import com.example.refactoringlifeacademy.data.dto.response.ProductByIdResponse
 import com.example.refactoringlifeacademy.data.repository.ProductRepository
 import com.example.refactoringlifeacademy.ui.home.viewmodel.ProductState
@@ -11,7 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ImageViewmodel(private val repository: ProductRepository) : ViewModel() {
+class ImageViewmodel(private val repository: ProductRepository = ProductRepository()) : ViewModel() {
 
     private val _data = MutableLiveData<ProductState<ProductByIdResponse>>()
     val data: LiveData<ProductState<ProductByIdResponse>> = _data
