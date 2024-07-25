@@ -38,6 +38,6 @@ interface ProductService {
     suspend fun getProductById(@Path("idProduct") idProduct: Int): Response<ProductByIdResponse>
 
     @GET("/api/v1/products/{idProduct}/similar")
-    suspend fun getSimilarProducts(@Query("idProduct") idProduct: Int): Response<ProductsResponse>
+    suspend fun getSimilarProducts(@Path("idProduct") idProduct: Int): Response<ProductsResponse>
 
 }

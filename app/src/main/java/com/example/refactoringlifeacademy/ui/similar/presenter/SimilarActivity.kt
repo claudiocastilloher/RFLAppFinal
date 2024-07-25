@@ -25,8 +25,8 @@ class SimilarActivity : AppCompatActivity() {
         binding = ActivitySimilarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        observer()
         calls()
+        observer()
         onClick()
     }
 

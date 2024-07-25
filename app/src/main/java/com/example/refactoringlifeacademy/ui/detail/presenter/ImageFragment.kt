@@ -1,6 +1,7 @@
 package com.example.refactoringlifeacademy.ui.detail.presenter
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import com.example.refactoringlifeacademy.databinding.FragmentImageBinding
 import com.example.refactoringlifeacademy.ui.detail.presenter.viewmodel.ImageViewmodel
 import com.example.refactoringlifeacademy.ui.detail.presenter.viewmodel.adapter.ProductImageAdapter
 import com.example.refactoringlifeacademy.ui.home.viewmodel.ProductState
+import com.example.refactoringlifeacademy.ui.similar.presenter.SimilarActivity
 
 
 class ImageFragment : Fragment() {
@@ -137,6 +139,13 @@ class ImageFragment : Fragment() {
             binding.btColors.setBackgroundResource(R.drawable.button_image1)
             binding.btProduct.setBackgroundResource(R.drawable.button_image1)
 
+            goToSimilares()
+
         }
+    }
+
+    private fun goToSimilares() {
+        val intent = Intent(context, SimilarActivity::class.java)
+        startActivity(intent)
     }
 }

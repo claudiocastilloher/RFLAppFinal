@@ -13,7 +13,7 @@ class CommentServiceImp {
         .build()
 
     private val retrofit = Retrofit.Builder()
-        .baseUrl("https://stoplight.io/mocks/reinierdearmas/api-app-final-rfa/451467774/")//CAMBIAR LA BASE URL CUANDO BACK LA TENGA DISPONIBLE
+        .baseUrl("https://api-comments-3yzc.onrender.com/")//CAMBIAR LA BASE URL CUANDO BACK LA TENGA DISPONIBLE
         .client(client)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
