@@ -1,4 +1,4 @@
-package com.example.refactoringlifeacademy.ui.detail.presenter
+package com.example.refactoringlifeacademy.ui.imageFragment.presenter
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -14,8 +14,8 @@ import com.example.refactoringlifeacademy.R
 import com.example.refactoringlifeacademy.data.dto.model.Image
 import com.example.refactoringlifeacademy.data.dto.model.UserProduct
 import com.example.refactoringlifeacademy.databinding.FragmentImageBinding
-import com.example.refactoringlifeacademy.ui.detail.presenter.viewmodel.ImageViewmodel
-import com.example.refactoringlifeacademy.ui.detail.presenter.viewmodel.adapter.ProductImageAdapter
+import com.example.refactoringlifeacademy.ui.imageFragment.viewmodel.ImageViewmodel
+import com.example.refactoringlifeacademy.ui.imageFragment.viewmodel.adapter.ProductImageAdapter
 import com.example.refactoringlifeacademy.ui.home.viewmodel.ProductState
 import com.example.refactoringlifeacademy.ui.similar.presenter.SimilarActivity
 

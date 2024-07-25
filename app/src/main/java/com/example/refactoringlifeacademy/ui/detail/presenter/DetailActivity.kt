@@ -11,6 +11,7 @@ import com.example.refactoringlifeacademy.ui.commentFragment.presenter.CommentFr
 import com.example.refactoringlifeacademy.ui.descriptionFragmen.presenter.DescriptionFragment
 import com.example.refactoringlifeacademy.ui.financeFragment.presenter.FinanceFragment
 import com.example.refactoringlifeacademy.ui.home.presenter.HomeActivity
+import com.example.refactoringlifeacademy.ui.imageFragment.presenter.ImageFragment
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding

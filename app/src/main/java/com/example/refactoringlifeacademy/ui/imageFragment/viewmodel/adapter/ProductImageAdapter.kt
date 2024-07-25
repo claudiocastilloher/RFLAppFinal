@@ -1,4 +1,4 @@
-package com.example.refactoringlifeacademy.ui.detail.presenter.viewmodel.adapter
+package com.example.refactoringlifeacademy.ui.imageFragment.viewmodel.adapter
 
 import android.view.LayoutInflater
 import android.view.View
