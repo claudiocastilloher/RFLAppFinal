@@ -35,7 +35,7 @@ class FinanceMethodsHolder(view: View) : RecyclerView.ViewHolder(view) {
             "galicia" -> {
                 binding.ivBank.setImageResource(R.drawable.galicia)
                 binding.tvBank.isVisible = false
-                binding.llCard.setBackgroundColor(binding.llCard.context.getColor(R.color.orange))
+                binding.llCard.setBackgroundColor(binding.llCard.context.getColor(R.color.orange_finance))
             }
 
             "santander" -> {

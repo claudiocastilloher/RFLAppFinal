@@ -1,5 +1,6 @@
 package com.example.refactoringlifeacademy.ui.detail.presenter
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.refactoringlifeacademy.R
 import com.example.refactoringlifeacademy.data.dto.model.Image
 import com.example.refactoringlifeacademy.data.dto.model.UserProduct
@@ -26,7 +27,7 @@ class ImageFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment using View Binding
         binding = FragmentImageBinding.inflate(inflater, container, false)
         return binding.root
@@ -39,15 +40,14 @@ class ImageFragment : Fragment() {
 
         calls()
 
-
         onClick()
 
-
-        viewModel.getProductById(1)
+        //UserProduct.userProductId?.let{viewModel.getProductById(it)} Sobraba esto esta contenido en la funcion calls
     }
 
+    @SuppressLint("SetTextI18n")
     private fun observer() {
-        viewModel.data.observe(viewLifecycleOwner, Observer { state ->
+        viewModel.data.observe(viewLifecycleOwner) { state ->
             when(state){
                 is ProductState.Loading -> {
                     showLoading()
@@ -57,28 +57,30 @@ class ImageFragment : Fragment() {
                    hideLoading()
                     binding.tvProductName.text = state.data?.name
                     binding.tvPrice.text = "$ ${state.data?.price}"
-                    state.data?.images?.let { images ->
-                        updateUI(images)
-                    }
+                    binding.btProduct.setBackgroundResource(R.drawable.button_image2)
+                    //state.data?.images?.let { images -> Hay que dar la posibilidad de que sea null para poder cargar la pantalla de error
+                        state.data?.let{updateUI(it.images, it.isFavorite)}
+                    //}
 
                 }
 
                 is ProductState.Error -> {
                     hideLoading()
+                    binding.icMsgError.cslImgError.visibility = View.VISIBLE
                     showMessageError(state.message)
                 }
             }
-        })
+        }
     }
 
 
 
     private fun showLoading() {
-        binding.progressBarrImage.rlProgressBar.visibility = View.VISIBLE
+        binding.progressBarr.visibility = View.VISIBLE
     }
 
     private fun hideLoading() {
-        binding.progressBarrImage.rlProgressBar.visibility = View.GONE
+        binding.progressBarr.visibility = View.GONE
     }
 
     private fun showMessageError(message: String) {
@@ -86,13 +88,16 @@ class ImageFragment : Fragment() {
         Toast.makeText(requireContext(), "Error: $message", Toast.LENGTH_SHORT).show()
     }
 
-    private fun updateUI(images: List<Image>) {
+    private fun updateUI(images: List<Image>?, favorite: Boolean?) {
         if(images.isNullOrEmpty()){
+            binding.icMsgError.cslImgError.visibility = View.VISIBLE
             binding.icMsgError.cslImgError.visibility = View.VISIBLE
         }else{
             binding.icMsgError.cslImgError.visibility = View.GONE
-            val adapter = ProductImageAdapter(images)
+            val adapter = ProductImageAdapter(images, favorite)
             binding.rvItemImage.adapter = adapter
+            binding.rvItemImage.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         }
 
 
@@ -104,7 +109,7 @@ class ImageFragment : Fragment() {
         }
     }
 
-    fun onClick(){
+    private fun onClick(){
         binding.btProduct.setOnClickListener {
 
             binding.btProduct.setBackgroundResource(R.drawable.button_image2)
