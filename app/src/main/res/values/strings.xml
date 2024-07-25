@@ -6,8 +6,8 @@
     <string name="confirm_password">Confirm password</string>
     <string name="show_password">Show password</string>
     <string name="enter">Sign in</string>
-    <string name="register_here">Sign Up here,</string>
-    <string name="no_account">if do not have an account</string>
+    <string name="register_here">Sign Up here </string>
+    <string name="no_account">If do not have an account,</string>
     <!--PreLogin-->
     <string name="iniciar_sesion">Sign in</string>
     <string name="logotipo_de_la_academia">Logo Academy</string>
@@ -24,7 +24,7 @@
     <string name="search">Search in Refactoring Life Shop</string>
     <string name="product">Summer shorts</string>
     <string name="price">$ 12.000</string>
-    <string name="problems">In case of problems, </string>
+    <string name="problems">In case of problems</string>
     <string name="support"> contact support</string>
     <string name="offer">Deal of the day</string>
     <string name="last_visited">Last visited</string>
@@ -66,5 +66,6 @@ Why do we use it? It is a long-established fact that a reader will be distracted
     <string name="description_image_error">There is a problem with \loading images</string>
 
     <string name="comment_text">An unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially</string>
+    <string name="pants">Pants</string>
 
 </resources>
