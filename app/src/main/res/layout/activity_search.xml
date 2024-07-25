@@ -5,8 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.search.presenter.SearchActivity"
-    android:background="@drawable/backgroud_home">
+    android:background="@drawable/backgroud_home"
+    tools:context=".ui.search.presenter.SearchActivity">
 
     <ImageView
         android:id="@+id/ivRefactoringLife"
@@ -26,6 +26,7 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="22dp"
         android:background="@drawable/rounded_background"
+        android:backgroundTint="@color/white"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toStartOf="@id/ivHeart"
@@ -40,17 +41,31 @@
             android:contentDescription="@string/content_description"
             android:src="@drawable/magnifier" />
 
-        <TextView
-            android:id="@+id/svSearch"
+        <EditText
+            android:id="@+id/etSearch"
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_marginStart="10dp"
-            android:textSize="10dp"
+            android:background="@drawable/rounded_background"
+            android:backgroundTint="@color/white"
             android:gravity="center_vertical"
-            android:text="@string/search"
-            android:textColor="@color/gray_tittle" />
+            android:hint="@string/search"
+            android:maxLines="1"
+            android:inputType="text"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+            android:textSize="10sp" />
     </LinearLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSearch"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toTopOf="@id/tvProblem"
+        app:layout_constraintTop_toBottomOf="@id/ivRefactoringLife"
+        tools:listitem="@layout/item_search" />
 
 
     <ImageView
@@ -91,5 +106,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tvProblem" />
+
+    <ProgressBar
+        android:id="@+id/progress_barr"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="170dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

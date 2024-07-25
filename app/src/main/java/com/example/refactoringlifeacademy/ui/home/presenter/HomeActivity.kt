@@ -19,6 +19,7 @@ import com.example.refactoringlifeacademy.ui.home.viewmodel.HomeViewModel
 import com.example.refactoringlifeacademy.ui.home.viewmodel.ProductState
 import com.example.refactoringlifeacademy.ui.home.viewmodel.adapter.AdapterCategory
 import com.example.refactoringlifeacademy.ui.home.viewmodel.adapter.AdapterProduct
+import com.example.refactoringlifeacademy.ui.search.presenter.SearchActivity
 import com.example.refactoringlifeacademy.utils.EmailUtils
 import com.squareup.picasso.Picasso
 
@@ -46,7 +47,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun initSearch() {
         binding.lySearch.setOnClickListener {
-
+            goToSearch()
         }
 
 
@@ -237,10 +238,9 @@ class HomeActivity : AppCompatActivity() {
             binding.tvProductName.text = it.name ?: ""
             binding.tvDescription.text = it.description ?: ""
             binding.tvPrice.text = "${it.currency} ${it.price}"
-            if (it.dailyOffer == true){
+            if (it.dailyOffer == true) {
                 binding.tvHeader.text = getString(R.string.offer)
-            }
-            else{
+            } else {
                 binding.tvHeader.text = getString(R.string.last_visited)
             }
         }
@@ -301,6 +301,11 @@ class HomeActivity : AppCompatActivity() {
     private fun goToDetails(productPrice: Double) {
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra("productPrice", productPrice)
+        startActivity(intent)
+    }
+
+    private fun goToSearch() {
+        val intent = Intent(this, SearchActivity::class.java)
         startActivity(intent)
     }
 
