@@ -30,8 +30,14 @@ class ProductHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun render(value: Product, onProductSelected: (Product) -> Unit){
         val image = value.image
         val name = value.name
-        val price = "$ ${value.price}"
-        Picasso.get().load(image).into(binding.ivProduct)
+        val currency = value.currency ?: "$"
+        val price = "$currency ${value.price}"
+        if (image.isNullOrEmpty()) {
+            binding.ivProduct.setImageResource(R.drawable.no_photo)
+        } else {
+            Picasso.get().load(image).into(binding.ivProduct)
+        }
+
         binding.producName.text = name
         binding.producPrice.text = price
         itemView.setOnClickListener{
