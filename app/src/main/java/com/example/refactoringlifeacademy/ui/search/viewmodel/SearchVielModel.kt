@@ -14,6 +14,9 @@ class SearchVielModel(private val searchRepository: ProductRepository = ProductR
     private val _searchState = MutableLiveData<ProductState<ProductsResponse>>()
     val searchState: LiveData<ProductState<ProductsResponse>> = _searchState
 
+    private val _favoriteState = MutableLiveData<ProductState<Void>>()
+    val favoriteState: LiveData<ProductState<Void>> = _favoriteState
+
     fun searchProducts(
         idProductType: Int? = null,
         productName: String? = null,
@@ -35,6 +38,18 @@ class SearchVielModel(private val searchRepository: ProductRepository = ProductR
                 } ?: _searchState.postValue(ProductState.Error("Empty response body"))
             } else {
                 _searchState.postValue(ProductState.Error("Failed: ${response.message()}"))
+            }
+        }
+    }
+
+    fun markProductAsFavorite(idProduct: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            _favoriteState.postValue(ProductState.Loading)
+            val response = searchRepository.markProductAsFavorite(idProduct)
+            if (response.isSuccessful) {
+                _favoriteState.postValue(ProductState.Success(null))
+            } else {
+                _favoriteState.postValue(ProductState.Error("Failed: ${response.message()}"))
             }
         }
     }

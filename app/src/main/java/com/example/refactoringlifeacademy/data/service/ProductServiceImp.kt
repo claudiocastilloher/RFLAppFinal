@@ -1,6 +1,5 @@
 package com.example.refactoringlifeacademy.data.service
 
-import com.example.refactoringlifeacademy.data.dto.model.Product
 import com.example.refactoringlifeacademy.data.dto.response.DailyOfferResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductByIdResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductTypesResponse
@@ -9,6 +8,7 @@ import com.example.refactoringlifeacademy.data.dto.response.SingleProductRespons
 import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
+import java.util.concurrent.TimeUnit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 
@@ -16,6 +16,9 @@ class ProductServiceImp {
 
     private val client = OkHttpClient.Builder()
         .addInterceptor(AuthInterceptor())
+        .connectTimeout(15, TimeUnit.SECONDS)
+        .readTimeout(15, TimeUnit.SECONDS)
+        .writeTimeout(15, TimeUnit.SECONDS)
         .build()
 
     private val retrofit = Retrofit.Builder()
