@@ -60,4 +60,8 @@ class ProductServiceImp {
         return service.getProductById(idProduct)
     }
 
+    suspend fun getSimilarProducts(idProduct: Int): Response<ProductsResponse> {
+        return service.getSimilarProducts(idProduct)
+    }
+
 }

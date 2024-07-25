@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".ui.detail.presenter.ImageFragment">
+    tools:context=".ui.imageFragment.presenter.ImageFragment">
 
     <TextView
         android:id="@+id/tvProductName"
