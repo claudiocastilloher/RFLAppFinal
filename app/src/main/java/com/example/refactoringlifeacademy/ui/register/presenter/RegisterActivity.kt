@@ -122,5 +122,9 @@ class RegisterActivity : AppCompatActivity() {
             }
             binding.etConfirmPassword.setSelection(binding.etConfirmPassword.text.length)
         }
+
+        binding.tvLoginHere.setOnClickListener{
+            goToLogin()
+        }
     }
 }

@@ -7,7 +7,9 @@
     <string name="show_password">Mostrar contraseña</string>
     <string name="enter">Entrar</string>
     <string name="register_here">registrate aqui</string>
+    <string name="login_here">inicia sesion aqui</string>
     <string name="no_account">Si no tienes una cuenta,</string>
+    <string name="si_account">Si tienes una cuenta creada,</string>
     <!--PreLogin-->
     <string name="iniciar_sesion">Iniciar sesión</string>
     <string name="logotipo_de_la_academia">Logotipo de la academia</string>
