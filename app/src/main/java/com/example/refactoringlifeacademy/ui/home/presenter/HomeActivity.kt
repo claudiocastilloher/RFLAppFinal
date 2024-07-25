@@ -161,6 +161,7 @@ class HomeActivity : AppCompatActivity() {
                         null -> {
                             UserProduct.userProductId = null
                             UserProduct.isfavorite = null
+                            UserProduct.price = 0.0
                             loadHeart()
                             showMessageError("Daily offer product is null")
                         }
@@ -172,7 +173,8 @@ class HomeActivity : AppCompatActivity() {
                             loadHeart()
                             showMessageSuccess("Daily offer product loaded successfully")
                             //dailyOffer.idProduct?.let { onConstarintLayoutClic(it) }
-                            dailyOffer.price?.let { onConstarintLayoutClic(it) }
+                            dailyOffer.price?.let { onConstarintLayoutClic(it)
+                            UserProduct.price = it}
                             putFavoriteProduct()
                         }
                     }

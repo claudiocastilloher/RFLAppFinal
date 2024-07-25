@@ -1,6 +1,5 @@
 package com.example.refactoringlifeacademy.data.service
 
-import com.example.refactoringlifeacademy.data.dto.model.Product
 import com.example.refactoringlifeacademy.data.dto.response.DailyOfferResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductByIdResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductTypesResponse
@@ -55,6 +54,10 @@ class ProductServiceImp {
 
     suspend fun getProductById(idProduct: Int): Response<ProductByIdResponse> {
         return service.getProductById(idProduct)
+    }
+
+    suspend fun getSimilarProducts(idProduct: Int): Response<ProductsResponse> {
+        return service.getSimilarProducts(idProduct)
     }
 
 }
