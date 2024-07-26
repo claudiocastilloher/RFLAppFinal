@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.refactoringlifeacademy.R
 import com.example.refactoringlifeacademy.data.dto.model.Product
 import com.example.refactoringlifeacademy.data.dto.model.UserProduct
 import com.example.refactoringlifeacademy.databinding.ActivitySimilarBinding
@@ -45,6 +46,11 @@ class SimilarActivity : AppCompatActivity() {
 
                 is ProductState.Success -> {
                     binding.progressBarr.visibility = View.GONE
+                    // como no se pudo definir lo del vendedor decidi poner un elemento comun a todos los productos y es la cantidad
+                    binding.seller.text = getString(R.string.total)
+                    state.data?.let {
+                        binding.sellerWho.text = it.totalProducts.toString()
+                    }
                     state.data?.products?.let { products ->
                         initRecyclerViewSimilarProduct(products)
                         showMessageSuccess()
@@ -77,12 +83,12 @@ class SimilarActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
 
-    private fun onClick(){
+    private fun onClick() {
         binding.vector.setOnClickListener {
             goToDetails(UserProduct.price)
         }
 
-        binding.tvSupport.setOnClickListener{
+        binding.tvSupport.setOnClickListener {
             EmailUtils.sendEmail(this)
         }
     }

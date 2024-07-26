@@ -8,6 +8,7 @@
     <string name="show_password">Show password</string>
     <string name="enter">Sign in</string>
     <string name="register_here">Sign Up here,</string>
+    <string name="login_here">Sign In here,</string>
     <string name="no_account">if do not have an account</string>
     <!--PreLogin-->
     <string name="iniciar_sesion">Sign in</string>
@@ -72,5 +73,6 @@ Why do we use it? It is a long-established fact that a reader will be distracted
     <string name="vendedor">Seller:</string>
     <string name="see">See</string>
     <string name="not_fount">Sorry, the content could not be found</string>
+    <string name="total">Similar Products:</string>
 
 </resources>
