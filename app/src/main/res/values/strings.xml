@@ -14,7 +14,7 @@
     <string name="iniciar_sesion">Iniciar sesión</string>
     <string name="logotipo_de_la_academia">Logotipo de la academia</string>
     <string name="refactoring_life_academy">Refactoring Life\n Academy</string>
-    <string name="en_caso_de_tener_problemas_comunicarse_con_soporte">En caso de tener problemas comunicarse con soporte</string>
+    <string name="en_caso_de_tener_problemas_comunicarse_con_soporte">Por cualquier problema comunicate con nosotros</string>
     <!--finPreLogin-->
     <string name="sign_in">Iniciar sesión</string>
     <string name="user_or_password_error">Error en el usuario o contraseña!</string>
