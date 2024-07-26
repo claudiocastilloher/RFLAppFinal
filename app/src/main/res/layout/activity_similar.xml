@@ -34,9 +34,9 @@
 
     <ImageView
         android:id="@+id/vector"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:contentDescription="@string/desc_arrowleft"
         android:src="@drawable/vector"
