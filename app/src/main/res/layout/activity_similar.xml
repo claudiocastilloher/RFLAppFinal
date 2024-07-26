@@ -10,8 +10,8 @@
         android:id="@+id/saler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/roboto"
         android:text="@string/vendedor"
         android:textSize="18sp"
@@ -23,14 +23,14 @@
         android:id="@+id/saler_who"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/roboto_regular"
         android:text="@string/vendedor"
         android:textSize="18sp"
-        tools:ignore="MissingConstraints"
         app:layout_constraintStart_toEndOf="@+id/saler"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/vector"
@@ -38,10 +38,10 @@
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
-        android:contentDescription="@string/desc_arrowleft"
-        android:src="@drawable/vector"
         android:clickable="true"
+        android:contentDescription="@string/desc_arrowleft"
         android:focusable="true"
+        android:src="@drawable/vector"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,45 +50,49 @@
         android:id="@+id/rv_similares"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="100dp"
-        android:layout_marginStart="5dp"
-        tools:listitem="@layout/item_similar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/saler" />
+        app:layout_constraintTop_toBottomOf="@id/saler"
+        tools:listitem="@layout/item_similar" />
 
-    <TextView
-        android:id="@+id/tv_problem"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="5dp"
-        android:fontFamily="@font/roboto_regular"
-        android:gravity="end"
-        android:text="@string/problems"
-        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tv_support"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:gravity="center"
+        android:layout_marginBottom="10dp">
 
-    <TextView
-        android:id="@+id/tv_support"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/roboto"
-        android:text="@string/support"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_problem" />
+        <TextView
+            android:id="@+id/tv_problem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/problems"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_support"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:text="@string/support"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/progress_barr"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible">
+        android:visibility="gone"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <ProgressBar
             android:layout_width="wrap_content"
