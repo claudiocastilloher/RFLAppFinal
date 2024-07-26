@@ -10,193 +10,256 @@
 
     <ImageView
         android:id="@+id/ivRefactoringLife"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="45dp"
+        android:layout_height="40dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="18dp"
         android:contentDescription="@string/content_description"
         android:src="@drawable/ic_refactoring_life"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <SearchView
-        android:id="@+id/svSearch"
+    <LinearLayout
+        android:id="@+id/lySearch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="22dp"
         android:background="@drawable/rounded_background"
-        android:queryHint="@string/search"
+        android:backgroundTint="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toStartOf="@id/ivHeart"
         app:layout_constraintStart_toEndOf="@id/ivRefactoringLife"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:contentDescription="@string/content_description"
+            android:src="@drawable/magnifier" />
+
+        <TextView
+            android:id="@+id/svSearch"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginStart="10dp"
+            android:textSize="10sp"
+            android:gravity="center_vertical"
+            android:text="@string/search"
+            android:textColor="@color/gray_tittle" />
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/ivHeart"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="20dp"
         android:contentDescription="@string/content_description"
         android:src="@drawable/heart"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/svSearch"
+        app:layout_constraintStart_toEndOf="@id/lySearch"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-
-        android:id="@+id/rvCategory"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="20dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/svSearch"
-        tools:listitem="@layout/item_category" />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvProduct"
-        android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rvCategory"
-        tools:listitem="@layout/item_product" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clProductDetail"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/rounded_background"
-        android:elevation="12dp"
-        android:padding="20dp"
-        app:layout_constraintBottom_toTopOf="@id/tvProblem"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rvProduct">
+        app:layout_constraintTop_toBottomOf="@id/lySearch"
+        android:layout_marginVertical="10dp"
+        app:layout_constraintBottom_toTopOf="@id/lyContact">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCategory"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/item_category" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:elevation="1dp"
+                android:gravity="center"
+                app:layout_constraintBottom_toTopOf="@id/clProductDetail"
+                app:layout_constraintTop_toBottomOf="@id/rvCategory">
+
+                <ProgressBar
+                    android:id="@+id/progress_barr_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvProduct"
+                android:layout_width="match_parent"
+                android:layout_height="147dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvCategory"
+                tools:listitem="@layout/item_product" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clProductDetail"
+                android:layout_width="match_parent"
+                android:layout_height="450dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/rounded_background"
+                android:backgroundTint="@color/white"
+                android:elevation="12dp"
+                android:padding="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvProduct">
+
+                <TextView
+                    android:id="@+id/tvHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/offer" />
+
+                <ImageView
+                    android:id="@+id/ivHeartBlue"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:contentDescription="@string/content_description"
+                    android:src="@drawable/heart_blue"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_offer_daily"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="10dp"
+                    android:contentDescription="@string/content_description"
+                    app:layout_constraintBottom_toTopOf="@id/tvProductName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivHeartBlue"
+                    tools:src="@drawable/pants" />
+
+                <TextView
+                    android:id="@+id/tvPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="@string/price" />
+
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@id/tvPrice"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="@string/rusty_description" />
+
+                <TextView
+                    android:id="@+id/tvProductName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/tvDescription"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="@string/rusty" />
+
+                <!--<include
+                    android:id="@+id/progress_tv"
+                    layout="@layout/progressbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />-->
+                <ProgressBar
+                    android:id="@+id/progress_barr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="13dp"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toTopOf="@id/clProductDetail"
+                    app:layout_constraintBottom_toBottomOf="@id/clProductDetail"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+
+    <LinearLayout
+        android:id="@+id/lyContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="10dp">
 
         <TextView
-            android:id="@+id/tvHeader"
+            android:id="@+id/tvProblem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/problems"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvSupport"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/offer" />
+            android:text="@string/support"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
 
-        <ImageView
-            android:id="@+id/ivHeartBlue"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:contentDescription="@string/content_description"
-            android:src="@drawable/heart_blue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/iv_offer_daily"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:contentDescription="@string/content_description"
-            tools:src="@drawable/pants"
-            android:layout_marginVertical="9dp"
-            app:layout_constraintBottom_toTopOf="@id/tvProductName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivHeartBlue" />
-
-        <TextView
-            android:id="@+id/tvPrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="@string/price" />
-
-        <TextView
-            android:id="@+id/tvDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:fontFamily="@font/roboto"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@id/tvPrice"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="@string/rusty_description" />
-
-        <TextView
-            android:id="@+id/tvProductName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:fontFamily="@font/roboto"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/tvDescription"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="@string/rusty" />
-
-        <include
-            android:id="@+id/progress_tv"
-            layout="@layout/progressbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            />
+    </LinearLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <TextView
-        android:id="@+id/tvProblem"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/roboto"
-        android:gravity="end"
-        android:text="@string/problems"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tvSupport"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/tvSupport"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/roboto"
-        android:text="@string/support"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tvProblem" />
-
-
-    <include
+    <!--<include
         android:id="@+id/progress_barr"
         layout="@layout/progressbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/svSearch"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />-->
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

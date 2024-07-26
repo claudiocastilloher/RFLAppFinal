@@ -11,6 +11,7 @@ import com.example.refactoringlifeacademy.ui.commentFragment.presenter.CommentFr
 import com.example.refactoringlifeacademy.ui.descriptionFragmen.presenter.DescriptionFragment
 import com.example.refactoringlifeacademy.ui.financeFragment.presenter.FinanceFragment
 import com.example.refactoringlifeacademy.ui.home.presenter.HomeActivity
+import com.example.refactoringlifeacademy.ui.imageFragment.presenter.ImageFragment
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
@@ -36,6 +37,7 @@ class DetailActivity : AppCompatActivity() {
         binding.ellipseImage.visibility = View.VISIBLE
         loadFragment(ImageFragment())
     }
+
     private fun initLeftBar() {
         binding.tvImag.setOnClickListener {
             binding.ellipseDescrip.visibility = View.INVISIBLE
@@ -69,11 +71,13 @@ class DetailActivity : AppCompatActivity() {
             loadFragment(CommentFragment.newInstance(productPrice))
         }
     }
+
     private fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(binding.fragmentContainer.id, fragment)
             .commit()
     }
+
     private fun goToHome(){
         binding.arrowLeft1.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
@@ -81,6 +85,7 @@ class DetailActivity : AppCompatActivity() {
             finish()
         }
     }
+
     private fun goToBuy(){
         binding.btnBuy.setOnClickListener {
             val intent = Intent(this, BuyActivity::class.java)

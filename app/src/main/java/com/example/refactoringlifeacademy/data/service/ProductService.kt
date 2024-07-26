@@ -1,6 +1,5 @@
 package com.example.refactoringlifeacademy.data.service
 
-import com.example.refactoringlifeacademy.data.dto.model.Product
 import com.example.refactoringlifeacademy.data.dto.response.DailyOfferResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductByIdResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductTypesResponse
@@ -37,5 +36,8 @@ interface ProductService {
 
     @GET("api/v1/products/{idProduct}")
     suspend fun getProductById(@Path("idProduct") idProduct: Int): Response<ProductByIdResponse>
+
+    @GET("/api/v1/products/{idProduct}/similar")
+    suspend fun getSimilarProducts(@Path("idProduct") idProduct: Int): Response<ProductsResponse>
 
 }

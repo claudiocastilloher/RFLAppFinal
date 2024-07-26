@@ -1,6 +1,7 @@
-package com.example.refactoringlifeacademy.ui.detail.presenter
+package com.example.refactoringlifeacademy.ui.imageFragment.presenter
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,9 +14,10 @@ import com.example.refactoringlifeacademy.R
 import com.example.refactoringlifeacademy.data.dto.model.Image
 import com.example.refactoringlifeacademy.data.dto.model.UserProduct
 import com.example.refactoringlifeacademy.databinding.FragmentImageBinding
-import com.example.refactoringlifeacademy.ui.detail.presenter.viewmodel.ImageViewmodel
-import com.example.refactoringlifeacademy.ui.detail.presenter.viewmodel.adapter.ProductImageAdapter
+import com.example.refactoringlifeacademy.ui.imageFragment.viewmodel.ImageViewmodel
+import com.example.refactoringlifeacademy.ui.imageFragment.viewmodel.adapter.ProductImageAdapter
 import com.example.refactoringlifeacademy.ui.home.viewmodel.ProductState
+import com.example.refactoringlifeacademy.ui.similar.presenter.SimilarActivity
 
 
 class ImageFragment : Fragment() {
@@ -55,13 +57,15 @@ class ImageFragment : Fragment() {
 
                 is ProductState.Success -> {
                    hideLoading()
+                    state.data?.price?.let { UserProduct.price = it
+                    } ?: { UserProduct.price = 0.0
+                    }
                     binding.tvProductName.text = state.data?.name
                     binding.tvPrice.text = "$ ${state.data?.price}"
                     binding.btProduct.setBackgroundResource(R.drawable.button_image2)
                     //state.data?.images?.let { images -> Hay que dar la posibilidad de que sea null para poder cargar la pantalla de error
                         state.data?.let{updateUI(it.images, it.isFavorite)}
                     //}
-
                 }
 
                 is ProductState.Error -> {
@@ -116,6 +120,8 @@ class ImageFragment : Fragment() {
             binding.btColors.setBackgroundResource(R.drawable.button_image1)
             binding.btSimilar.setBackgroundResource(R.drawable.button_image1)
             // Aquí puedes realizar otras acciones según sea necesario
+
+            calls()
         }
 
 
@@ -133,6 +139,13 @@ class ImageFragment : Fragment() {
             binding.btColors.setBackgroundResource(R.drawable.button_image1)
             binding.btProduct.setBackgroundResource(R.drawable.button_image1)
 
+            goToSimilares()
+
         }
+    }
+
+    private fun goToSimilares() {
+        val intent = Intent(context, SimilarActivity::class.java)
+        startActivity(intent)
     }
 }

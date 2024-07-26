@@ -1,4 +1,4 @@
-package com.example.refactoringlifeacademy.ui.detail.presenter.viewmodel
+package com.example.refactoringlifeacademy.ui.imageFragment.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

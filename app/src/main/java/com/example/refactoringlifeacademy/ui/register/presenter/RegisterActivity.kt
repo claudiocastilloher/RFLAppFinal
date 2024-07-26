@@ -11,7 +11,7 @@ import androidx.core.widget.addTextChangedListener
 import com.example.refactoringlifeacademy.data.dto.model.UserProduct
 import com.example.refactoringlifeacademy.data.dto.request.RegisterRequest
 import com.example.refactoringlifeacademy.databinding.ActivityRegisterBinding
-import com.example.refactoringlifeacademy.ui.home.presenter.HomeActivity
+import com.example.refactoringlifeacademy.ui.login.presenter.LoginActivity
 import com.example.refactoringlifeacademy.ui.register.viewmodel.RegisterViewModel
 import com.example.refactoringlifeacademy.utils.StateRegister
 
@@ -45,7 +45,7 @@ class RegisterActivity : AppCompatActivity() {
                 is StateRegister.Success ->{
                     binding.progressBarr.rlProgressBar.visibility = View.GONE
                     UserProduct.userToken = state.info.token
-                    goToHome()
+                    goToLogin()
 
                 }
                 is StateRegister.Error ->{
@@ -58,8 +58,8 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun goToHome(){
-        val intent = Intent(this, HomeActivity::class.java)
+    private fun goToLogin(){
+        val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
     }
@@ -121,6 +121,10 @@ class RegisterActivity : AppCompatActivity() {
                     PasswordTransformationMethod.getInstance()
             }
             binding.etConfirmPassword.setSelection(binding.etConfirmPassword.text.length)
+        }
+
+        binding.tvLoginHere.setOnClickListener{
+            goToLogin()
         }
     }
 }

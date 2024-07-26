@@ -5,4 +5,5 @@ object UserProduct {
         var isLogging: Boolean = false
         var isfavorite: Boolean? = false
         var userProductId: Int? = null
+        var price: Double = 0.0
 }
