@@ -30,14 +30,18 @@ class ViewModelLogin(private val repository: LoginRepository = LoginRepository()
     fun loginUser(email: String, password: String) {
         CoroutineScope(Dispatchers.IO).launch {
             _loginState.postValue(LoginState.Loading)
-            val response = repository.loginUser(LoginRequest(email, password))
-            if(response.isSuccessful){
-                response.body()?.let {
-                    UserProduct.userToken = it.token
-                    _loginState.postValue(LoginState.Succes(it))
-                } ?: _loginState.postValue(LoginState.Error("No Data"))
-            }else{
-                _loginState.postValue(LoginState.Error("Error Service"))
+            try {
+                val response = repository.loginUser(LoginRequest(email, password))
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        UserProduct.userToken = it.token
+                        _loginState.postValue(LoginState.Succes(it))
+                    } ?: _loginState.postValue(LoginState.Error("No Data"))
+                } else {
+                    _loginState.postValue(LoginState.Error("Error Service"))
+                }
+            }catch (e: Exception){
+                _loginState.postValue(LoginState.Error("Error: ${e.message}"))
             }
         }
     }

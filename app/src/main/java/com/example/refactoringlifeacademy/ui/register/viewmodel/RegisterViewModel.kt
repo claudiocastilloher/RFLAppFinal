@@ -40,14 +40,18 @@ class RegisterViewModel(private val regRepository: RegisterRepository = Register
     fun registerUser(requestRegister: RegisterRequest) {
         CoroutineScope(Dispatchers.IO).launch {
             _data.postValue(StateRegister.Loading)
-            val regResponse = regRepository.registerUser(requestRegister)
-            if(regResponse.isSuccessful){
-                regResponse.body()?.let {
-                    UserProduct.userToken = it.token
-                    _data.postValue(StateRegister.Success(it))
-                } ?: _data.postValue(StateRegister.Error("No Data"))
-            }else{
-                _data.postValue(StateRegister.Error("Error Service"))
+            try {
+                val regResponse = regRepository.registerUser(requestRegister)
+                if (regResponse.isSuccessful) {
+                    regResponse.body()?.let {
+                        UserProduct.userToken = it.token
+                        _data.postValue(StateRegister.Success(it))
+                    } ?: _data.postValue(StateRegister.Error("No Data"))
+                } else {
+                    _data.postValue(StateRegister.Error("Error Service"))
+                }
+            }catch (e: Exception){
+                _data.postValue(StateRegister.Error("Error: ${e.message}"))
             }
         }
     }

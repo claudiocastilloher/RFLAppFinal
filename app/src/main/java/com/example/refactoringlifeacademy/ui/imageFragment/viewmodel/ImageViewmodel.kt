@@ -18,13 +18,17 @@ class ImageViewmodel(private val repository: ProductRepository = ProductReposito
     fun getProductById(idProduct: Int){
         CoroutineScope(Dispatchers.IO).launch{
             _data.postValue(ProductState.Loading)
-            val response = repository.getProductById(idProduct)
-            if (response.isSuccessful) {
-                response.body()?.let {
-                    _data.postValue(ProductState.Success(it))
-                } ?: _data.postValue(ProductState.Error("No Data"))
-            } else {
-                _data.postValue(ProductState.Error("Error Service"))
+            try {
+                val response = repository.getProductById(idProduct)
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        _data.postValue(ProductState.Success(it))
+                    } ?: _data.postValue(ProductState.Error("No Data"))
+                } else {
+                    _data.postValue(ProductState.Error("Error Service"))
+                }
+            }catch (e: Exception){
+                _data.postValue(ProductState.Error("Error: ${e.message}"))
             }
         }
     }

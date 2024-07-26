@@ -18,13 +18,17 @@ class SimilarViewModel (private val repository: ProductRepository = ProductRepos
 
         CoroutineScope(Dispatchers.IO).launch {
             _productsSimilarState.postValue(ProductState.Loading)
-            val response = repository.getSimilarProducts(idProduct)
-            if (response.isSuccessful) {
-                response.body()?.let {
-                    _productsSimilarState.postValue(ProductState.Success(it))
-                } ?: _productsSimilarState.postValue(ProductState.Error("Empty response body"))
-            } else {
-                _productsSimilarState.postValue(ProductState.Error("Failed: ${response.message()}"))
+            try {
+                val response = repository.getSimilarProducts(idProduct)
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        _productsSimilarState.postValue(ProductState.Success(it))
+                    } ?: _productsSimilarState.postValue(ProductState.Error("Empty response body"))
+                } else {
+                    _productsSimilarState.postValue(ProductState.Error("Failed: ${response.message()}"))
+                }
+            }catch (e: Exception){
+                _productsSimilarState.postValue(ProductState.Error("Error: ${e.message}"))
             }
         }
     }
