@@ -67,7 +67,7 @@
             android:textSize="16sp"
             android:textColor="@color/white"
             android:textAllCaps="false"
-            android:background="@color/violet"/>
+            android:background="?attr/selectableItemBackground"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/tv_descript"
@@ -84,7 +84,7 @@
             android:textSize="16sp"
             android:textColor="@color/white"
             android:textAllCaps="false"
-            android:background="@color/violet"/>
+            android:background="?attr/selectableItemBackground"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/tv_financ"
@@ -101,7 +101,7 @@
             android:textSize="16sp"
             android:textColor="@color/white"
             android:textAllCaps="false"
-            android:background="@color/violet"/>
+            android:background="?attr/selectableItemBackground"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/tv_coment"
@@ -118,7 +118,7 @@
             android:textSize="16sp"
             android:textColor="@color/white"
             android:textAllCaps="false"
-            android:background="@color/violet" />
+            android:background="?attr/selectableItemBackground"/>
 
     </LinearLayout>
 
