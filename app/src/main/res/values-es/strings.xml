@@ -6,7 +6,8 @@
     <string name="password">Clave</string>
     <string name="confirm_password">Confirmar contraseña</string>
     <string name="show_password">Mostrar contraseña</string>
-    <string name="enter">Entrar</string>
+    <string name="enter">Iniciar Sesion</string>
+    <string name="enter2">Registrarse</string>
     <string name="register_here">registrate aqui</string>
     <string name="no_account">Si no tienes una cuenta,</string>
     <!--PreLogin-->
