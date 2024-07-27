@@ -78,7 +78,6 @@ class ImageFragment : Fragment() {
     }
 
 
-
     private fun showLoading() {
         binding.progressBarr.visibility = View.VISIBLE
     }
