@@ -52,11 +52,13 @@ class ImageFragment : Fragment() {
         viewModel.data.observe(viewLifecycleOwner) { state ->
             when(state){
                 is ProductState.Loading -> {
+                    hideError()
                     showLoading()
                 }
 
                 is ProductState.Success -> {
-                   hideLoading()
+                    hideLoading()
+                    hideError()
                     state.data?.price?.let { UserProduct.price = it
                     } ?: { UserProduct.price = 0.0
                     }
