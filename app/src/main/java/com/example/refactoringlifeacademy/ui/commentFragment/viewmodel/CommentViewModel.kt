@@ -17,13 +17,17 @@ class CommentViewModel(private val repository: CommentRepository = CommentReposi
     fun getComments(idProduct: Int){
         CoroutineScope(Dispatchers.IO).launch {
             _comments.postValue(ProductState.Loading)
-            val response = repository.getComments(idProduct)
-            if (response.isSuccessful) {
-                response.body()?.let {
-                    _comments.postValue(ProductState.Success(it))
-                }?: _comments.postValue(ProductState.Error("Empty response body"))
-            }else{
-                _comments.postValue(ProductState.Error("Failed: ${response.message()}"))
+            try {
+                val response = repository.getComments(idProduct)
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        _comments.postValue(ProductState.Success(it))
+                    } ?: _comments.postValue(ProductState.Error("Empty response body"))
+                } else {
+                    _comments.postValue(ProductState.Error("Failed: ${response.message()}"))
+                }
+            }catch (e: Exception){
+                _comments.postValue(ProductState.Error("Error: ${e.message}"))
             }
         }
     }

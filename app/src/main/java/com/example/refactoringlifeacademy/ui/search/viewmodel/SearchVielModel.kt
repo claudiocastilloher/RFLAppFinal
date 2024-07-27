@@ -10,7 +10,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class SearchVielModel(private val searchRepository: ProductRepository = ProductRepository()): ViewModel() {
+class SearchVielModel(private val searchRepository: ProductRepository = ProductRepository()) :
+    ViewModel() {
     private val _searchState = MutableLiveData<ProductState<ProductsResponse>>()
     val searchState: LiveData<ProductState<ProductsResponse>> = _searchState
 
@@ -31,13 +32,23 @@ class SearchVielModel(private val searchRepository: ProductRepository = ProductR
 
         CoroutineScope(Dispatchers.IO).launch {
             _searchState.postValue(ProductState.Loading)
-            val response = searchRepository.getProducts(idProductType, productName, onlyFavorite, page, size)
-            if (response.isSuccessful) {
-                response.body()?.let {
-                    _searchState.postValue(ProductState.Success(it))
-                } ?: _searchState.postValue(ProductState.Error("Empty response body"))
-            } else {
-                _searchState.postValue(ProductState.Error("Failed: ${response.message()}"))
+            try {
+                val response = searchRepository.getProducts(
+                    idProductType,
+                    productName,
+                    onlyFavorite,
+                    page,
+                    size
+                )
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        _searchState.postValue(ProductState.Success(it))
+                    } ?: _searchState.postValue(ProductState.Error("Empty response body"))
+                } else {
+                    _searchState.postValue(ProductState.Error("Failed: ${response.message()}"))
+                }
+            } catch (e: Exception) {
+                _searchState.postValue(ProductState.Error("Error: ${e.message}"))
             }
         }
     }
@@ -45,11 +56,15 @@ class SearchVielModel(private val searchRepository: ProductRepository = ProductR
     fun markProductAsFavorite(idProduct: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             _favoriteState.postValue(ProductState.Loading)
-            val response = searchRepository.markProductAsFavorite(idProduct)
-            if (response.isSuccessful) {
-                _favoriteState.postValue(ProductState.Success(null))
-            } else {
-                _favoriteState.postValue(ProductState.Error("Failed: ${response.message()}"))
+            try {
+                val response = searchRepository.markProductAsFavorite(idProduct)
+                if (response.isSuccessful) {
+                    _favoriteState.postValue(ProductState.Success(null))
+                } else {
+                    _favoriteState.postValue(ProductState.Error("Failed: ${response.message()}"))
+                }
+            } catch (e: Exception) {
+                _favoriteState.postValue(ProductState.Error("Error: ${e.message}"))
             }
         }
     }

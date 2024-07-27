@@ -304,6 +304,7 @@ class HomeActivity : AppCompatActivity() {
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra("productPrice", productPrice)
         startActivity(intent)
+        finish()
     }
 
     private fun goToSearch() {
