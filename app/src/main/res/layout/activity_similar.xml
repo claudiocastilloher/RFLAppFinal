@@ -7,30 +7,28 @@
     tools:context=".ui.similar.presenter.SimilarActivity">
 
     <TextView
-        android:id="@+id/saler"
+        android:id="@+id/seller"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
+        android:layout_marginStart="25dp"
         android:fontFamily="@font/roboto"
-        android:text="@string/vendedor"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/saler_who"
+        android:id="@+id/seller_who"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
         android:layout_marginTop="20dp"
+        android:layout_marginStart="5dp"
         android:fontFamily="@font/roboto_regular"
-        android:text="@string/vendedor"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/saler"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        app:layout_constraintStart_toEndOf="@+id/seller"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
         android:id="@+id/vector"
@@ -38,10 +36,10 @@
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
-        android:clickable="true"
         android:contentDescription="@string/desc_arrowleft"
-        android:focusable="true"
         android:src="@drawable/vector"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,19 +48,23 @@
         android:id="@+id/rv_similares"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="5dp"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="100dp"
+        android:layout_marginStart="5dp"
+        tools:listitem="@layout/item_similar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/saler"
-        tools:listitem="@layout/item_similar" />
+        app:layout_constraintTop_toBottomOf="@id/seller" />
+
+
 
     <LinearLayout
+        android:id="@+id/lyNoAccount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
-        android:layout_marginBottom="10dp">
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
             android:id="@+id/tv_problem"
@@ -70,9 +72,12 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:fontFamily="@font/roboto_regular"
+            android:gravity="center"
             android:text="@string/problems"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_support"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/tv_support"
@@ -80,19 +85,18 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
             android:text="@string/support"
-            android:textColor="@color/black"
             android:textSize="15sp"
-            android:textStyle="bold" />
-
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_problem"/>
     </LinearLayout>
 
     <FrameLayout
         android:id="@+id/progress_barr"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:visibility="invisible">
 
         <ProgressBar
             android:layout_width="wrap_content"

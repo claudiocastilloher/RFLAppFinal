@@ -35,23 +35,26 @@ class RegisterActivity : AppCompatActivity() {
             when(state){
                 is StateRegister.FormValid ->{
                     binding.buttonRegister.isEnabled = state.state
-
-                }
-                is StateRegister.Loading ->{
-                    binding.progressBarr.rlProgressBar.visibility = View.VISIBLE
+                    binding.prBarr.rlProgressBar.visibility = View.GONE
                     binding.incMsjError.tvEmailError.visibility = View.GONE
 
                 }
+                is StateRegister.Loading ->{
+                    binding.incMsjError.tvEmailError.visibility = View.GONE
+                    binding.prBarr.rlProgressBar.visibility = View.VISIBLE
+
+                }
                 is StateRegister.Success ->{
-                    binding.progressBarr.rlProgressBar.visibility = View.GONE
+                    binding.prBarr.rlProgressBar.visibility = View.GONE
+                    binding.incMsjError.tvEmailError.visibility = View.GONE
                     UserProduct.userToken = state.info.token
                     goToLogin()
 
                 }
                 is StateRegister.Error ->{
-                    binding.progressBarr.rlProgressBar.visibility = View.GONE
+                    binding.prBarr.rlProgressBar.visibility = View.GONE
                     binding.incMsjError.tvEmailError.visibility = View.VISIBLE
-
+                    binding.buttonRegister.isEnabled = false
                 }
             }
 

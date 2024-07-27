@@ -8,6 +8,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import com.example.refactoringlifeacademy.R
 import com.example.refactoringlifeacademy.ui.login.viewmodel.ViewModelLogin
 import com.example.refactoringlifeacademy.databinding.ActivityLoginBinding
 import com.example.refactoringlifeacademy.ui.home.presenter.HomeActivity
@@ -59,17 +60,23 @@ class LoginActivity : AppCompatActivity() {
             when(state){
                 is LoginState.FormValid -> {
                     binding.btnEnter.isEnabled = state.state
+                    binding.prBar.rlProgressBar.visibility = View.GONE
+                    binding.incMsjError.tvEmailError.visibility = View.GONE
                 }
                 is LoginState.Succes -> {
-                    binding.progressBar.rlProgressBar.visibility = View.GONE
+                    binding.prBar.rlProgressBar.visibility = View.GONE
+                    binding.incMsjError.tvEmailError.visibility = View.GONE
                     goToHome()
                 }
                 is LoginState.Error -> {
-                    binding.progressBar.rlProgressBar.visibility = View.GONE
+                    binding.prBar.rlProgressBar.visibility = View.GONE
                     binding.incMsjError.tvEmailError.visibility = View.VISIBLE
+                    binding.btnEnter.isEnabled = false
+                    binding.etEmail.setBackgroundResource(R.drawable.edittext_background2)
+                    binding.etPassword.setBackgroundResource(R.drawable.edittext_background2)
                 }
                 is LoginState.Loading -> {
-                    binding.progressBar.rlProgressBar.visibility = View.VISIBLE
+                    binding.prBar.rlProgressBar.visibility = View.VISIBLE
                     binding.incMsjError.tvEmailError.visibility = View.GONE
                 }
             }
@@ -85,9 +92,13 @@ class LoginActivity : AppCompatActivity() {
 
     private fun activateButton() {
         binding.etEmail.addTextChangedListener {
+            binding.etEmail.setBackgroundResource(R.drawable.edittext_background)
+            binding.etPassword.setBackgroundResource(R.drawable.edittext_background)
             validateFields()
         }
         binding.etPassword.addTextChangedListener {
+            binding.etEmail.setBackgroundResource(R.drawable.edittext_background)
+            binding.etPassword.setBackgroundResource(R.drawable.edittext_background)
             validateFields()
         }
     }

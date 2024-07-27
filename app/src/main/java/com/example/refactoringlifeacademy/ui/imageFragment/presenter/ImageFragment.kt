@@ -52,11 +52,13 @@ class ImageFragment : Fragment() {
         viewModel.data.observe(viewLifecycleOwner) { state ->
             when(state){
                 is ProductState.Loading -> {
+                    hideError()
                     showLoading()
                 }
 
                 is ProductState.Success -> {
-                   hideLoading()
+                    hideLoading()
+                    hideError()
                     state.data?.price?.let { UserProduct.price = it
                     } ?: { UserProduct.price = 0.0
                     }
@@ -70,7 +72,7 @@ class ImageFragment : Fragment() {
 
                 is ProductState.Error -> {
                     hideLoading()
-                    binding.icMsgError.cslImgError.visibility = View.VISIBLE
+                    showError()
                     showMessageError(state.message)
                 }
             }
@@ -78,13 +80,20 @@ class ImageFragment : Fragment() {
     }
 
 
-
     private fun showLoading() {
         binding.progressBarr.visibility = View.VISIBLE
     }
 
+    private fun showError() {
+        binding.icMsgError.cslImgError.visibility = View.VISIBLE
+    }
+
     private fun hideLoading() {
         binding.progressBarr.visibility = View.GONE
+    }
+
+    private fun hideError() {
+        binding.icMsgError.cslImgError.visibility = View.GONE
     }
 
     private fun showMessageError(message: String) {

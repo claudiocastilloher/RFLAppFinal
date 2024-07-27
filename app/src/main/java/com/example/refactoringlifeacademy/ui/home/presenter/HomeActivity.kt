@@ -168,7 +168,7 @@ class HomeActivity : AppCompatActivity() {
                             UserProduct.isfavorite = null
                             UserProduct.price = 0.0
                             loadHeart()
-                            showMessageError("Daily offer product is null")
+                            showMessageError("Daily Offer or Last User Product is null")
                         }
 
                         else -> {
@@ -176,7 +176,7 @@ class HomeActivity : AppCompatActivity() {
                             UserProduct.userProductId = dailyOffer.idProduct
                             UserProduct.isfavorite = dailyOffer.isFavorite
                             loadHeart()
-                            showMessageSuccess("Daily offer product loaded successfully")
+                            showMessageSuccess("Daily Offer or Last User Product loaded successfully")
                             //dailyOffer.idProduct?.let { onConstarintLayoutClic(it) }
                             dailyOffer.price?.let { onConstarintLayoutClic(it)
                             UserProduct.price = it}
@@ -203,10 +203,10 @@ class HomeActivity : AppCompatActivity() {
 
                 is ProductState.Success -> {
                     //binding.progressTv.rlProgressBar.visibility = View.GONE
-                    if (loadHeartFavorite()) {
-                        showMessageSuccess("Mark not favorite product successfully")
+                    if (loadHeartFavorite(state.data?.isFavorite)) {
+                        showMessageSuccess("Unmark Favorite Product successfully")
                     } else {
-                        showMessageSuccess("Mark favorite product successfully")
+                        showMessageSuccess("Mark Favorite Product successfully")
                     }
 
                 }
@@ -312,7 +312,6 @@ class HomeActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-
     private fun loadHeart() {
         if (UserProduct.isfavorite == false || UserProduct.isfavorite == null) {
             binding.ivHeartBlue.setImageResource(R.drawable.heart_blue)
@@ -321,15 +320,14 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadHeartFavorite(): Boolean {
+    private fun loadHeartFavorite(favorite: Boolean?): Boolean {
         val messageFav: Boolean
-        if (UserProduct.isfavorite == true || UserProduct.isfavorite == null) {
+        UserProduct.isfavorite = favorite
+        if (favorite == false || favorite == null) {
             binding.ivHeartBlue.setImageResource(R.drawable.heart_blue)
-            UserProduct.isfavorite = false
             messageFav = true
         } else {
             binding.ivHeartBlue.setImageResource(R.drawable.heart_blue_fill)
-            UserProduct.isfavorite = true
             messageFav = false
         }
         return messageFav

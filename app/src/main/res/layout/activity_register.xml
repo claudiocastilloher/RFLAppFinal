@@ -136,7 +136,7 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/button_validate"
         android:elevation="42dp"
-        android:text="@string/enter"
+        android:text="@string/enter2"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="20sp"
@@ -171,12 +171,13 @@
             android:text="@string/iniciar_sesion"
             android:textColor="@color/black"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="RtlSymmetry" />
     </LinearLayout>
 
 
     <include
-        android:id="@+id/progress_barr"
+        android:id="@+id/pr_barr"
         layout="@layout/progressbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -185,11 +186,9 @@
     <include
         android:id="@+id/inc_msj_error"
         layout="@layout/msj_error"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/etConfirmPassword"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/button_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
