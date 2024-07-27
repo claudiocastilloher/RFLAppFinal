@@ -171,7 +171,8 @@
             android:text="@string/iniciar_sesion"
             android:textColor="@color/black"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="RtlSymmetry" />
     </LinearLayout>
 
 

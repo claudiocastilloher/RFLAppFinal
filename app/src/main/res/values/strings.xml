@@ -71,9 +71,9 @@ Why do we use it? It is a long-established fact that a reader will be distracted
     <string name="comment_text">An unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially</string>
 
     <!--similar-->
-    <string name="vendedor">Seller:</string>
-    <string name="see">See</string>
-    <string name="not_fount">Sorry, the content could not be found</string>
-    <string name="total">Similar Products:</string>
+    <string name="vendedor" translatable="false">Seller:</string>
+    <string name="see" translatable="false">See</string>
+    <string name="not_fount" translatable="false">Sorry, the content could not be found</string>
+    <string name="total" translatable="false">Similar Products:</string>
 
 </resources>
