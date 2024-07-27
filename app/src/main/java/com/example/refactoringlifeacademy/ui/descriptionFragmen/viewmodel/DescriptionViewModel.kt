@@ -17,13 +17,17 @@ class DescriptionViewModel(private val repository: ProductRepository = ProductRe
     fun getProductByID(idProduc: Int){
         CoroutineScope(Dispatchers.IO).launch {
             _productByIdState.postValue(ProductState.Loading)
-            val response = repository.getProductById(idProduc)
-            if (response.isSuccessful){
-                response.body()?.let {
-                    _productByIdState.postValue(ProductState.Success(it))
-                } ?: _productByIdState.postValue(ProductState.Error("Empty response body"))
-            }else {
-                _productByIdState.postValue(ProductState.Error("Failed: ${response.message()}"))
+            try {
+                val response = repository.getProductById(idProduc)
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        _productByIdState.postValue(ProductState.Success(it))
+                    } ?: _productByIdState.postValue(ProductState.Error("Empty response body"))
+                } else {
+                    _productByIdState.postValue(ProductState.Error("Failed: ${response.message()}"))
+                }
+            }catch (e: Exception){
+                _productByIdState.postValue(ProductState.Error("Error: ${e.message}"))
             }
         }
     }

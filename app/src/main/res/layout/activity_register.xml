@@ -168,7 +168,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
             android:paddingStart="3dp"
-            android:text="@string/login_here"
+            android:text="@string/iniciar_sesion"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />

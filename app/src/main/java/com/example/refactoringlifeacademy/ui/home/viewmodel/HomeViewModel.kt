@@ -43,13 +43,18 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
 
         CoroutineScope(Dispatchers.IO).launch {
             _productsState.postValue(ProductState.Loading)
-            val response = repository.getProducts(idProductType, productName, onlyFavorite, page, size)
-            if (response.isSuccessful) {
-                response.body()?.let {
-                    _productsState.postValue(ProductState.Success(it))
-                } ?: _productsState.postValue(ProductState.Error("Empty response body"))
-            } else {
-                _productsState.postValue(ProductState.Error("Failed: ${response.message()}"))
+            try {
+                val response =
+                    repository.getProducts(idProductType, productName, onlyFavorite, page, size)
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        _productsState.postValue(ProductState.Success(it))
+                    } ?: _productsState.postValue(ProductState.Error("Empty response body"))
+                } else {
+                    _productsState.postValue(ProductState.Error("Failed: ${response.message()}"))
+                }
+            }catch (e: Exception){
+                _productsState.postValue(ProductState.Error("Error: ${e.message}"))
             }
         }
     }
@@ -57,13 +62,17 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
     fun getLastUserProduct() {
         CoroutineScope(Dispatchers.IO).launch {
             _lastUserProductState.postValue(ProductState.Loading)
-            val response = repository.getLastUserProduct()
-            if (response.isSuccessful) {
-                response.body()?.let {
-                    _lastUserProductState.postValue(ProductState.Success(it))
-                } ?: _lastUserProductState.postValue(ProductState.Error("Empty response body"))
-            } else {
-                _lastUserProductState.postValue(ProductState.Error("Failed: ${response.message()}"))
+            try {
+                val response = repository.getLastUserProduct()
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        _lastUserProductState.postValue(ProductState.Success(it))
+                    } ?: _lastUserProductState.postValue(ProductState.Error("Empty response body"))
+                } else {
+                    _lastUserProductState.postValue(ProductState.Error("Failed: ${response.message()}"))
+                }
+            }catch (e: Exception){
+                _lastUserProductState.postValue(ProductState.Error("Error: ${e.message}"))
             }
         }
     }
@@ -71,13 +80,17 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
     fun getProductTypes() {
         CoroutineScope(Dispatchers.IO).launch {
             _productTypesState.postValue(ProductState.Loading)
-            val response = repository.getProductTypes()
-            if (response.isSuccessful) {
-                response.body()?.let {
-                    _productTypesState.postValue(ProductState.Success(it))
-                } ?: _productTypesState.postValue(ProductState.Error("Empty response body"))
-            } else {
-                _productTypesState.postValue(ProductState.Error("Failed: ${response.message()}"))
+            try {
+                val response = repository.getProductTypes()
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        _productTypesState.postValue(ProductState.Success(it))
+                    } ?: _productTypesState.postValue(ProductState.Error("Empty response body"))
+                } else {
+                    _productTypesState.postValue(ProductState.Error("Failed: ${response.message()}"))
+                }
+            }catch (e: Exception){
+                _productTypesState.postValue(ProductState.Error("Error: ${e.message}"))
             }
         }
     }
@@ -85,13 +98,17 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
     fun getDailyOffer() {
         CoroutineScope(Dispatchers.IO).launch {
             _dailyOfferState.postValue(ProductState.Loading)
-            val response = repository.getDailyOffer()
-            if (response.isSuccessful) {
-                response.body()?.let {
-                    _dailyOfferState.postValue(ProductState.Success(it))
-                } ?:  _dailyOfferState.postValue(ProductState.Error("Empty response body"))
-            } else {
-                _dailyOfferState.postValue(ProductState.Error("Failed: ${response.message()}"))
+            try {
+                val response = repository.getDailyOffer()
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        _dailyOfferState.postValue(ProductState.Success(it))
+                    } ?: _dailyOfferState.postValue(ProductState.Error("Empty response body"))
+                } else {
+                    _dailyOfferState.postValue(ProductState.Error("Failed: ${response.message()}"))
+                }
+            }catch (e: Exception){
+                _dailyOfferState.postValue(ProductState.Error("Error: ${e.message}"))
             }
         }
     }
@@ -99,11 +116,15 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
     fun markProductAsFavorite(idProduct: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             _favoriteState.postValue(ProductState.Loading)
-            val response = repository.markProductAsFavorite(idProduct)
-            if (response.isSuccessful) {
+            try {
+                val response = repository.markProductAsFavorite(idProduct)
+                if (response.isSuccessful) {
                     _favoriteState.postValue(ProductState.Success(null))
-            } else {
-                _dailyOfferState.postValue(ProductState.Error("Failed: ${response.message()}"))
+                } else {
+                    _dailyOfferState.postValue(ProductState.Error("Failed: ${response.message()}"))
+                }
+            }catch (e: Exception){
+                _favoriteState.postValue(ProductState.Error("Error: ${e.message}"))
             }
         }
     }
