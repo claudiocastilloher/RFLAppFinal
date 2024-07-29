@@ -12,6 +12,7 @@
     <color name="grey2">#8F8A89</color>
     <color name="orange">#F39C12</color>
     <color name="grey3">#EEEE</color>
+    <color name="grey4">#EEEEEE</color>
     <color name="gray_tittle">#B7B7B7</color>
     <color name="blue_text">#154360</color>
 </resources>
