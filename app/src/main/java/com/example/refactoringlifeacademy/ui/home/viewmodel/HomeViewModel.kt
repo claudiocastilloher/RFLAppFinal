@@ -3,6 +3,7 @@ package com.example.refactoringlifeacademy.ui.home.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.refactoringlifeacademy.data.dto.model.Product
 import com.example.refactoringlifeacademy.data.dto.response.DailyOfferResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductFavoriteResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductTypesResponse
@@ -34,29 +35,45 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
         idProductType: Int? = null,
         productName: String? = null,
         onlyFavorite: Boolean = false,
-        page: Int = 1,
         size: Int = 10
     ) {
-        if (page < 1 || size !in 1..50) {
-            _productsState.postValue(ProductState.Error("Invalid pagination parameters"))
-            return
-        }
-
         CoroutineScope(Dispatchers.IO).launch {
             _productsState.postValue(ProductState.Loading)
-            try {
-                val response =
-                    repository.getProducts(idProductType, productName, onlyFavorite, page, size)
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        _productsState.postValue(ProductState.Success(it))
-                    } ?: _productsState.postValue(ProductState.Error("Empty response body"))
-                } else {
-                    _productsState.postValue(ProductState.Error("Failed: ${response.message()}"))
+            val allProductsList = mutableListOf<Product>()
+            var page = 1
+            var hasMoreProducts = true
+
+            while (hasMoreProducts) {
+                try {
+                    val response =
+                        repository.getProducts(idProductType, productName, onlyFavorite, page, size)
+                    if (response.isSuccessful) {
+                        val products = response.body()?.products ?: emptyList()
+                        allProductsList.addAll(products)
+                        hasMoreProducts = products.size == size
+                        page++
+                    } else {
+                        hasMoreProducts = false
+                        _productsState.postValue(ProductState.Error("Failed: ${response.message()}"))
+                    }
+                } catch (e: Exception) {
+                    hasMoreProducts = false
+                    _productsState.postValue(ProductState.Error("Error: ${e.message}"))
                 }
-            } catch (e: Exception) {
-                _productsState.postValue(ProductState.Error("Error: ${e.message}"))
             }
+
+            _productsState.postValue(
+                ProductState.Success(
+                    ProductsResponse(
+                        page = null,
+                        size = allProductsList.size,
+                        totalPages = null,
+                        totalProducts = allProductsList.size,
+                        products = allProductsList
+                    )
+                )
+            )
+
         }
     }
 
