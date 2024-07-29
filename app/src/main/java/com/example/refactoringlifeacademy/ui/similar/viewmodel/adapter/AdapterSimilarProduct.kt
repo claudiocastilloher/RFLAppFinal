@@ -24,9 +24,10 @@ class AdapterSimilarProduct(private val similarProductList: List<Product>, priva
         holder.render(similarProductList[position], onSimilarProductSelected, onSimilarProductMarkFavorite)
     }
 
-    fun updateItem(position: Int, newValue: Boolean) {
-        similarProductList[position].isFavorite = newValue
-    }
+    fun updateItem(position: Int, newFavorite: Boolean) {
+        val newProduct = similarProductList[position].copy(isFavorite = newFavorite)
+        (similarProductList as MutableList)[position] = newProduct
+        }
 }
 
 class SimilarProductHolder(view: View) : RecyclerView.ViewHolder(view) {

@@ -128,6 +128,7 @@ class SimilarActivity : AppCompatActivity() {
 
     private fun loadHeartFavorite(favorite: Boolean) {
         UserProduct.positionAdapter?.let { adapterSimilar.updateItem(it, favorite)
-            adapterSimilar.notifyItemChanged(it)}
+            adapterSimilar.notifyItemChanged(it)
+        }
     }
 }
