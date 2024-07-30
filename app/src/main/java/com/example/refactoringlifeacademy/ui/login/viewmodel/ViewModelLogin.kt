@@ -35,7 +35,7 @@ class ViewModelLogin(private val repository: LoginRepository = LoginRepository()
                 if (response.isSuccessful) {
                     response.body()?.let {
                         UserProduct.userToken = it.token
-                        _loginState.postValue(LoginState.Succes(it))
+                        _loginState.postValue(LoginState.Success(it))
                     } ?: _loginState.postValue(LoginState.Error("No Data"))
                 } else {
                     _loginState.postValue(LoginState.Error("Error Service"))

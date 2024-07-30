@@ -112,7 +112,7 @@ class SimilarActivity : AppCompatActivity() {
 
     private fun onSimilarProductSee(product: Product) {
         UserProduct.userProductId = product.idProduct //Actualizar Id Producto
-        UserProduct.isfavorite = product.isFavorite  //Actualizar Favorito Producto
+        UserProduct.isFavorite = product.isFavorite  //Actualizar Favorito DProducto
         product.price?.let { goToDetails(it) }
     }
 

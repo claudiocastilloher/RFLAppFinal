@@ -10,5 +10,4 @@ sealed class StateRegister {
 
     data class FormValid(val state:Boolean): StateRegister()
 
-
 }

@@ -35,7 +35,6 @@ class SimilarViewModel (private val repository: ProductRepository = ProductRepos
             }
         }
     }
-
     fun markProductAsFavorite(idProduct: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             _favoriteState.postValue(ProductState.Loading)

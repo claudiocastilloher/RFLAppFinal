@@ -63,9 +63,10 @@ class LoginActivity : AppCompatActivity() {
                     binding.prBar.rlProgressBar.visibility = View.GONE
                     binding.incMsjError.tvEmailError.visibility = View.GONE
                 }
-                is LoginState.Succes -> {
+                is LoginState.Success -> {
                     binding.prBar.rlProgressBar.visibility = View.GONE
                     binding.incMsjError.tvEmailError.visibility = View.GONE
+
                     goToHome()
                 }
                 is LoginState.Error -> {
@@ -84,7 +85,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun goToHome(){
+    private fun goToHome(){
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
         finish()
