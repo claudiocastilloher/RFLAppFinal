@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.refactoringlifeacademy.R
 import com.example.refactoringlifeacademy.data.dto.model.Product
+import com.example.refactoringlifeacademy.data.dto.model.UserProduct
 import com.example.refactoringlifeacademy.databinding.ItemSimilarBinding
 import com.squareup.picasso.Picasso
 
-class AdapterSimilarProduct(private val similarProductList: List<Product>, private val onSimilarProductSelected: (Product) -> Unit) : RecyclerView.Adapter<SimilarProductHolder>() {
+class AdapterSimilarProduct(private val similarProductList: List<Product>, private val onSimilarProductSelected: (Product) -> Unit, private val onSimilarProductMarkFavorite: (Product) -> Unit) : RecyclerView.Adapter<SimilarProductHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimilarProductHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_similar,parent,false)
         return SimilarProductHolder(view)
@@ -20,14 +21,19 @@ class AdapterSimilarProduct(private val similarProductList: List<Product>, priva
     }
 
     override fun onBindViewHolder(holder: SimilarProductHolder, position: Int) {
-        holder.render(similarProductList[position], onSimilarProductSelected)
+        holder.render(similarProductList[position], onSimilarProductSelected, onSimilarProductMarkFavorite)
     }
+
+    fun updateItem(position: Int, newFavorite: Boolean) {
+        val newProduct = similarProductList[position].copy(isFavorite = newFavorite)
+        (similarProductList as MutableList)[position] = newProduct
+        }
 }
 
 class SimilarProductHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val binding = ItemSimilarBinding.bind(view)
 
-    fun render(value: Product, onSimilarProductSelected: (Product) -> Unit){
+    fun render(value: Product, onSimilarProductSelected: (Product) -> Unit, onSimilarProductMarkFavorite: (Product) -> Unit){
         val image = value.image
         val name = value.name
         val description = value.description
@@ -43,6 +49,10 @@ class SimilarProductHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
         binding.btnSee.setOnClickListener{
             onSimilarProductSelected(value)
+        }
+        binding.ivHeartBlue.setOnClickListener{
+            UserProduct.positionAdapter = adapterPosition
+            onSimilarProductMarkFavorite(value)
         }
     }
 }
