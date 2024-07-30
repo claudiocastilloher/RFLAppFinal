@@ -60,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
                 is LoginState.FormValid -> {
                     binding.btnEnter.isEnabled = state.state
                 }
-                is LoginState.Succes -> {
+                is LoginState.Success -> {
                     binding.progressBar.rlProgressBar.visibility = View.GONE
                     goToHome()
                 }
@@ -77,7 +77,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun goToHome(){
+    private fun goToHome(){
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
         finish()

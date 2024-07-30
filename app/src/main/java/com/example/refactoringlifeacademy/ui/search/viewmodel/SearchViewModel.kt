@@ -10,7 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class SearchVielModel(private val searchRepository: ProductRepository = ProductRepository()) :
+class SearchViewModel(private val searchRepository: ProductRepository = ProductRepository()) :
     ViewModel() {
     private val _searchState = MutableLiveData<ProductState<ProductsResponse>>()
     val searchState: LiveData<ProductState<ProductsResponse>> = _searchState

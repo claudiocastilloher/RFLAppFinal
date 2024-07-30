@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.example.refactoringlifeacademy.data.dto.model.UserProduct
 import com.example.refactoringlifeacademy.databinding.FragmentDescriptionBinding
 import com.example.refactoringlifeacademy.ui.descriptionFragmen.viewmodel.DescriptionViewModel
@@ -41,7 +40,7 @@ class DescriptionFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun observer() {
-        viewModel.productByIdState.observe(viewLifecycleOwner, Observer { state ->
+        viewModel.productByIdState.observe(viewLifecycleOwner) { state ->
             when(state){
                 is ProductState.Loading -> {
                     binding.progressBarr.visibility = View.VISIBLE
@@ -62,7 +61,7 @@ class DescriptionFragment : Fragment() {
                     showMessageError(state.message)
                 }
             }
-        })
+        }
     }
 
     private fun showMessageError(message: String) {

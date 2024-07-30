@@ -14,11 +14,11 @@ class DescriptionViewModel(private val repository: ProductRepository = ProductRe
     private val _productByIdState = MutableLiveData<ProductState<ProductByIdResponse>>()
     val productByIdState: LiveData<ProductState<ProductByIdResponse>> = _productByIdState
 
-    fun getProductByID(idProduc: Int){
+    fun getProductByID(idProduct: Int){
         CoroutineScope(Dispatchers.IO).launch {
             _productByIdState.postValue(ProductState.Loading)
             try {
-                val response = repository.getProductById(idProduc)
+                val response = repository.getProductById(idProduct)
                 if (response.isSuccessful) {
                     response.body()?.let {
                         _productByIdState.postValue(ProductState.Success(it))

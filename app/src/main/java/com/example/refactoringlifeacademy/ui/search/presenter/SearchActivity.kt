@@ -17,13 +17,13 @@ import com.example.refactoringlifeacademy.data.dto.model.UserProduct
 import com.example.refactoringlifeacademy.databinding.ActivitySearchBinding
 import com.example.refactoringlifeacademy.ui.detail.presenter.DetailActivity
 import com.example.refactoringlifeacademy.ui.home.viewmodel.ProductState
-import com.example.refactoringlifeacademy.ui.search.viewmodel.SearchVielModel
+import com.example.refactoringlifeacademy.ui.search.viewmodel.SearchViewModel
 import com.example.refactoringlifeacademy.ui.search.viewmodel.adapter.AdapterSearch
 import com.example.refactoringlifeacademy.utils.EmailUtils
 
 class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
-    private val viewModel: SearchVielModel by viewModels()
+    private val viewModel: SearchViewModel by viewModels()
     private lateinit var adapterSearch: AdapterSearch
     private var products: List<Product> = emptyList()
     private var favoriteProducts: List<Product> = emptyList()
@@ -187,7 +187,7 @@ class SearchActivity : AppCompatActivity() {
 
     private fun goToDetails(product: Product) {
         UserProduct.userProductId = product.idProduct
-        UserProduct.isfavorite = product.isFavorite
+        UserProduct.isFavorite = product.isFavorite
         val productPrice = product.price
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra("productPrice", productPrice)
