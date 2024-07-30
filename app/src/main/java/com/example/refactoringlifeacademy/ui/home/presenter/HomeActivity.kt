@@ -178,10 +178,8 @@ class HomeActivity : AppCompatActivity() {
                             loadHeart()
                             showMessageSuccess("Daily Offer or Last User Product loaded successfully")
                             //dailyOffer.idProduct?.let { onConstarintLayoutClic(it) }
-                            dailyOffer.price?.let {
-                                onConstarintLayoutClic(it)
-                                UserProduct.price = it
-                            }
+                            dailyOffer.price?.let { onConstarintLayoutClic(it)
+                            UserProduct.price = it}
                             putFavoriteProduct()
                         }
                     }
@@ -325,24 +323,14 @@ class HomeActivity : AppCompatActivity() {
     private fun loadHeartFavorite(favorite: Boolean?): Boolean {
         val messageFav: Boolean
         UserProduct.isFavorite = favorite
-        if (UserProduct.isFavorite == true || UserProduct.isFavorite == null) {
+
+        if (UserProduct.isFavorite == false || UserProduct.isFavorite == null) {
             binding.ivHeartBlue.setImageResource(R.drawable.heart_blue)
-            UserProduct.isFavorite = false
             messageFav = true
         } else {
             binding.ivHeartBlue.setImageResource(R.drawable.heart_blue_fill)
-            UserProduct.isFavorite = true
-
-            UserProduct.isFavorite = favorite
-            if (favorite == false || favorite == null) {
-                binding.ivHeartBlue.setImageResource(R.drawable.heart_blue)
-                messageFav = true
-            } else {
-                binding.ivHeartBlue.setImageResource(R.drawable.heart_blue_fill)
-                messageFav = false
-            }
+            messageFav = false
         }
         return messageFav
     }
-
 }
