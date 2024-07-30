@@ -178,8 +178,10 @@ class HomeActivity : AppCompatActivity() {
                             loadHeart()
                             showMessageSuccess("Daily Offer or Last User Product loaded successfully")
                             //dailyOffer.idProduct?.let { onConstarintLayoutClic(it) }
-                            dailyOffer.price?.let { onConstarintLayoutClic(it)
-                            UserProduct.price = it}
+                            dailyOffer.price?.let {
+                                onConstarintLayoutClic(it)
+                                UserProduct.price = it
+                            }
                             putFavoriteProduct()
                         }
                     }
@@ -203,7 +205,7 @@ class HomeActivity : AppCompatActivity() {
 
                 is ProductState.Success -> {
                     //binding.progressTv.rlProgressBar.visibility = View.GONE
-                    if (loadHeartFavorite()) {
+                    if (loadHeartFavorite(state.data?.isFavorite)) {
                         showMessageSuccess("Unmark Favorite Product successfully")
                     } else {
                         showMessageSuccess("Mark Favorite Product successfully")
@@ -320,8 +322,9 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadHeartFavorite(): Boolean {
+    private fun loadHeartFavorite(favorite: Boolean?): Boolean {
         val messageFav: Boolean
+
         if (UserProduct.isFavorite == true || UserProduct.isFavorite == null) {
             binding.ivHeartBlue.setImageResource(R.drawable.heart_blue)
             UserProduct.isFavorite = false
@@ -329,8 +332,17 @@ class HomeActivity : AppCompatActivity() {
         } else {
             binding.ivHeartBlue.setImageResource(R.drawable.heart_blue_fill)
             UserProduct.isFavorite = true
-            messageFav = false
+
+            UserProduct.isFavorite = favorite
+            if (favorite == false || favorite == null) {
+                binding.ivHeartBlue.setImageResource(R.drawable.heart_blue)
+                messageFav = true
+            } else {
+                binding.ivHeartBlue.setImageResource(R.drawable.heart_blue_fill)
+                messageFav = false
+            }
         }
         return messageFav
     }
+
 }
