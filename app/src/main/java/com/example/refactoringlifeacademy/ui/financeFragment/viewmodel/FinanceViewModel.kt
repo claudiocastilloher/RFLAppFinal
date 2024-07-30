@@ -16,13 +16,17 @@ class FinanceViewModel(private val repository: FinanceRepository = FinanceReposi
     fun getFinanceMethods(){
         CoroutineScope(Dispatchers.IO).launch {
             _financeState.postValue(FinanceState.Loading)
-            val response = repository.getFinanceMethods()
-            if (response.isSuccessful){
-                response.body()?.let {
-                    _financeState.postValue(FinanceState.Success(it))
-                } ?: _financeState.postValue(FinanceState.Error("Empty response body"))
-            }else {
-                _financeState.postValue(FinanceState.Error("Failed: ${response.message()}"))
+            try {
+                val response = repository.getFinanceMethods()
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        _financeState.postValue(FinanceState.Success(it))
+                    } ?: _financeState.postValue(FinanceState.Error("Empty response body"))
+                } else {
+                    _financeState.postValue(FinanceState.Error("Failed: ${response.message()}"))
+                }
+            }catch (e: Exception){
+                _financeState.postValue(FinanceState.Error("Error: ${e.message}"))
             }
         }
     }

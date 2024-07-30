@@ -2,6 +2,7 @@ package com.example.refactoringlifeacademy.data.repository
 
 import com.example.refactoringlifeacademy.data.dto.response.DailyOfferResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductByIdResponse
+import com.example.refactoringlifeacademy.data.dto.response.ProductFavoriteResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductTypesResponse
 import com.example.refactoringlifeacademy.data.dto.response.ProductsResponse
 import com.example.refactoringlifeacademy.data.dto.response.SingleProductResponse
@@ -32,7 +33,7 @@ class ProductRepository(private val service: ProductServiceImp = ProductServiceI
         return service.getDailyOffer()
     }
 
-    suspend fun markProductAsFavorite(idProduct: Int): Response<Void> {
+    suspend fun markProductAsFavorite(idProduct: Int): Response<ProductFavoriteResponse> {
         return service.markProductAsFavorite(idProduct)
     }
 
