@@ -324,7 +324,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun loadHeartFavorite(favorite: Boolean?): Boolean {
         val messageFav: Boolean
-
+        UserProduct.isFavorite = favorite
         if (UserProduct.isFavorite == true || UserProduct.isFavorite == null) {
             binding.ivHeartBlue.setImageResource(R.drawable.heart_blue)
             UserProduct.isFavorite = false
