@@ -21,6 +21,7 @@ import com.example.refactoringlifeacademy.utils.EmailUtils
 class SimilarActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySimilarBinding
     private val similarViewModel: SimilarViewModel by viewModels()
+    private lateinit var adapterSimilar: AdapterSimilarProduct
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySimilarBinding.inflate(layoutInflater)
@@ -64,6 +65,21 @@ class SimilarActivity : AppCompatActivity() {
             }
         }
 
+        similarViewModel.favoriteState.observe(this) { state ->
+            when (state) {
+                is ProductState.Loading -> {
+                }
+
+                is ProductState.Success -> {
+                    state.data?.isFavorite?.let { loadHeartFavorite(it) }
+                }
+
+                is ProductState.Error -> {
+                    showMessageError(state.message)
+                }
+            }
+        }
+
     }
 
     private fun showMessageSuccess() {
@@ -75,10 +91,11 @@ class SimilarActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerViewSimilarProduct(value: List<Product>) {
-        val adapter = AdapterSimilarProduct(value) {
-            onSimilarProductSelected(it)
-        }
-        binding.rvSimilares.adapter = adapter
+        adapterSimilar = AdapterSimilarProduct(value,
+            onSimilarProductSelected = { onSimilarProductSee(it) },
+            onSimilarProductMarkFavorite = { putProductMarkFavorite(it) }
+        )
+        binding.rvSimilares.adapter = adapterSimilar
         binding.rvSimilares.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
@@ -93,15 +110,25 @@ class SimilarActivity : AppCompatActivity() {
         }
     }
 
-    private fun onSimilarProductSelected(product: Product) {
+    private fun onSimilarProductSee(product: Product) {
         UserProduct.userProductId = product.idProduct //Actualizar Id Producto
-        UserProduct.isfavorite = product.isFavorite  //Actualizar Favorito Producto
+        UserProduct.isFavorite = product.isFavorite  //Actualizar Favorito DProducto
         product.price?.let { goToDetails(it) }
+    }
+
+    private fun putProductMarkFavorite(product: Product) {
+        product.idProduct?.let { similarViewModel.markProductAsFavorite(it) }
     }
 
     private fun goToDetails(productPrice: Double) {
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra("productPrice", productPrice)
         startActivity(intent)
+    }
+
+    private fun loadHeartFavorite(favorite: Boolean) {
+        UserProduct.positionAdapter?.let { adapterSimilar.updateItem(it, favorite)
+            adapterSimilar.notifyItemChanged(it)
+        }
     }
 }

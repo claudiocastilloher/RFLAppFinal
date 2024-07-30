@@ -16,30 +16,40 @@
         tools:targetApi="31">
         <activity
             android:name=".ui.similar.presenter.SimilarActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.search.presenter.SearchActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.buy.presenter.BuyActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.detail.presenter.DetailActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.home.presenter.HomeActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.login.presenter.LoginActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.register.presenter.RegisterActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.prelogin.presenter.PreLogin"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.main.presenter.MainActivity"
+            android:theme="@style/Theme.App.Starting"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

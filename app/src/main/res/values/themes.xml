@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.RefactoringLifeAcademy" parent="Base.Theme.RefactoringLifeAcademy" />
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_refactoring_academy</item>
+        <item name="windowSplashScreenAnimationDuration">400</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.RefactoringLifeAcademy</item>
+    </style>
 </resources>

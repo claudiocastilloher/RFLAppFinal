@@ -14,17 +14,17 @@ class AdapterSearch(
     var value: List<Product>,
     private val onProductSelected: (Product) -> Unit,
     private val onFavoriteSelected: (Product) -> Unit
-) : RecyclerView.Adapter<SerachHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SerachHolder {
+) : RecyclerView.Adapter<SearchHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_search, parent, false)
-        return SerachHolder(view)
+        return SearchHolder(view)
     }
 
     override fun getItemCount(): Int {
         return value.size
     }
 
-    override fun onBindViewHolder(holder: SerachHolder, position: Int) {
+    override fun onBindViewHolder(holder: SearchHolder, position: Int) {
         holder.render(value[position], onProductSelected, onFavoriteSelected)
     }
 
@@ -40,7 +40,7 @@ class AdapterSearch(
     }
 }
 
-class SerachHolder(view: View) : RecyclerView.ViewHolder(view) {
+class SearchHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val binding = ItemSearchBinding.bind(view)
 
     @SuppressLint("SetTextI18n")

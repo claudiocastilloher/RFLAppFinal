@@ -12,5 +12,3 @@
             android:layout_margin="160dp"
             android:visibility="visible"/>
     </RelativeLayout>
-
-

@@ -32,5 +32,4 @@ class ImageViewmodel(private val repository: ProductRepository = ProductReposito
             }
         }
     }
-
 }

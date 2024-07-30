@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.refactoringlifeacademy.data.dto.model.Comment
 import com.example.refactoringlifeacademy.data.dto.model.UserProduct
@@ -34,7 +33,7 @@ class CommentFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentCommentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -53,7 +52,7 @@ class CommentFragment : Fragment() {
     }
 
     private fun observer() {
-        viewModel.comments.observe(viewLifecycleOwner, Observer { state ->
+        viewModel.comments.observe(viewLifecycleOwner) { state ->
             when(state){
                 is ProductState.Loading -> {
                     binding.progressBarr.visibility = View.VISIBLE
@@ -71,7 +70,7 @@ class CommentFragment : Fragment() {
                     showMessageError(state.message)
                 }
             }
-        })
+        }
     }
 
     private fun initRecyclerViewComments(value: List<Comment>) {
