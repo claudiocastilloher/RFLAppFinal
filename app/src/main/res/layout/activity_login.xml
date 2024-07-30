@@ -111,7 +111,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:layout_marginBottom="40dp"
-        android:background="@drawable/button_background"
+        android:background="@drawable/button_validate"
         android:elevation="42dp"
         android:text="@string/enter"
         android:textAllCaps="false"
@@ -154,7 +154,7 @@
 
 
     <include
-        android:id="@+id/progressBar"
+        android:id="@+id/pr_bar"
         layout="@layout/progressbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -165,10 +165,10 @@
         layout="@layout/msj_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:visibility="gone"
+        android:layout_marginStart="40dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/guideline"
         app:layout_constraintBottom_toTopOf="@+id/etEmail"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,4 +6,6 @@ object UserProduct {
         var isFavorite: Boolean? = false
         var userProductId: Int? = null
         var price: Double = 0.0
+        var positionAdapter: Int? = 0
 }
+

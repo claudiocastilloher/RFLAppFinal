@@ -52,53 +52,73 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/violet">
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/tv_imag"
-            android:layout_width="match_parent"
+            android:layout_width="95dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="110dp"
+            android:layout_marginTop="100dp"
             android:layout_marginBottom="70dp"
-            android:contentDescription="@string/but_images"
-            android:src="@drawable/imagenes"
             android:clickable="true"
             android:focusable="true"
-            android:gravity="center"
-            android:background="@color/violet"/>
+            android:gravity="top"
+            android:text="@string/but_images"
+            android:rotation="270"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:background="?attr/selectableItemBackground"/>
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/tv_descript"
-            android:layout_width="match_parent"
+            android:layout_width="95dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:layout_marginBottom="70dp"
-            android:contentDescription="@string/but_descrip"
-            android:src="@drawable/descripcion"
             android:clickable="true"
             android:focusable="true"
-            android:gravity="center"
-            android:background="@color/violet"/>
+            android:gravity="top"
+            android:text="@string/but_descrip"
+            android:rotation="270"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:background="?attr/selectableItemBackground"/>
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/tv_financ"
-            android:layout_width="match_parent"
+            android:layout_width="95dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="70dp"
-            android:contentDescription="@string/but_financ"
-            android:src="@drawable/financiacion"
+            android:layout_marginTop="30dp"
             android:clickable="true"
             android:focusable="true"
-            android:gravity="center"
-            android:background="@color/violet"/>
+            android:gravity="top"
+            android:text="@string/but_financ"
+            android:rotation="270"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:background="?attr/selectableItemBackground"/>
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/tv_coment"
-            android:layout_width="match_parent"
+            android:layout_width="95dp"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/but_coment"
-            android:src="@drawable/comentarios"
+            android:layout_marginBottom="70dp"
+            android:layout_marginTop="50dp"
             android:clickable="true"
             android:focusable="true"
-            android:gravity="center"
-            android:background="@color/violet" />
+            android:gravity="top"
+            android:text="@string/but_coment"
+            android:rotation="270"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:background="?attr/selectableItemBackground"/>
 
     </LinearLayout>
 

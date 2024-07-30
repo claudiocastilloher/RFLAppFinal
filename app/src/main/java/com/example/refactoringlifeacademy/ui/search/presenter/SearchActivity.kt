@@ -89,7 +89,7 @@ class SearchActivity : AppCompatActivity() {
             if (showingFavorites) {
                 searchLocalFavorites(query)
             } else {
-                viewModel.searchProducts(productName = query)
+                viewModel.loadAllProducts(productName = query)
             }
         }
     }
@@ -109,6 +109,12 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun observers() {
+        viewModel.allProducts.observe(this) { allProducts ->
+            products = allProducts
+            favoriteProducts = allProducts.filter { it.isFavorite == true }
+            updateRecyclerView()
+        }
+
         viewModel.searchState.observe(this) { state ->
             when (state) {
                 is ProductState.Loading -> {
@@ -116,11 +122,6 @@ class SearchActivity : AppCompatActivity() {
                 }
                 is ProductState.Success -> {
                     binding.progressBarr.visibility = View.GONE
-                    state.data?.products?.let {
-                        products = it
-                        favoriteProducts = it.filter { product -> product.isFavorite == true }
-                        updateRecyclerView()
-                    }
                 }
                 is ProductState.Error -> {
                     binding.progressBarr.visibility = View.GONE

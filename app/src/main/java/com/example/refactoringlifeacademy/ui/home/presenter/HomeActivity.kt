@@ -168,7 +168,7 @@ class HomeActivity : AppCompatActivity() {
                             UserProduct.isFavorite = null
                             UserProduct.price = 0.0
                             loadHeart()
-                            showMessageError("Daily offer product is null")
+                            showMessageError("Daily Offer or Last User Product is null")
                         }
 
                         else -> {
@@ -176,7 +176,7 @@ class HomeActivity : AppCompatActivity() {
                             UserProduct.userProductId = dailyOffer.idProduct
                             UserProduct.isFavorite = dailyOffer.isFavorite
                             loadHeart()
-                            showMessageSuccess("Daily offer product loaded successfully")
+                            showMessageSuccess("Daily Offer or Last User Product loaded successfully")
                             //dailyOffer.idProduct?.let { onConstarintLayoutClic(it) }
                             dailyOffer.price?.let { onConstarintLayoutClic(it)
                             UserProduct.price = it}
@@ -204,9 +204,9 @@ class HomeActivity : AppCompatActivity() {
                 is ProductState.Success -> {
                     //binding.progressTv.rlProgressBar.visibility = View.GONE
                     if (loadHeartFavorite()) {
-                        showMessageSuccess("Mark not favorite product successfully")
+                        showMessageSuccess("Unmark Favorite Product successfully")
                     } else {
-                        showMessageSuccess("Mark favorite product successfully")
+                        showMessageSuccess("Mark Favorite Product successfully")
                     }
 
                 }
@@ -311,7 +311,6 @@ class HomeActivity : AppCompatActivity() {
         val intent = Intent(this, SearchActivity::class.java)
         startActivity(intent)
     }
-
 
     private fun loadHeart() {
         if (UserProduct.isFavorite == false || UserProduct.isFavorite == null) {
